@@ -15,7 +15,7 @@ public class VocabularioGestionCitas {
     public static final String ErrorObtencionInterfaz_RecPersistencia = "Error-AlObtener:Interfaz_Recurso_Persistencia";
     public static final String IdentRecursoExtractorSemantico= "ExtractorSemantico1";
     public static final String IdentRecursoComunicacionChat= "ComunicacionChat1";
-    public static final String IdentAgenteAplicacionDialogoCitas= "AgenteAplicacionDialogoGarvis";
+    public static final String IdentAgenteAplicacionDialogoCitas= "AgenteAplicacionDialogoCitas1";
     public static final String IdentConexionAgte= "AgteGarvis";
     public static final String IdentRecursoPersistenciaChat= "PersistenciaChat1";
     public static final String InfoUsuarioYaExiste= "infoUsuarioYaExistente";
