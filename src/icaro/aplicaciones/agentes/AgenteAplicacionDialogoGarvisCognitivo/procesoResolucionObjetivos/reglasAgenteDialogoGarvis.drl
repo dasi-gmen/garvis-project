@@ -75,8 +75,10 @@ rule "No hay extraccion  semantica del texto del interlocutor  "
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
-rule "Estas hablando de mi"
+rule "Estas hablando de mi "
    when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionGarvis)
    then
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaGarvis.class);
