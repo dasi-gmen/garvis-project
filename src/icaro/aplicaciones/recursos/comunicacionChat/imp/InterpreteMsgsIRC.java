@@ -399,8 +399,17 @@ public class InterpreteMsgsIRC {
         anotacionesBusquedaPrueba.add("Lookup");
         anotacionesBusquedaPrueba.add("despedida");
         anotacionesBusquedaPrueba.add("usuario");
-        anotacionesBusquedaPrueba.add("nevera");
+
         anotacionesBusquedaPrueba.add("garvis");
+
+        anotacionesBusquedaPrueba.add("nevera");
+        anotacionesBusquedaPrueba.add("microondas");
+        anotacionesBusquedaPrueba.add("television");
+        anotacionesBusquedaPrueba.add("biblioteca");
+        anotacionesBusquedaPrueba.add("dispensador");
+        anotacionesBusquedaPrueba.add("aspiradora");
+        anotacionesBusquedaPrueba.add("termostato");
+        anotacionesBusquedaPrueba.add("detector");
         
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
@@ -1237,6 +1246,17 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionGarvis(contextoInterpretacion, annot));
 //                 i++;
              }
+             if(anotType.equalsIgnoreCase("nevera")
+                ||anotType.equalsIgnoreCase("microondas")
+                ||anotType.equalsIgnoreCase("television")
+                ||anotType.equalsIgnoreCase("biblioteca")
+                ||anotType.equalsIgnoreCase("dispensador")
+                ||anotType.equalsIgnoreCase("aspiradora")
+                ||anotType.equalsIgnoreCase("termostato")
+                ||anotType.equalsIgnoreCase("detector")){
+                 anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
+//                 i++;
+             }
 //                 fet = annot.getFeatures();
                 
 //                string= (String) annot.getFeatures().get("string");
@@ -1268,6 +1288,20 @@ private Notificacion interpretarAnotacionGarvis(String conttextoInterpretacion,A
         int posicionFinTexto =anotacionGarvis.getEndNode().getOffset().intValue();
         String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
         notif.setTipoNotificacion(anotacionGarvis.getType());
+        notif.setMensajeNotificacion(msgNotif);
+        return notif;
+}
+private Notificacion interpretarAnotacionGenerica(String conttextoInterpretacion,Annotation anotacionGenerica){
+//    if(anotacionSaludo.getType()!="saludo"){
+//        return null;
+//    }
+    Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+    // obtenemos el texto del saludo a partir de la anotacion
+            
+        int posicionComienzoTexto =anotacionGenerica.getStartNode().getOffset().intValue();
+        int posicionFinTexto =anotacionGenerica.getEndNode().getOffset().intValue();
+        String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
+        notif.setTipoNotificacion(anotacionGenerica.getType());
         notif.setMensajeNotificacion(msgNotif);
         return notif;
 }

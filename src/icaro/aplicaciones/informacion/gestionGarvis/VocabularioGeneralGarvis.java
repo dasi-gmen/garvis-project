@@ -29,9 +29,29 @@ public class VocabularioGeneralGarvis {
     public static final String Despedida1="Bueno tenemos que dejarlo ha sido un placer";
     public static final String NombreTipoNoticacionSaludo="saludo";
     public static final String NombreTipoNoticacionGarvis="garvis";
+    
+    public static final String NombreTipoNoticacionNevera="nevera";
+    public static final String NombreTipoNoticacionMicroondas="microondas";
+    public static final String NombreTipoNoticacionTelevision="television";
+    public static final String NombreTipoNoticacionBiblioteca="biblioteca";
+    public static final String NombreTipoNoticacionDispensador="dispensador";
+    public static final String NombreTipoNoticacionAspiradora="aspiradora";
+    public static final String NombreTipoNoticacionTermostato="termostato";
+    public static final String NombreTipoNoticacionDetector="detector";
+    
+
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";
     public static final String peticionInfoIicialCita1 = "puedes avisarme si necesitas algo de tu casa.";
     public static final String HasDichoMiNombre ="Está claro que quieres interactuar conmigo.";
+
+    public static final String HasDichoNevera ="Intuyo que quieres que te dé de comer.";
+    public static final String HasDichoMicroondas ="¿Está fría tu comida?";
+    public static final String HasDichoTelevision ="La tele te quitará el aburrimiento.";
+    public static final String HasDichoBiblioteca ="¡Qué bueno que leas!";
+    public static final String HasDichoDispensador ="No olvides aclarar.";
+    public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!¡Qué casa tan sucia!";
+    public static final String HasDichoTermostato ="Avísame si tienes frío o calor";
+    public static final String HasDichoDetector ="Yo te avisaré si hay algún incendio.";    
 }
