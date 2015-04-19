@@ -1233,6 +1233,10 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionSaludo(contextoInterpretacion, annot));
 //                 i++;
              }
+             if(anotType.equalsIgnoreCase("garvis")){
+                 anotacionesInterpretadas.add(interpretarAnotacionGarvis(contextoInterpretacion, annot));
+//                 i++;
+             }
 //                 fet = annot.getFeatures();
                 
 //                string= (String) annot.getFeatures().get("string");
@@ -1250,6 +1254,20 @@ private Notificacion interpretarAnotacionSaludo(String conttextoInterpretacion,A
         int posicionFinTexto =anotacionSaludo.getEndNode().getOffset().intValue();
         String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
         notif.setTipoNotificacion(anotacionSaludo.getType());
+        notif.setMensajeNotificacion(msgNotif);
+        return notif;
+}
+private Notificacion interpretarAnotacionGarvis(String conttextoInterpretacion,Annotation anotacionGarvis){
+//    if(anotacionSaludo.getType()!="saludo"){
+//        return null;
+//    }
+    Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+    // obtenemos el texto del saludo a partir de la anotacion
+            
+        int posicionComienzoTexto =anotacionGarvis.getStartNode().getOffset().intValue();
+        int posicionFinTexto =anotacionGarvis.getEndNode().getOffset().intValue();
+        String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
+        notif.setTipoNotificacion(anotacionGarvis.getType());
         notif.setMensajeNotificacion(msgNotif);
         return notif;
 }
