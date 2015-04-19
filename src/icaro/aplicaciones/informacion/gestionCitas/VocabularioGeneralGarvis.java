@@ -28,8 +28,8 @@ public class VocabularioGeneralGarvis {
     public static final String RespuestaNoEniendo3="definitivamente no me entero de lo que dice , creo que vamos a terminar la conversación";
     public static final String Despedida1="Bueno tenemos que dejarlo ha sido un placer";
     public static final String NombreTipoNoticacionSaludo="saludo";
-    public static final String InfoGeneralFuncionalidad= "Soy un agente encargado de gestionar el funcionamiento de algunos de tus electrodomésticos. Dime si deseas algo.";
+    public static final String InfoGeneralFuncionalidad= "Soy un agente encargado de gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
-    public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero vayamos al grano";
-    public static final String peticionInfoIicialCita1 = " podría decirme con quien quiere la cita ";
+    public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";
+    public static final String peticionInfoIicialCita1 = "puedes avisarme si necesitas algo de tu casa.";
 }
