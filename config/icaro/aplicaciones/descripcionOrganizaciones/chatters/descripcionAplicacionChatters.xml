@@ -28,8 +28,8 @@
 			<icaro:DescComportamientoAgentesAplicacion>
 				<icaro:DescComportamientoAgente
 					nombreComportamiento="AgenteAplicacionAcceso" rol="AgenteAplicacion" 
-					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoCitasCognitivo"
-                                        localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoCitasCognitivo.procesoResolucionObjetivos.reglasAgenteDialogoCitas.drl"
+					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoGarvisCognitivo"
+                                        localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoGarvisCognitivo.procesoResolucionObjetivos.reglasAgenteDialogoGarvis.drl"
 					tipo="Cognitivo" />
 			</icaro:DescComportamientoAgentesAplicacion>
 		</icaro:DescComportamientoAgentes>
