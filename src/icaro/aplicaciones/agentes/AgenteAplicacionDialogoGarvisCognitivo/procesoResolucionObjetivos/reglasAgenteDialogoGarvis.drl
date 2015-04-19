@@ -47,7 +47,7 @@ rule "Saludo Inicial y peticion de info"
    then
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Se ejecuta la tarea : SolicitarDatosAcceso",InfoTraza.NivelTraza.debug));
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarInfoInicial.class);
-     tarea.ejecutar(VocabularioGestionCitas.IdentRecursoComunicacionChat);
+     tarea.ejecutar(VocabularioGeneralGarvis.IdentRecursoComunicacionChat);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -56,7 +56,7 @@ rule "Saludo Inicial al interlocutor y peticion de datos iniciales "
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGestionCitas.NombreTipoNoticacionSaludo)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionSaludo)
    then
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(SaludarYPresentarFuncionalidad.class);
      tarea.ejecutar(identInterlc);
@@ -67,10 +67,10 @@ rule "No hay extraccion  semantica del texto del interlocutor  "
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGestionCitas.ExtraccionSemanticaNull)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull)
    then
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarInfoInicialCita.class);
-     tarea.ejecutar(identInterlc,VocabularioGestionCitas.preambuloNoHeEntendido,VocabularioGestionCitas.peticionInfoIicialCita1  );
+     tarea.ejecutar(identInterlc,VocabularioGeneralGarvis.preambuloNoHeEntendido,VocabularioGeneralGarvis.peticionInfoIicialCita1  );
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end

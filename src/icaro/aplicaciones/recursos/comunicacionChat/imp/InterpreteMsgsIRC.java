@@ -8,7 +8,7 @@ package icaro.aplicaciones.recursos.comunicacionChat.imp;
 import gate.Annotation;
 import icaro.aplicaciones.informacion.gestionCitas.InfoConexionUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
+import icaro.aplicaciones.informacion.gestionCitas.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import static icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc.VERSION;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 public class InterpreteMsgsIRC {
     
      private boolean _verbose = true;
-    private String _userNameAgente = VocabularioGestionCitas.IdentConexionAgte;
+    private String _userNameAgente = VocabularioGeneralGarvis.IdentConexionAgte;
     private String _login = "ConexionIrc";
     private String _version = "ConexionIrc " + VERSION + " Java IRC Bot - www.jibble.org";
     private String _finger = "You ought to be arrested for fingering a bot!";
@@ -430,7 +430,7 @@ public class InterpreteMsgsIRC {
             try {
                 if (infoExtraida.size()==0){
                     Notificacion infoAenviar = new Notificacion(sender);
-                    infoAenviar.setTipoNotificacion(VocabularioGestionCitas.ExtraccionSemanticaNull);
+                    infoAenviar.setTipoNotificacion(VocabularioGeneralGarvis.ExtraccionSemanticaNull);
                     mensajeAenviar = new MensajeSimple((Object)infoAenviar,sender,identAgenteGestorDialogo);
                 }
                 else if (infoExtraida.size()==1){

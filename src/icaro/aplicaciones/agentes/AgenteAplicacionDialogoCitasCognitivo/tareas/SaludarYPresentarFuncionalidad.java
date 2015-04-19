@@ -11,7 +11,7 @@ package icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.tareas;
 
 
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetivos.ObtenerInfoInterlocutor;
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
+import icaro.aplicaciones.informacion.gestionCitas.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.CausaTerminacionTarea;
@@ -40,22 +40,22 @@ public class SaludarYPresentarFuncionalidad extends TareaSincrona{
                     try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
 		ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
-						VocabularioGestionCitas.IdentRecursoComunicacionChat);          
+						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = VocabularioGestionCitas.SaludoInicial2+ "  "+ identInterlocutor + "  "+
-                            VocabularioGestionCitas.InfoGeneralFuncionalidad + "  "+
-                            VocabularioGestionCitas.PeticionInformacionGeneral1;
+                    String mensajeAenviar = VocabularioGeneralGarvis.SaludoInicial2+ "  "+ identInterlocutor + "  "+
+                            VocabularioGeneralGarvis.InfoGeneralFuncionalidad + "  "+
+                            VocabularioGeneralGarvis.PeticionInformacionGeneral1;
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {
                     identAgenteOrdenante = this.getAgente().getIdentAgente();
                      this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
-                             VocabularioGestionCitas.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
+                             VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
                         }
                     } catch(Exception e) {
                         this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-Acceso:Interfaz:"+
-                                VocabularioGestionCitas.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
+                                VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
 			e.printStackTrace();
 		}
 	}

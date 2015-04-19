@@ -1,6 +1,6 @@
 package icaro.aplicaciones.recursos.comunicacionChat;
 
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
+import icaro.aplicaciones.informacion.gestionCitas.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.InterpreteMsgsIRC;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.IrcException;
@@ -42,8 +42,8 @@ public class ClaseGeneradoraComunicacionChat extends ImplRecursoSimple implement
 
                 url=ConfigInfoComunicacionChat.urlFeeNode;
                 nickname=ConfigInfoComunicacionChat.nicknameConexionAgte;
-//                identAgenteAReportar = VocabularioGestionCitas.IdentAgenteAplicacionDialogoCitas;
-                identExtractorSem = VocabularioGestionCitas.IdentRecursoExtractorSemantico;
+//                identAgenteAReportar = VocabularioGeneralGarvis.IdentAgenteAplicacionDialogoCitas;
+                identExtractorSem = VocabularioGeneralGarvis.IdentRecursoExtractorSemantico;
 		try {
 //                        comunicChat = new ComunicacionChatImp(idInstanciaRecurso,url,nickname);
                     
@@ -138,8 +138,8 @@ private void generarErrorCreacionComponente(String textoMensaje){
            }else interpreteMsgIrc.setItfusoRecExtractorSemantico(itfExtractorSem);
            if (itfExtractorSem == null ||itfAgteControlador == null )throw new Exception();
            else{
-               interpreteMsgIrc.setIdentAgenteGestorDialogo(VocabularioGestionCitas.IdentAgenteAplicacionDialogoCitas);
-               interpreteMsgIrc.setIdentConexion(VocabularioGestionCitas.IdentConexionAgte);
+               interpreteMsgIrc.setIdentAgenteGestorDialogo(VocabularioGeneralGarvis.IdentAgenteAplicacionDialogoCitas);
+               interpreteMsgIrc.setIdentConexion(VocabularioGeneralGarvis.IdentConexionAgte);
                comunicChat.setVerbose(true);
                conectar( url, chanel, nickname);
            }

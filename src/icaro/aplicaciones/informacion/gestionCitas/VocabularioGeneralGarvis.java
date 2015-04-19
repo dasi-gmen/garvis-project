@@ -8,7 +8,7 @@ package icaro.aplicaciones.informacion.gestionCitas;
  *
  * @author FGarijo
  */
-public class VocabularioGestionCitas {
+public class VocabularioGeneralGarvis {
     public static final String ResultadoAutenticacion_DatosNoValidos= "usuarioNoValido";
     public static final String ResultadoAutenticacion_DatosValidos= "usuarioValido";
     public static final String NotificacionAccesoAutorizado="Autorizacion_Acceso_Notificado_Al_Usuario";
@@ -28,7 +28,7 @@ public class VocabularioGestionCitas {
     public static final String RespuestaNoEniendo3="definitivamente no me entero de lo que dice , creo que vamos a terminar la conversación";
     public static final String Despedida1="Bueno tenemos que dejarlo ha sido un placer";
     public static final String NombreTipoNoticacionSaludo="saludo";
-    public static final String InfoGeneralFuncionalidad= "Soy un agente encargado de gestionar las citas de los profesores de la UCM";
+    public static final String InfoGeneralFuncionalidad= "Soy un agente encargado de gestionar el funcionamiento de algunos de tus electrodomésticos. Dime si deseas algo.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero vayamos al grano";
     public static final String peticionInfoIicialCita1 = " podría decirme con quien quiere la cita ";

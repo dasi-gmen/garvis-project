@@ -7,7 +7,7 @@
  */
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.tareas;
 
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
+import icaro.aplicaciones.informacion.gestionCitas.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
 import icaro.aplicaciones.recursos.visualizacionAcceso.ItfUsoVisualizadorAcceso;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Tarea;
@@ -33,7 +33,7 @@ public class SolicitarInfoInicial extends TareaSincrona {
 						NombresPredefinidos.ITF_USO + identRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    recComunicacionChat.enviarMensagePrivado(VocabularioGestionCitas.SaludoInicial1);
+                    recComunicacionChat.enviarMensagePrivado(VocabularioGeneralGarvis.SaludoInicial1);
                 }
                 else {
                     identAgenteOrdenante = this.getAgente().getIdentAgente();
