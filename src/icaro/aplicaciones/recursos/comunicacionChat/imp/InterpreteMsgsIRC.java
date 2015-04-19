@@ -395,8 +395,12 @@ public class InterpreteMsgsIRC {
     // Se envia la información al extrator semantico se traducen las anotaciones y se envia el contenido al agente de dialogo
     // de esta forma el agente recibe mensajes con entidades del modelo de información
         HashSet anotacionesBusquedaPrueba = new HashSet();
-        anotacionesBusquedaPrueba.add("Saludo");
+        anotacionesBusquedaPrueba.add("saludo");
         anotacionesBusquedaPrueba.add("Lookup");
+        anotacionesBusquedaPrueba.add("despedida");
+        anotacionesBusquedaPrueba.add("usuario");
+        anotacionesBusquedaPrueba.add("nevera");
+        
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName(sender);

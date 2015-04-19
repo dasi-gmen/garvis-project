@@ -27,7 +27,7 @@ public class VocabularioGestionCitas {
     public static final String RespuestaNoEniendo2="Lo siento pero sigo sin entender nada";
     public static final String RespuestaNoEniendo3="definitivamente no me entero de lo que dice , creo que vamos a terminar la conversación";
     public static final String Despedida1="Bueno tenemos que dejarlo ha sido un placer";
-    public static final String NombreTipoNoticacionSaludo="Saludo";
+    public static final String NombreTipoNoticacionSaludo="saludo";
     public static final String InfoGeneralFuncionalidad= "Soy un agente encargado de gestionar las citas de los profesores de la UCM";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero vayamos al grano";
