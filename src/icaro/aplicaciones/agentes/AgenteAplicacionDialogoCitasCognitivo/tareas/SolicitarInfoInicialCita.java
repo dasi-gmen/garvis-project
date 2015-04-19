@@ -36,7 +36,7 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
 						VocabularioGestionCitas.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = "cara cara"+VocabularioGestionCitas.SaludoInicial2+ "  "+ identInterlocutor + "  "+
+                    String mensajeAenviar = "old old"+VocabularioGestionCitas.SaludoInicial2+ "  "+ identInterlocutor + "  "+
                             preambulo + "  "+
                             textoPeticion;
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
