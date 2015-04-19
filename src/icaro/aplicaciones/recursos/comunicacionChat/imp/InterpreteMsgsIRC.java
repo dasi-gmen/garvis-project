@@ -6,9 +6,9 @@
 package icaro.aplicaciones.recursos.comunicacionChat.imp;
 
 import gate.Annotation;
-import icaro.aplicaciones.informacion.gestionCitas.InfoConexionUsuario;
-import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGeneralGarvis;
+import icaro.aplicaciones.informacion.gestionGarvis.InfoConexionUsuario;
+import icaro.aplicaciones.informacion.gestionGarvis.Notificacion;
+import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import static icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc.VERSION;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
@@ -400,6 +400,7 @@ public class InterpreteMsgsIRC {
         anotacionesBusquedaPrueba.add("despedida");
         anotacionesBusquedaPrueba.add("usuario");
         anotacionesBusquedaPrueba.add("nevera");
+        anotacionesBusquedaPrueba.add("garvis");
         
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();

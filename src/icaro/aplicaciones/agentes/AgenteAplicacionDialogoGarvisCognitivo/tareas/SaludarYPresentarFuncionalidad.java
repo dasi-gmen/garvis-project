@@ -11,7 +11,7 @@ package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas
 
 
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.ObtenerInfoInterlocutor;
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGeneralGarvis;
+import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.CausaTerminacionTarea;

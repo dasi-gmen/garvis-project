@@ -5,7 +5,7 @@ import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTar
 import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
 import icaro.infraestructura.entidadesBasicas.comunicacion.*
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.*;
-import icaro.aplicaciones.informacion.gestionCitas.*;
+import icaro.aplicaciones.informacion.gestionGarvis.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas.*;
 
 global ItfGestorTareas gestorTareas;
@@ -52,7 +52,7 @@ rule "Saludo Inicial y peticion de info"
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
-rule "Saludo Inicial al interlocutor y peticion de datos iniciales "
+rule "Saludo Respuesta al interlocutor y peticion de datos iniciales "
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
@@ -75,3 +75,12 @@ rule "No hay extraccion  semantica del texto del interlocutor  "
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
+rule "Estas hablando de mi"
+   when
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionGarvis)
+   then
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaGarvis.class);
+     tarea.ejecutar(identInterlc);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package icaro.aplicaciones.informacion.gestionCitas;
+package icaro.aplicaciones.informacion.gestionGarvis;
 
 import java.io.Serializable;
 
