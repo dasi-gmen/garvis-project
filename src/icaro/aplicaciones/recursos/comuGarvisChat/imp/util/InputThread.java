@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat.imp.util;
+package icaro.aplicaciones.recursos.comuGarvisChat.imp.util;
 
-import icaro.aplicaciones.recursos.comunicacionChat.imp.InterpreteMsgsIRC;
+import icaro.aplicaciones.recursos.comuGarvisChat.imp.InterpreteMsgsGARVIS;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InterruptedIOException;
@@ -26,16 +26,18 @@ public class InputThread extends Thread{
      * @param breader The BufferedReader that reads lines from the server.
      * @param bwriter
      */
-    private InterpreteMsgsIRC  _interpreteMensajes = null;
-    private BufferedReader _breader = null;
-    private BufferedWriter _bwriter = null;
+    private InterpreteMsgsGARVIS  _interpreteMensajes = null;
+    private ConexionGARVIS _conexionG = null;
+    private GarvisUserChat _garvisGUI = null;
+  //  private BufferedReader _breader = null;
+  //  private BufferedWriter _bwriter = null;
     
     public static final int MAX_LINE_LENGTH = 510;
     
-    protected InputThread(InterpreteMsgsIRC intrpmsg, BufferedReader breader, BufferedWriter bwriter) {
+    protected InputThread(ConexionGARVIS con, InterpreteMsgsGARVIS intrpmsg, GarvisUserChat gui) {
         _interpreteMensajes = intrpmsg;
-        _breader = breader;
-        _bwriter = bwriter;
+        _conexionG = con;
+        _garvisGUI = gui;
     }
     
     
@@ -45,7 +47,7 @@ public class InputThread extends Thread{
      *
      * @param line The raw line to send to the IRC server.
      */
-    public void sendRawLine(String line) {
+    /*public void sendRawLine(String line) {
         if (line.length() > _interpreteMensajes.getMaxLineLength() - 2) {
             line = line.substring(0, _interpreteMensajes.getMaxLineLength() - 2);
         }
@@ -60,7 +62,7 @@ public class InputThread extends Thread{
             }
         }
     }
-    
+    */
     
     /**
      * Called to start this Thread reading lines from the IRC server.
@@ -81,7 +83,7 @@ public class InputThread extends Thread{
             while (running) {
                 try {
                     String line = null;
-                    while ((line = _breader.readLine()) != null) {
+                    while ((line = _garvisGUI.nextLine()) != null) {
                         try {
                             _interpreteMensajes.handleLine(line);
                         }
@@ -109,10 +111,10 @@ public class InputThread extends Thread{
                         running = false;
                     }
                 }
-                catch (InterruptedIOException iioe) {
+                catch (Exception iioe) {
                     // This will happen if we haven't received anything from the server for a while.
                     // So we shall send it a ping to check that we are still connected.
-                    this.sendRawLine("PING " + (System.currentTimeMillis()/1000));
+                    //this.sendRawLine("PING " + (System.currentTimeMillis()/1000));
                     // Now we go back to listening for stuff from the server...
                 }
             }

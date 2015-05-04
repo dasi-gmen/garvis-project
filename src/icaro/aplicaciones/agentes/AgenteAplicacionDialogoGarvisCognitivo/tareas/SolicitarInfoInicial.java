@@ -8,7 +8,7 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
-import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
+import icaro.aplicaciones.recursos.comuGarvisChat.ItfUsoComuGarvisChat;
 import icaro.aplicaciones.recursos.visualizacionAcceso.ItfUsoVisualizadorAcceso;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Tarea;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -29,7 +29,7 @@ public class SolicitarInfoInicial extends TareaSincrona {
           String identRecursoComunicacionChat = (String)params[0];
                     try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
-		ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfaz(
+		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfaz(
 						NombresPredefinidos.ITF_USO + identRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);

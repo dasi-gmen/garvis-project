@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat.imp.util;
+package icaro.aplicaciones.recursos.comuGarvisChat.imp.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,11 +31,11 @@ public class IdentServer extends Thread{
      * @param login The login that the ident server will respond with.
      */
       
-    private ConexionIrc _bot;
+    private ConexionGARVIS _bot;
     private String _login;
     private ServerSocket _ss = null;
     
-    public IdentServer(ConexionIrc bot, String login) {
+    public IdentServer(ConexionGARVIS bot, String login) {
         _bot = bot;
         _login = login;
 

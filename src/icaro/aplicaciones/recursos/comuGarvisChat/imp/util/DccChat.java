@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat.imp.util;
+package icaro.aplicaciones.recursos.comuGarvisChat.imp.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,12 +25,12 @@ public class DccChat {
      * from somebody. It attempts to connect to the client that issued the
      * request.
      */
-    private ConexionIrc _bot;
+    private ConexionGARVIS _bot;
     private String _sourceNick;
     private BufferedReader _reader;
     private BufferedWriter _writer;
     private Socket _socket;
-    public DccChat(ConexionIrc bot, String sourceNick, String address, int port) throws IOException {
+    public DccChat(ConexionGARVIS bot, String sourceNick, String address, int port) throws IOException {
         _bot = bot;
         _sourceNick = sourceNick;
         _socket = new Socket(address, port);
@@ -44,7 +44,7 @@ public class DccChat {
      * somebody. If the client accepts the chat request, then the socket we
      * obtain is passed to this constructor.
      */
-    public DccChat(ConexionIrc bot, String sourceNick, Socket socket) throws IOException {
+    public DccChat(ConexionGARVIS bot, String sourceNick, Socket socket) throws IOException {
         _bot = bot;
         _sourceNick = sourceNick;
         _socket = socket;

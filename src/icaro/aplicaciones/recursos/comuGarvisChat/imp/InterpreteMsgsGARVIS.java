@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat.imp;
+package icaro.aplicaciones.recursos.comuGarvisChat.imp;
 
 import gate.Annotation;
 import icaro.aplicaciones.informacion.gestionGarvis.InfoConexionUsuario;
 import icaro.aplicaciones.informacion.gestionGarvis.Notificacion;
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
-import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
-import static icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc.VERSION;
+import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.ConexionGARVIS;
+import static icaro.aplicaciones.recursos.comuGarvisChat.imp.util.ConexionGARVIS.VERSION;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
@@ -29,15 +29,15 @@ import java.util.logging.Logger;
  *
  * @author FGarijo
  */
-public class InterpreteMsgsIRC {
+public class InterpreteMsgsGARVIS {
     
      private boolean _verbose = true;
     private String _userNameAgente = VocabularioGeneralGarvis.IdentConexionAgte;
-    private String _login = "ConexionIrc";
-    private String _version = "ConexionIrc " + VERSION + " Java IRC Bot - www.jibble.org";
+    private String _login = "ConexionGARVIS";
+    private String _version = "ConexionGARVIS " + VERSION + " Java IRC Bot - www.jibble.org";
     private String _finger = "You ought to be arrested for fingering a bot!";
     private int _maxLineLength = 512;
-    private ConexionIrc conectorIrc;
+    private ConexionGARVIS conectorGarvis;
     private String identAgenteGestorDialogo;
     private String identRecExtractSemantico;
     private ComunicacionAgentes comunicator;
@@ -48,13 +48,13 @@ public class InterpreteMsgsIRC {
     private InfoConexionUsuario infoConecxInterlocutor;
     
 
-    public InterpreteMsgsIRC (){}
-    public InterpreteMsgsIRC(ConexionIrc conexIrc) {
-       conectorIrc = conexIrc;
+    public InterpreteMsgsGARVIS (){}
+    public InterpreteMsgsGARVIS(ConexionGARVIS conexGarvis) {
+       conectorGarvis = conexGarvis;
     }
     
-    public synchronized void setConectorIrc (ConexionIrc ircConect){
-        conectorIrc = ircConect;
+    public synchronized void setConectorGarvis (ConexionGARVIS garvisConect){
+        conectorGarvis = garvisConect;
     }
     public synchronized  void setItfusoAgenteGestorDialogo(InterfazUsoAgente itfAgteDialogo){
         this.itfAgenteDialogo=itfAgteDialogo;
@@ -75,217 +75,13 @@ public class InterpreteMsgsIRC {
     }
     public final void handleLine(String line) {
         this.log(line);
-
-        // Check for server pings.
-        if (line.startsWith("PING ")) {
-            conectorIrc.onServerPing(line.substring(5));
-            return;
-        }
-
-        String sourceNick = null;
-        String sourceLogin = null;
-        String sourceHostname = null;
-
-        StringTokenizer tokenizer = new StringTokenizer(line);
-        String senderInfo = tokenizer.nextToken();
-        int exclamation = senderInfo.indexOf("!");
-        int at = senderInfo.indexOf("@");
-        if (senderInfo.startsWith(":")) {
-            if (exclamation > 0 && at > 0 && exclamation < at) {
-                sourceNick = senderInfo.substring(1, exclamation);
-                sourceLogin = senderInfo.substring(exclamation + 1, at);
-                sourceHostname = senderInfo.substring(at + 1);
-            }
-            else if (tokenizer.hasMoreTokens()) {
-                String errorStr = tokenizer.nextToken();
-                if (errorStr.length() == 3) {
-                    int code = 0;
-                    try {
-                        code = Integer.parseInt(errorStr);
-                    }
-                    catch (NumberFormatException e) {
-                        conectorIrc.onUnknown(line);
-                        return;
-                    }
-                    String response = line.substring(line.indexOf(errorStr, senderInfo.length()) + 4, line.length());
-                    conectorIrc.onServerResponse(code, response);
-                    return;
-                }
-                else {
-                    conectorIrc.onUnknown(line);
-                    return;
-                }
-            }
-            else {
-                conectorIrc.onUnknown(line);
-                return;
-            }
-        }
-        else {
-            // This line is not in a format that we can understand.
-            conectorIrc.onUnknown(line);
-            return;
-        }
-        
-        String command = tokenizer.nextToken();
-        String target = tokenizer.nextToken();
-
-        // Check for CTCP requests.
-        if (command.equals("PRIVMSG") && line.indexOf(":\u0001") > 0 && line.endsWith("\u0001")) {
-            
-            String request = line.substring(line.indexOf(":\u0001") + 2, line.length() - 1);
-
-            // Check for version requests.
-            if (request.equals("VERSION")) {
-                conectorIrc.onVersion(sourceNick, sourceLogin, sourceHostname, target);
-                return;
-            }
-            
-            // Check for actions from users.
-            if (request.startsWith("ACTION ")) {
-                conectorIrc.onAction(sourceNick, sourceLogin, sourceHostname, target, request.substring(7));
-                return;
-            }
-
-            // Check for ping requests.
-            if (request.startsWith("PING ")) {
-                conectorIrc.onPing(sourceNick, sourceLogin, sourceHostname, target, request.substring(5));
-                return;
-            }
-            
-            // Check for time requests.
-            if (request.equals("TIME")) {
-                conectorIrc.onTime(sourceNick, sourceLogin, sourceHostname, target);
-                return;
-            }
-
-            // Check for finger requests.
-            if (request.equals("FINGER")) {
-                conectorIrc.onFinger(sourceNick, sourceLogin, sourceHostname, target);
-                return;
-            }
-            
-            // Check for DCC SEND or CHAT requests.
-            tokenizer = new StringTokenizer(request);
-            if (tokenizer.countTokens() >= 5 && tokenizer.nextToken().equals("DCC")) {
-                String type = tokenizer.nextToken();
-                String filename = tokenizer.nextToken();
-                try {
-                    long address = Long.parseLong(tokenizer.nextToken());
-                    int port = Integer.parseInt(tokenizer.nextToken());
-                    int size = -1;
-                    if (tokenizer.hasMoreTokens()) {
-                        try {
-                            size = Integer.parseInt(tokenizer.nextToken());
-                        }
-                        catch (NumberFormatException e) {
-                            // Stick with the value we already had.
-                        }
-                    }
-                    final String sourceNick2 = sourceNick;
-                    final String sourceLogin2 = sourceLogin;
-                    final String sourceHostname2 = sourceHostname;
-                    final String filename2 = filename;
-                    final long address2 = address;
-                    final int port2 = port;
-                    final int size2 = size;
-                    if (type.equals("SEND")) {
-                        new Thread() {
-                            public void run() {
-                                onDccSendRequest(sourceNick2, sourceLogin2, sourceHostname2, filename2, address2, port2, size2);
-                            }
-                        }.start();
-                    }
-                    else if (type.equals("CHAT")) {
-                        new Thread() {
-                            public void run() {
-                                onDccChatRequest(sourceNick2, sourceLogin2, sourceHostname2, address2, port2);
-                            }
-                        }.start();
-                    }
-                }
-                catch (NumberFormatException e) {
-                    this.log("+++ Invalid DCC SEND request received: " + request);
-                }
-                return;
-            }
-            
-            // An unknown CTCP message - ignore it.
-            conectorIrc.onUnknown(line);
-            return;
-        }
-        
-        // Check for normal messages to the channel.
-        if (command.equals("PRIVMSG") && (target.startsWith("#") || target.startsWith("&"))) {
-            this.onMessage(target, sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-        
-        // Check for private messages to us.
-        if (command.equals("PRIVMSG") && target.equalsIgnoreCase(_userNameAgente)) {
-            this.onPrivateMessage(sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-        
-        // Check for people joining channels.
-        if (command.equals("JOIN")) {
-            this.onJoin(line.substring(line.indexOf(" :") + 2), sourceNick, sourceLogin, sourceHostname);
-            return;
-        }
-
-        // Check for people parting channels.
-        if (command.equals("PART")) {
-            this.onPart(target, sourceNick, sourceLogin, sourceHostname);
-            return;
-        }
-        
-        // Check for nick changes.
-        if (command.equals("NICK")) {
-            this.onNickChange(sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-        
-        // Check for notices.
-        if (command.equals("NOTICE")) {
-            this.onNotice(sourceNick, sourceLogin, sourceHostname, target, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-
-        // Check for quits.
-        if (command.equals("QUIT")) {
-            this.onQuit(sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-
-        // Check for kicks.
-        if (command.equals("KICK")) {
-            String kickee = tokenizer.nextToken();
-            this.onKick(target, sourceNick, sourceLogin, sourceHostname, kickee, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-        
-        // Check for mode changes.
-        if (command.equals("MODE")) {
-            this.onMode(target, sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(target) + target.length() + 1));
-            return;
-        }
-        
-        // Check for invites.
-        if (command.equals("INVITE")) {
-            this.onInvite(target, sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(" :") + 2));
-            return;
-        }
-        
-        // If we reach this point, then we've found something that the ConexionIrc
-        // Doesn't currently deal with.
-        this.onUnknown(line);
-        return;
-        
+        this.onPrivateMessage(line);
+         
     }
      /**
-     * This method is called once the ConexionIrc has successfully connected to
+     * This method is called once the ConexionGARVIS has successfully connected to
      * the IRC server.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      */
     protected void onConnect() {
@@ -294,8 +90,8 @@ public class InterpreteMsgsIRC {
     
     
     /**
-     * This method carries out the actions to be performed when the ConexionIrc
-     * gets disconnected.  This may happen if the ConexionIrc quits from the
+     * This method carries out the actions to be performed when the ConexionGARVIS
+     * gets disconnected.  This may happen if the ConexionGARVIS quits from the
      * server, or if the connection is unexpectedly lost.
      *  <p>
      * Disconnection from the IRC server is detected immediately if either
@@ -308,7 +104,7 @@ public class InterpreteMsgsIRC {
      * the connection has been lost, then this is probably the ideal method to
      * override to implement such functionality.
      *  <p>
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      */
     protected void onDisconnect() {}
@@ -326,11 +122,11 @@ public class InterpreteMsgsIRC {
      * For example, we can use this method to discover the topic of a
      * channel when we join it.  If we join the channel #test which
      * has a topic of &quot;I am King of Test&quot; then the response
-     * will be &quot;<code>ConexionIrc #test :I Am King of Test</code>&quot;
+     * will be &quot;<code>ConexionGARVIS #test :I Am King of Test</code>&quot;
      * with a code of 332 to signify that this is a topic.  Check the
      * IRC RFC for the full list of command response codes.
      *  <p>
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param code The three-digit numerical code for the response.
@@ -348,14 +144,14 @@ public class InterpreteMsgsIRC {
      *
      * @param response The response that should be given back in your PONG.
      */
-    public void onServerPing(String response) {
-        conectorIrc.sendRawLine("PONG " + response);
-    }
+//    public void onServerPing(String response) {
+//        conectorGarvis.sendRawLine("PONG " + response);
+//    }
     
     
     /**
      * This method is called whenever a message is sent to a channel.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel to which the message was sent.
@@ -368,8 +164,8 @@ public class InterpreteMsgsIRC {
 
 
     /**
-     * This method is called whenever a private message is sent to the ConexionIrc.
-     * The implementation of this method in the ConexionIrc abstract class
+     * This method is called whenever a private message is sent to the ConexionGARVIS.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param sender The nick of the person who sent the private message.
@@ -377,13 +173,13 @@ public class InterpreteMsgsIRC {
      * @param hostname The hostname of the person who sent the private message.
      * @param message The actual message.
      */
-    protected void onPrivateMessage(String sender, String login, String hostname, String textoUsuario) {
+    protected void onPrivateMessage(String textoUsuario) {
     
     
     /**
      * This method is called whenever an ACTION is sent from a user.  E.g.
      * such events generated by typing "/me goes shopping" in most IRC clients.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param sender The nick of the user that sent the action.
@@ -413,23 +209,23 @@ public class InterpreteMsgsIRC {
         
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
-        infoConecxInterlocutor.setuserName(sender);
-        infoConecxInterlocutor.sethost(hostname);
-        infoConecxInterlocutor.setlogin(login);
+        infoConecxInterlocutor.setuserName("pacopa");
+        infoConecxInterlocutor.sethost("casa");
+        infoConecxInterlocutor.setlogin("pacopa");
     if(itfUsoExtractorSem !=null){
         try {
             anotacionesRelevantes = itfUsoExtractorSem.extraerAnotaciones(anotacionesBusquedaPrueba, textoUsuario);
             String anot = anotacionesRelevantes.toString();
             System.out.println(System.currentTimeMillis() + " " + anot);
-           ArrayList infoAenviar= interpretarAnotaciones(sender,textoUsuario,anotacionesRelevantes);
-           enviarInfoExtraida ( infoAenviar, sender);
+           ArrayList infoAenviar= interpretarAnotaciones("pacopa",textoUsuario,anotacionesRelevantes);
+           enviarInfoExtraida ( infoAenviar, "pacopa");
 //            if ( itfAgenteDialogo!=null){
 //            mensajeAenviar = new MensajeSimple(infoAenviar,sender,identAgenteGestorDialogo);
 //            itfAgenteDialogo.aceptaMensaje(mensajeAenviar);
 ////            comunicator.enviarMsgaOtroAgente(mensajeAenviar);
 //        }
         } catch (Exception ex) {
-            Logger.getLogger(InterpreteMsgsIRC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InterpreteMsgsGARVIS.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     }
@@ -453,7 +249,7 @@ public class InterpreteMsgsIRC {
                 
                 itfAgenteDialogo.aceptaMensaje(mensajeAenviar);
             } catch (RemoteException ex) {
-                Logger.getLogger(InterpreteMsgsIRC.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InterpreteMsgsGARVIS.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     }
@@ -469,7 +265,7 @@ public class InterpreteMsgsIRC {
     /**
      * This method is called whenever someone (possibly us) joins a channel
      * which we are on.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel which somebody joined.
@@ -483,7 +279,7 @@ public class InterpreteMsgsIRC {
     /**
      * This method is called whenever someone (possibly us) parts a channel
      * which we are on.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel which somebody parted from.
@@ -497,7 +293,7 @@ public class InterpreteMsgsIRC {
     /**
      * This method is called whenever someone (possibly us) changes nick on any
      * of the channels that we are on.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param oldNick The old nick.
@@ -511,7 +307,7 @@ public class InterpreteMsgsIRC {
     /**
      * This method is called whenever someone (possibly us) is kicked from
      * any of the channels that we are in.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param channel The channel from which the recipient was kicked.
@@ -528,7 +324,7 @@ public class InterpreteMsgsIRC {
      * This method is called whenever someone (possibly us) quits from the
      * server.  We will only observe this if the user was in one of the
      * channels to which we are connected.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param sourceNick The nick of the user that quit from the server.
@@ -677,8 +473,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a user (possibly us) gets granted operator status for a channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -693,8 +489,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a user (possibly us) gets operator status taken away.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -709,8 +505,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a user (possibly us) gets voice status granted in a channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -725,8 +521,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a user (possibly us) gets voice status removed.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -743,8 +539,8 @@ public class InterpreteMsgsIRC {
      * other users may only join that channel if they know the key.  Channel keys
      * are sometimes referred to as passwords.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -759,8 +555,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a channel key is removed.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -776,8 +572,8 @@ public class InterpreteMsgsIRC {
      * Called when a user limit is set for a channel.  The number of users in
      * the channel cannot exceed this limit.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -792,8 +588,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when the user limit is removed for a channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -810,8 +606,8 @@ public class InterpreteMsgsIRC {
      * joining the channel.  For this reason, most bans are usually directly
      * followed by the user being kicked :-)
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -826,8 +622,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a hostmask ban is removed from a channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -843,8 +639,8 @@ public class InterpreteMsgsIRC {
      * Called when topic protection is enabled for a channel.  Topic protection
      * means that only operators in a channel may change the topic.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -858,8 +654,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when topic protection is removed for a channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -874,8 +670,8 @@ public class InterpreteMsgsIRC {
      * Called when a channel is set to only allow messages from users that
      * are in the channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -890,8 +686,8 @@ public class InterpreteMsgsIRC {
      * Called when a channel is set to allow messages from any user, even
      * if they are not actually in the channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -907,8 +703,8 @@ public class InterpreteMsgsIRC {
      * join the channel if they are invited by someone who is already in the
      * channel.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -922,8 +718,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a channel has 'invite only' removed.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -939,8 +735,8 @@ public class InterpreteMsgsIRC {
      * moderated, then only users who have been 'voiced' or 'opped' may speak
      * or change their nicks.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -954,8 +750,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a channel has moderated mode removed.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -969,8 +765,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a channel is marked as being in private mode.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -984,8 +780,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a channel is marked as not being in private mode.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -1000,8 +796,8 @@ public class InterpreteMsgsIRC {
      * Called when a channel is set to be in 'secret' mode.  Such channels
      * typically do not appear on a server's channel listing.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -1015,8 +811,8 @@ public class InterpreteMsgsIRC {
     /**
      * Called when a channel has 'secret' mode removed.
      * This is a type of mode change and is called by the onMode method
-     * of the ConexionIrc class.
-     * The implementation of this method in the ConexionIrc abstract class
+     * of the ConexionGARVIS class.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      *
      * @param channel The channel in which the mode change took place.
@@ -1029,7 +825,7 @@ public class InterpreteMsgsIRC {
     
     /**
      * Called when we are invited to a channel by a user.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param targetNick The nick of the user being invited - should be us!
@@ -1042,7 +838,7 @@ public class InterpreteMsgsIRC {
 
 
     /**
-     * This method is called whenever a DCC SEND request is sent to the ConexionIrc.
+     * This method is called whenever a DCC SEND request is sent to the ConexionGARVIS.
      * This means that a client has requested to send a file to us.
      * This abstract implementation performs no action, which means that all
      * DCC SEND requests will be ignored by default.  If you wish to save the
@@ -1061,14 +857,14 @@ public class InterpreteMsgsIRC {
      * <p>
      * Each time this method is called, it is called from within a
      * new Thread in order to allow multiple files to be downloaded by the
-     * ConexionIrc at the same time.
+     * ConexionGARVIS at the same time.
      *
      * <b>Warning:</b> Implementing this method and subsequently calling the
      * dccReceiveFile method will cause a file to be written to disk.  Please
      * ensure that you make adequate security checks to make sure that this
      * file will not overwrite anything important!
      * 
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param sender The nick of the user that sent the DCC SEND request.
@@ -1084,7 +880,7 @@ public class InterpreteMsgsIRC {
     
     
     /**
-     * This method is called whenever a DCC CHAT request is sent to the ConexionIrc.
+     * This method is called whenever a DCC CHAT request is sent to the ConexionGARVIS.
      * This means that a client has requested to chat to us directly rather than
      * via the IRC server.  This is useful for sending many lines of text to and
      * from the bot without having to worry about flooding the server or any
@@ -1119,7 +915,7 @@ public class InterpreteMsgsIRC {
      * new Thread in order to allow multiple DCC Chat sessions to run at the
      * same time.
      * <p>
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param sender The nick of the user that sent the DCC CHAT request.
@@ -1133,7 +929,7 @@ public class InterpreteMsgsIRC {
     
     /**
      * This method is called whenever we receive a VERSION request.
-     * This abstract implementation responds with the ConexionIrc's _version string,
+     * This abstract implementation responds with the ConexionGARVIS's _version string,
      * so if you override this method, be sure to either mimic its functionality
      * or to call super.onVersion(...);
      * 
@@ -1142,9 +938,9 @@ public class InterpreteMsgsIRC {
      * @param sourceHostname The hostname of the user that sent the VERSION request.
      * @param target The target of the VERSION request, be it our nick or a channel name.
      */
-    public void onVersion(String sourceNick, String sourceLogin, String sourceHostname, String target) {
-        conectorIrc.sendRawLine("NOTICE " + sourceNick + " :\u0001VERSION " + _version + "\u0001");
-    }
+//    public void onVersion(String sourceNick, String sourceLogin, String sourceHostname, String target) {
+//        conectorGarvis.sendRawLine("NOTICE " + sourceNick + " :\u0001VERSION " + _version + "\u0001");
+//    }
     
     
     /**
@@ -1159,9 +955,9 @@ public class InterpreteMsgsIRC {
      * @param target The target of the PING request, be it our nick or a channel name.
      * @param pingValue The value that was supplied as an argument to the PING command.
      */
-    public void onPing(String sourceNick, String sourceLogin, String sourceHostname, String target, String pingValue) {
-        conectorIrc.sendRawLine("NOTICE " + sourceNick + " :\u0001PING " + pingValue + "\u0001");
-    }
+//    public void onPing(String sourceNick, String sourceLogin, String sourceHostname, String target, String pingValue) {
+//        conectorGarvis.sendRawLine("NOTICE " + sourceNick + " :\u0001PING " + pingValue + "\u0001");
+//    }
     
     
     /**
@@ -1175,30 +971,12 @@ public class InterpreteMsgsIRC {
      * @param sourceHostname The hostname of the user that sent the TIME request.
      * @param target The target of the TIME request, be it our nick or a channel name.
      */
-    public void onTime(String sourceNick, String sourceLogin, String sourceHostname, String target) {
-        conectorIrc.sendRawLine("NOTICE " + sourceNick + " :\u0001TIME " + new Date().toString() + "\u0001");
-    }
     
-    
-    /**
-     * This method is called whenever we receive a FINGER request.
-     * This abstract implementation responds correctly, so if you override this
-     * method, be sure to either mimic its functionality or to call
-     * super.onFinger(...);
-     * 
-     * @param sourceNick The nick of the user that sent the FINGER request.
-     * @param sourceLogin The login of the user that sent the FINGER request.
-     * @param sourceHostname The hostname of the user that sent the FINGER request.
-     * @param target The target of the FINGER request, be it our nick or a channel name.
-     */
-    public void onFinger(String sourceNick, String sourceLogin, String sourceHostname, String target) {
-        conectorIrc.sendRawLine("NOTICE " + sourceNick + " :\u0001FINGER " + _finger + "\u0001");
-    }
     
     
     /**
      * This method is called whenever we receive a notice.
-     * The implementation of this method in the ConexionIrc abstract class
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param sourceNick The nick of the user that sent the notice.
@@ -1212,8 +990,8 @@ public class InterpreteMsgsIRC {
     
     /**
      * This method is called whenever we receive a line from the server that
-     * the ConexionIrc has not been programmed to recognise.
-     * The implementation of this method in the ConexionIrc abstract class
+     * the ConexionGARVIS has not been programmed to recognise.
+     * The implementation of this method in the ConexionGARVIS abstract class
      * performs no actions and may be overridden as required.
      * 
      * @param line The raw line that was received from the server.
@@ -1228,7 +1006,8 @@ public class InterpreteMsgsIRC {
 
     public void intentaDesconectar() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    if (conectorIrc.isConnected())conectorIrc.disconnect(); 
+//    if (conectorGarvis.isConnected())
+    	conectorGarvis.disconnect(); 
     }
 private ArrayList interpretarAnotaciones(String interlocutor,String contextoInterpretacion,HashSet anotacionesRelevantes){
     // recorremos las anotaciones obtenidas y las traducimos a objetos del modelo de información

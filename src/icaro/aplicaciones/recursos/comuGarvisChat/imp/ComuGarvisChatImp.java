@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat.imp;
+package icaro.aplicaciones.recursos.comuGarvisChat.imp;
 
-import icaro.aplicaciones.recursos.comunicacionChat.imp.util.IrcException;
-import icaro.aplicaciones.recursos.comunicacionChat.imp.util.NickAlreadyInUseException;
-import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
+import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.IrcException;
+import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.NickAlreadyInUseException;
+import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.ConexionGARVIS;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.excepciones.ExcepcionEnComponente;
@@ -20,20 +20,20 @@ import java.util.logging.Logger;
  *
  * @author FGarijo
  */
-public class ComunicacionChatImp extends ConexionIrc{
+public class ComuGarvisChatImp extends ConexionGARVIS{
     private String identRecurso;
-    private String url = null;
-    private String nickname = null;
-    private String chanel="#kiwiirc-garvis";
-    private Boolean conectado=false;
+   // private String url = null;
+   // private String nickname = null;
+  //  private String chanel="#kiwiirc-garvis";
+  //  private Boolean conectado=false;
     public InterfazUsoAgente itfUsoAgenteGestDialogo;
     private  String identificadorAgenteGestorDialogo;
     private ComunicacionAgentes comunicator;
     private MensajeSimple mensajeAenviar;
-    public ComunicacionChatImp(String identRecurso,String url, String nickname) {
-        this.url = url;
+    public ComuGarvisChatImp(String identRecurso,String url, String nickname) {
+       /* this.url = url;
         this.nickname = nickname;    
-        this.setName(this.nickname);
+        this.setName(this.nickname);*/
         comunicator = new ComunicacionAgentes(this.identRecurso);
     }
     public void setItfUsoAgenteGestorDialogo(InterfazUsoAgente itfUsoAgenteDialogo){
@@ -45,7 +45,7 @@ public class ComunicacionChatImp extends ConexionIrc{
     public synchronized final String getIdentAgenteGestorDialogo(){
         return identificadorAgenteGestorDialogo;
     }
-    public Boolean conectar(){
+  /*  public Boolean conectar(){
         this.setVerbose(true); //Debugging -> false
         conectado=isConnected();
         while(!conectado)
@@ -61,13 +61,13 @@ public class ComunicacionChatImp extends ConexionIrc{
             } catch (IrcException ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             } catch (NickAlreadyInUseException ex) {
-                Logger.getLogger(ComunicacionChatImp.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
         return conectado;
-    }
-    public Boolean nuevaConexion (String urlNueva, String canal, String nick ){
+    }*/
+  /*  public Boolean nuevaConexion (String urlNueva, String canal, String nick ){
         
         if(conectado){
             if(this.url.equals(urlNueva))
@@ -78,7 +78,7 @@ public class ComunicacionChatImp extends ConexionIrc{
         this.chanel=canal;
         this.nickname= nick;
         return this.conectar();
-    }
+    }*/
     @Override
     public void onPrivateMessage(String sender, String login, String hostname, String message)
     {
@@ -97,7 +97,7 @@ public class ComunicacionChatImp extends ConexionIrc{
         else try {
             throw new ExcepcionEnComponente ("El identificador del Gestor de dialogo no esta definido",this.getClass().getSimpleName(),null);
         } catch (ExcepcionEnComponente ex) {
-            Logger.getLogger(ComunicacionChatImp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @Override
@@ -108,7 +108,7 @@ public class ComunicacionChatImp extends ConexionIrc{
         else try {
             throw new ExcepcionEnComponente ("El identificador del Gestor de dialogo no esta definido",this.getClass().getSimpleName(),null);
         } catch (ExcepcionEnComponente ex) {
-            Logger.getLogger(ComunicacionChatImp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        if(message.matches("hola"))
 //        {

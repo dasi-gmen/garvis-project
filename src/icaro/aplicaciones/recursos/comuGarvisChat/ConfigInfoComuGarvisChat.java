@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat;
+package icaro.aplicaciones.recursos.comuGarvisChat;
 
 /**
  *
  * @author FGarijo
  */
-public class ConfigInfoComunicacionChat {
+public class ConfigInfoComuGarvisChat {
      public static final String urlFeeNode= "irc.freenode.net";
      public static final String nicknameConexionAgte= "AgteGarvis";
      public static final String chanelConexionAgte= "#kiwiirc-garvis";

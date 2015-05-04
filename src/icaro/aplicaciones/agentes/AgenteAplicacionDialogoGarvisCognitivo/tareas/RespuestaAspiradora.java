@@ -3,7 +3,7 @@ package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas
 
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.ObtenerInfoInterlocutor;
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
-import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
+import icaro.aplicaciones.recursos.comuGarvisChat.ItfUsoComuGarvisChat;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.CausaTerminacionTarea;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
@@ -30,7 +30,7 @@ public class RespuestaAspiradora extends TareaSincrona{
           String identInterlocutor = (String)params[0];
                     try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
-		ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
+		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);

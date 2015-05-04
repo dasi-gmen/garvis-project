@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comunicacionChat.imp.util;
+package icaro.aplicaciones.recursos.comuGarvisChat.imp.util;
+
+import icaro.aplicaciones.recursos.comuGarvisChat.imp.*;
 
 /**
  *
@@ -23,9 +25,11 @@ public class OutputThread extends Thread{
      * @param bwriter The BufferedWriter to send lines to the IRC server.
      * 
      */
-    protected OutputThread(ConexionIrc bot, Queue outQueue) {
+    protected OutputThread(ConexionGARVIS bot, InterpreteMsgsGARVIS inter, Queue outQueue, GarvisUserChat gui) {
         _bot = bot;
         _outQueue = outQueue;
+        _interp = inter;
+        _garvisGUI = gui;
     }
     
     
@@ -40,17 +44,19 @@ public class OutputThread extends Thread{
         while (running) {
             // Small delay to prevent spamming of the channel
             try {
-                Thread.sleep(_bot.getMessageDelay());
+                Thread.sleep(5000);
             }
             catch (InterruptedException e) {
                 // Do nothing.
             }
             String line = (String) _outQueue.next();
-            _bot.sendRawLine(line);
+            //_bot.sendRawLine(line);
+            _garvisGUI.messageIn(line);
         }
     }
     
-    private ConexionIrc _bot = null;
+    private ConexionGARVIS _bot = null;
     private Queue _outQueue = null;
-  
+    private InterpreteMsgsGARVIS _interp = null;
+    private GarvisUserChat _garvisGUI = null;
 }
