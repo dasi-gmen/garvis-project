@@ -153,5 +153,4 @@ rule "Creacion de los objectivos iniciales"
      insert(new AutorizarAccesoUsuarios());
 //   insert(new TerminarServicioAcceso());
 end
-
 */

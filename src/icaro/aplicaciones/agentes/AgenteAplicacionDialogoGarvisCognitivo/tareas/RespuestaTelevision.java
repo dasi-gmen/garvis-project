@@ -34,7 +34,8 @@ public class RespuestaTelevision extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoTelevision+" - "+(String) params[1];
+                    //String mensajeAenviar = VocabularioGeneralGarvis.HasDichoTelevision+" - "+(String) params[1];
+                    String mensajeAenviar = (String) params[1];
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {

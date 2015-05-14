@@ -33,6 +33,7 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionNevera="nevera";
     public static final String NombreTipoNoticacionMicroondas="microondas";
     public static final String NombreTipoNoticacionTelevision="television";
+    public static final String NombreTipoNoticacionGrabarTelevision="grabartv";
     public static final String NombreTipoNoticacionBiblioteca="biblioteca";
     public static final String NombreTipoNoticacionDispensador="dispensador";
     public static final String NombreTipoNoticacionAspiradora="aspiradora";
@@ -40,18 +41,26 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionDetector="detector";
     
 
-    public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomÃ©sticos.";
+    public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";
     public static final String peticionInfoIicialCita1 = "puedes avisarme si necesitas algo de tu casa.";
     public static final String HasDichoMiNombre ="EstÃ¡ claro que quieres interactuar conmigo.";
 
-    public static final String HasDichoNevera ="Intuyo que quieres que te dÃ© de comer.";
-    public static final String HasDichoMicroondas ="Â¿EstÃ¡ frÃ­a tu comida?";
-    public static final String HasDichoTelevision ="La tele te quitarÃ¡ el aburrimiento.";
-    public static final String HasDichoBiblioteca ="Â¡QuÃ© bueno que leas!";
+    public static final String HasDichoNevera ="Intuyo que quieres algo de comer?.";
+    public static final String HasDichoMicroondas ="¿Está fría tu comida?";
+    public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
+    public static final String HasDichoBiblioteca ="¡Qué bueno que leas!";
     public static final String HasDichoDispensador ="No olvides aclarar.";
-    public static final String HasDichoAspiradora ="Â¡Ya tocaba limpiar!Â¡QuÃ© casa tan sucia!";
+    public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Â¡QuÃ© casa tan sucia!";
     public static final String HasDichoTermostato ="AvÃ­same si tienes frÃ­o o calor";
-    public static final String HasDichoDetector ="Yo te avisarÃ© si hay algÃºn incendio.";    
+    public static final String HasDichoDetector ="Yo te avisarÃ© si hay algÃºn incendio.";
+    
+    public static final String RepuestaApagarTV ="La TV ha sido apaga.";
+    public static final String RepuestaEncenderTV ="La TV está encendida.";
+    public static final String RepuestaBuscarCanal ="Estoy buscando el canal que me has pedido.";
+    public static final String RepuestaSintonizarCanal ="He sintonizado el canal que me has pedido.";
+    public static final String RepuestaGrabarContenido ="Estoy iniciando la grabación.";
+    public static final String RepuestaSintonizarFutbol ="He sintonizado el fútbol.";
+        
 }

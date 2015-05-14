@@ -7,10 +7,7 @@
  */
 
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos;
-
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
-
-
 
 /**
  *
