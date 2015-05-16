@@ -42,14 +42,13 @@ public class ObtenerLibros extends TareaSincrona{
                     supplierNames.add("sup1");
                     supplierNames.add("sup2");
                     supplierNames.add("sup3");
-                    String mensaje1 = VocabularioGeneralGarvis.HasDichoBiblioteca;
-                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca;
+                    String space = " " ;
+                    String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
                     Iterator<String> iterator = supplierNames.iterator();
                     while (iterator.hasNext()) {
-                          //System.out.println(iterator.next());
-                          mensajeAenviar +=iterator.next();
+                          mensajeprev +=iterator.next()+ space;
                         } 
-                    recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+                    recComunicacionChat.enviarMensagePrivado(mensajeprev);
                 }
                 else {
                     identAgenteOrdenante = this.getAgente().getIdentAgente();

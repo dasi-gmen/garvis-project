@@ -35,6 +35,7 @@ end
 //  insert(gp);
 //end
 // =======================================================================
+
 //Reglas de focalizacion.
 rule "Regla de focalizacion en objetivo AutorizarAccesoUsuarios"
  when
@@ -185,6 +186,21 @@ rule "Mencionaste la biblioteca"
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
+
+rule "Mencionaste listar libro"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionListarLibro)
+   then
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
+     tarea.ejecutar(identInterlc);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+
+
 
 rule "Mencionaste la Dispensador"
    when

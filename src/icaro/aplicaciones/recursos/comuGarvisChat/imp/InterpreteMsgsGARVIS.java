@@ -207,6 +207,7 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("termostato");
         anotacionesBusquedaPrueba.add("detector");
         anotacionesBusquedaPrueba.add("grabartv");
+        anotacionesBusquedaPrueba.add("ListarLibro");
         
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
@@ -1034,6 +1035,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                 ||anotType.equalsIgnoreCase("aspiradora")
                 ||anotType.equalsIgnoreCase("termostato")
                 ||anotType.equalsIgnoreCase("detector")
+                ||anotType.equalsIgnoreCase("ListarLibro")
                 ||anotType.equalsIgnoreCase("grabartv")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
