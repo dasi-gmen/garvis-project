@@ -14,7 +14,7 @@ public class NotificacionBiblioteca {
 		setcontexto(notif.getcontexto());
 		setidentObjectRefNotificacion(notif.getidentObjectRefNotificacion());
 		setTipoNotificacion(notif.getTipoNotificacion());
-		setLibro(notif.getLibro());
+		//setLibro(notif.getLibro());
 	}
 
 	public void setLibro(String Libro) {

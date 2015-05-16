@@ -42,8 +42,8 @@ public class ObtenerLibros extends TareaSincrona{
                     supplierNames.add("sup1");
                     supplierNames.add("sup2");
                     supplierNames.add("sup3");
-                    String mensaje1 = VocabularioGeneralGarvis.HasDichoBiblioteca2;
-                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca2;
+                    String mensaje1 = VocabularioGeneralGarvis.HasDichoBiblioteca;
+                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca;
                     Iterator<String> iterator = supplierNames.iterator();
                     while (iterator.hasNext()) {
                           //System.out.println(iterator.next());
