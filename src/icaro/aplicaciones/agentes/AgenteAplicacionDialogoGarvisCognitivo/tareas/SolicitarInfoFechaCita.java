@@ -7,7 +7,6 @@
  */
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
 
-import icaro.aplicaciones.recursos.visualizacionAcceso.ItfUsoVisualizadorAcceso;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Tarea;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.CausaTerminacionTarea;
