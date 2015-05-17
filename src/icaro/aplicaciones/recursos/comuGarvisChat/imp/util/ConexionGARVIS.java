@@ -59,62 +59,13 @@ import java.util.StringTokenizer;
      * for changing the default settings if required.
      */
     public  ConexionGARVIS() {}
-//    public void ConexionGARVIS(InterpreteMsgsGARVIS interprete) {
-//         this.interpMesgs =interprete;
-//     
-//     }
+
     
 
-    public final synchronized void connect() throws IOException, IrcException, NickAlreadyInUseException {
-
-       // _server = hostname;
-       // _port = port;
-       // _password = password;
-        
-        
-        // Don't clear the outqueue - there might be something important in it!
-        
-        // Connect to the server.
-        //_socket =  new Socket(hostname, port);
+    public final synchronized void connect() throws IOException {
         chatGUI = new GarvisUserChat();
         chatGUI.start();
         this.log("*** Connected to GARVIS.");
-        
-        //BufferedReader breader = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
-        //BufferedWriter bwriter = new BufferedWriter(new OutputStreamWriter(_socket.getOutputStream()));
-        
-        // Attempt to join the server.
-       /* if (password != null && !password.equals("")) {
-            bwriter.write("PASS " + password + "\r\n");
-        }
-        bwriter.write("NICK " + _name + "\r\n");
-        bwriter.write("USER " + _login + " 8 * :" + _version + "\r\n");
-        bwriter.flush();*/
-        
-        // Read stuff back from the server to see if we connected.
-       /* String line = null;
-        while ((line = breader.readLine()) != null) {
-            this.log(line);
-            if (line.startsWith("PING ")) {
-                bwriter.write("PONG " + line.substring(5) + "\r\n");
-                bwriter.flush();
-                continue;
-            }
-            StringTokenizer tokenizer = new StringTokenizer(line);
-            tokenizer.nextToken();
-            String code = tokenizer.nextToken();
-            if (code.equals("004")) {
-                break;
-            }
-            else if (code.equals("433")) {
-                if (!line.contains(this._name))
-                throw new NickAlreadyInUseException(line);
-            }
-            else if (code.startsWith("5") || code.startsWith("4")) {
-                throw new IrcException("Could not log into the IRC server: " + line);
-            }
-        }
-        */
         this.log("*** Logged onto GARVIS.");
         
         // This makes the socket timeout on read operations after 5 minutes.
@@ -150,15 +101,10 @@ import java.util.StringTokenizer;
         _isConnected = false;
         this.log("*** Disconnected.");
         try {
-            //_socket.close();
-            //TODO
-            //chatGUI.close();
-
         }
         catch (Exception e) {
             // If something went wrong, let's assume the socket is already closed.
         }
-        //this.onDisconnect();
     }
     
         

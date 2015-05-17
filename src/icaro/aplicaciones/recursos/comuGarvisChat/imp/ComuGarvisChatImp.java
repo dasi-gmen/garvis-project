@@ -5,8 +5,6 @@
  */
 package icaro.aplicaciones.recursos.comuGarvisChat.imp;
 
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.IrcException;
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.NickAlreadyInUseException;
 import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.ConexionGARVIS;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
@@ -31,9 +29,6 @@ public class ComuGarvisChatImp extends ConexionGARVIS{
     private ComunicacionAgentes comunicator;
     private MensajeSimple mensajeAenviar;
     public ComuGarvisChatImp(String identRecurso,String url, String nickname) {
-       /* this.url = url;
-        this.nickname = nickname;    
-        this.setName(this.nickname);*/
         comunicator = new ComunicacionAgentes(this.identRecurso);
     }
     public void setItfUsoAgenteGestorDialogo(InterfazUsoAgente itfUsoAgenteDialogo){
@@ -45,51 +40,10 @@ public class ComuGarvisChatImp extends ConexionGARVIS{
     public synchronized final String getIdentAgenteGestorDialogo(){
         return identificadorAgenteGestorDialogo;
     }
-  /*  public Boolean conectar(){
-        this.setVerbose(true); //Debugging -> false
-        conectado=isConnected();
-        while(!conectado)
-        {
-            try {
-                this.connect(url);
-                this.joinChannel(chanel);
-                this.changeNick(nickname);
-                conectado= true;
-//                this.sendMessage("pacopa2", "hola hola");
-            } catch (IOException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            } catch (IrcException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            } catch (NickAlreadyInUseException ex) {
-                Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-        return conectado;
-    }*/
-  /*  public Boolean nuevaConexion (String urlNueva, String canal, String nick ){
-        
-        if(conectado){
-            if(this.url.equals(urlNueva))
-                if(!this.chanel.equals(canal))this.chanel=canal;
-                    return true;
-                }
-        this.url=urlNueva;
-        this.chanel=canal;
-        this.nickname= nick;
-        return this.conectar();
-    }*/
+
     @Override
     public void onPrivateMessage(String sender, String login, String hostname, String message)
     {
-//        if(message.matches("Hola"))
-//        {
-//            sendRawLine("PRIVMSG "+sender+" :Hola, "+sender+"!");
-//        }else
-//        {
-//            sendRawLine("PRIVMSG "+sender+" :Lo siento pero no entiendo lo que dices");
-//        }
-//        String agteReceptor = getIdentAgenteGestorDialogo();
         if ( getIdentAgenteGestorDialogo()!=null){
             mensajeAenviar = new MensajeSimple(message,sender,getIdentAgenteGestorDialogo());
             comunicator.enviarMsgaOtroAgente(mensajeAenviar);
@@ -110,12 +64,5 @@ public class ComuGarvisChatImp extends ConexionGARVIS{
         } catch (ExcepcionEnComponente ex) {
             Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        if(message.matches("hola"))
-//        {
-//            sendRawLine("PRIVMSG "+sender+" :Hola, "+sender+"!");
-//        }else
-//        {
-//            sendRawLine("PRIVMSG "+sender+" :Lo siento pero no entiendo lo que dices");
-//        }
     }
 }
