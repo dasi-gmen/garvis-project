@@ -10,10 +10,12 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.*;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ArrayList;
+import icaro.aplicaciones.recursos.comuGarvisChat.*;
 
 public class ObtenerLibros extends TareaSincrona{
 
@@ -38,16 +40,17 @@ public class ObtenerLibros extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    List<String> supplierNames = new ArrayList<String>();
-                    supplierNames.add("sup1");
-                    supplierNames.add("sup2");
-                    supplierNames.add("sup3");
-                    String space = " " ;
+                    //GetLibro lista = new GetLibro();
+                    //List<String>suppliesNames = lista.Libros();
+                    /*AddLibro lista = new AddLibro();
+                    List<String>suppliesNames = lista.ListaLibros();
+                    String space = " , " ;
+                    List<String> listadelibros= suppliesNames;*/
                     String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
-                    Iterator<String> iterator = supplierNames.iterator();
+                    /*Iterator<String> iterator = listadelibros.iterator();
                     while (iterator.hasNext()) {
                           mensajeprev +=iterator.next()+ space;
-                        } 
+                        } */
                     recComunicacionChat.enviarMensagePrivado(mensajeprev);
                 }
                 else {
