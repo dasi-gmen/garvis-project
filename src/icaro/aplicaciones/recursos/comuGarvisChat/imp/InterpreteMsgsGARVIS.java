@@ -1030,7 +1030,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionSaludo(contextoInterpretacion, annot));
 //                 i++;
              }
-             if(anotType.equalsIgnoreCase("garvis")){
+             if(anotType.equalsIgnoreCase("garvis") && anotacionesRelevantes.size()==1 ){
                  anotacionesInterpretadas.add(interpretarAnotacionGarvis(contextoInterpretacion, annot));
 //                 i++;
              }

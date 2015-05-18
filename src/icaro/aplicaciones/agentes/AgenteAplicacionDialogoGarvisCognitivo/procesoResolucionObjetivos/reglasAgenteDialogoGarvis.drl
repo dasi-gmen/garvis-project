@@ -419,7 +419,40 @@ rule "Mencionaste listar libro"
  	update(libro);
     retract(notif);
 end
+//============Reglas Tv============================
+//---------------------------------------
+rule "Volviste a mencionar la television para apagar"
+   when
+	obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj1)
+    obj2:EncenderTele(state==Objetivo.PENDING)
+    obj3:SintonizaTV(state==Objetivo.PENDING)
+    obj4:GrabarProgramaTV(state==Objetivo.PENDING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionApagarTV)
+   then
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Ya tienes la TV apagada!...");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 
+rule "Volviste a Mencionar la television para encender"
+   when
+    obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj1)
+    obj2:EncenderTele(state==Objetivo.SOLVED)
+    obj3:ApagarTele(state==Objetivo.PENDING)
+    obj4:SintonizaTV(state==Objetivo.SOLVING)//Sintonizar esta activo ya que la TV está encendida
+    obj5:GrabarProgramaTV(state==Objetivo.SOLVING)//Grabar esta activo ya que la TV está encendida
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncenderTV)
+   then
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Ya tienes la TV encendida!...");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 
 
 
