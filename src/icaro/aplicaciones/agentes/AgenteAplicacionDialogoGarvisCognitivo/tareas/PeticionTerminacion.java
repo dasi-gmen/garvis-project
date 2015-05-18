@@ -1,6 +1,5 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
 
-import icaro.aplicaciones.recursos.visualizacionAcceso.ItfUsoVisualizadorAcceso;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Tarea;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.comunicacion.AdaptadorRegRMI;
@@ -27,15 +26,8 @@ public class PeticionTerminacion extends Tarea {
                try {
                   
                      identAgenteOrdenante = this.getAgente().getIdentAgente();
-			ItfUsoVisualizadorAcceso visualizadorAcceso = (ItfUsoVisualizadorAcceso) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
-					.obtenerInterfaz(
-							NombresPredefinidos.ITF_USO + identRecursoVisualizacionAcceso);
-                  if (visualizadorAcceso==null)
-                    visualizadorAcceso = (ItfUsoVisualizadorAcceso)AdaptadorRegRMI.getItfRecursoRemoto(identRecursoVisualizacionAcceso, NombresPredefinidos.ITF_USO);
-                    if (visualizadorAcceso==null)
-                        this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz_Recurso:"+identRecursoVisualizacionAcceso, CausaTerminacionTarea.ERROR);
-                    else {
-                    visualizadorAcceso.cerrarVisualizadorAcceso();
+			
+                  
                     ItfUsoAgenteReactivo gestorAgentes = (ItfUsoAgenteReactivo) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfaz(NombresPredefinidos.ITF_USO+NombresPredefinidos.NOMBRE_GESTOR_AGENTES);
 			 if (gestorAgentes==null)
                             gestorAgentes = (ItfUsoAgenteReactivo)AdaptadorRegRMI.getItfAgenteRemoto(NombresPredefinidos.NOMBRE_GESTOR_AGENTES, NombresPredefinidos.ITF_USO);
@@ -50,7 +42,7 @@ public class PeticionTerminacion extends Tarea {
                             mensaje.setContenido("peticionTerminacion");
                             this.getAgente().aceptaMensaje(mensaje);
                             }
-                        }
+                        
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
                       this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlUtilizar:Interfaces_Recurso:"+identRecursoVisualizacionAcceso, CausaTerminacionTarea.ERROR);

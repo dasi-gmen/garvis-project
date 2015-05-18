@@ -200,6 +200,10 @@ public class InterpreteMsgsGARVIS {
 
         anotacionesBusquedaPrueba.add("nevera");
         anotacionesBusquedaPrueba.add("microondas");
+        anotacionesBusquedaPrueba.add("encendermicro");
+        anotacionesBusquedaPrueba.add("apagarmicro");
+        anotacionesBusquedaPrueba.add("abrirmicro");
+        anotacionesBusquedaPrueba.add("cerrarmicro");
         anotacionesBusquedaPrueba.add("television");
         anotacionesBusquedaPrueba.add("biblioteca");
         anotacionesBusquedaPrueba.add("dispensador");
@@ -210,7 +214,8 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("acc_encender");
         anotacionesBusquedaPrueba.add("apagartv");
         anotacionesBusquedaPrueba.add("sintonizatv");
-                
+        anotacionesBusquedaPrueba.add("ListarLibro");
+        anotacionesBusquedaPrueba.add("addlibro");
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
@@ -1031,6 +1036,10 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
              }
              if(anotType.equalsIgnoreCase("nevera")
                 ||anotType.equalsIgnoreCase("microondas")
+                ||anotType.equalsIgnoreCase("encendermicro")
+                ||anotType.equalsIgnoreCase("apagarmicro")
+                ||anotType.equalsIgnoreCase("abrirmicro")
+                ||anotType.equalsIgnoreCase("cerrarmicro")
                 ||anotType.equalsIgnoreCase("television")
                 ||anotType.equalsIgnoreCase("biblioteca")
                 ||anotType.equalsIgnoreCase("dispensador")
@@ -1042,6 +1051,9 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	||anotType.equalsIgnoreCase("acc_apagar")
             	||anotType.equalsIgnoreCase("sintonizatv")
             	||anotType.equalsIgnoreCase("apagartv")){
+                ||anotType.equalsIgnoreCase("ListarLibro")
+                ||anotType.equalsIgnoreCase("addlibro")
+                ||anotType.equalsIgnoreCase("grabartv")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
              }

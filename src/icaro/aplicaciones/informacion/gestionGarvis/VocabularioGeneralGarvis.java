@@ -29,9 +29,15 @@ public class VocabularioGeneralGarvis {
     public static final String Despedida1="Bueno tenemos que dejarlo ha sido un placer";
     public static final String NombreTipoNoticacionSaludo="saludo";
     public static final String NombreTipoNoticacionGarvis="garvis";
-    
+
+    public static final String msglibro="Añadido .Gracias";
+    public static final String msglibro1="Algo mas ? ";
     public static final String NombreTipoNoticacionNevera="nevera";
     public static final String NombreTipoNoticacionMicroondas="microondas";
+    public static final String NombreTipoNoticacionEncendermicro="encendermicro";
+    public static final String NombreTipoNoticacionApagarmicro="apagarmicro";
+    public static final String NombreTipoNoticacionAbrirmicro="abrirmicro";
+    public static final String NombreTipoNoticacionCerrarmicro="cerrarmicro";
     public static final String NombreTipoNoticacionTelevision="television";
     public static final String NombreTipoNoticacionGrabarTV="grabartv";
     public static final String NombreTipoNoticacionBiblioteca="biblioteca";
@@ -42,6 +48,9 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionEncenderTV="acc_encender";
     public static final String NombreTipoNoticacionApagarTV="apagartv";
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
+    public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
+    public static final String NombreTipoNoticacionLibro = "addlibro";
+    
 
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
@@ -53,6 +62,8 @@ public class VocabularioGeneralGarvis {
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
     public static final String HasDichoBiblioteca ="¡Qué bueno que leas!";
+    public static final String HasDichoBiblioteca2 ="La Lista de Libros es : ";
+    public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
     public static final String HasDichoDispensador ="No olvides aclarar.";
     public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Â¡QuÃ© casa tan sucia!";
     public static final String HasDichoTermostato ="AvÃ­same si tienes frÃ­o o calor";
@@ -64,5 +75,5 @@ public class VocabularioGeneralGarvis {
     public static final String RepuestaSintonizarCanal ="He sintonizado el canal que me has pedido.";
     public static final String RepuestaGrabarContenido ="Estoy iniciando la grabación.";
     public static final String RepuestaSintonizarFutbol ="He sintonizado el fútbol.";
-        
+    public static final String obtenerLibros = "Dime los libros que deseas añadir : ";  
 }
