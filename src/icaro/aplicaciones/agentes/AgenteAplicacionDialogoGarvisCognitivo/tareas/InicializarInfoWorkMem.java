@@ -26,6 +26,10 @@ public class InicializarInfoWorkMem extends TareaSincrona{
              this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
              this.getEnvioHechos().insertarHecho(new ObtenerInfoInterlocutor());
              	this.getEnvioHechos().insertarHecho(new ApagarTele());
+             	this.getEnvioHechos().insertarHecho(new EncenderMicro());
+             	this.getEnvioHechos().insertarHecho(new ApagarMicro());
+             	this.getEnvioHechos().insertarHecho(new AbrirMicro());
+             	this.getEnvioHechos().insertarHecho(new CerrarMicro());
              	this.getEnvioHechos().insertarHecho(new EncenderTele());
              	this.getEnvioHechos().insertarHecho(new GrabarProgramaTV());
               this.getEnvioHechos().insertarHecho(new AddLibro());
