@@ -211,7 +211,7 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("termostato");
         anotacionesBusquedaPrueba.add("detector");
         anotacionesBusquedaPrueba.add("grabartv");
-        anotacionesBusquedaPrueba.add("acc_encender");
+        anotacionesBusquedaPrueba.add("encendertv");
         anotacionesBusquedaPrueba.add("apagartv");
         anotacionesBusquedaPrueba.add("sintonizatv");
         anotacionesBusquedaPrueba.add("ListarLibro");
@@ -1047,7 +1047,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                 ||anotType.equalsIgnoreCase("termostato")
                 ||anotType.equalsIgnoreCase("detector")
                 ||anotType.equalsIgnoreCase("grabartv")
-            	||anotType.equalsIgnoreCase("acc_encender")
+            	||anotType.equalsIgnoreCase("encendertv")
             	||anotType.equalsIgnoreCase("acc_apagar")
             	||anotType.equalsIgnoreCase("sintonizatv")
             	||anotType.equalsIgnoreCase("apagartv")
