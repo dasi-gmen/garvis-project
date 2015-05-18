@@ -1050,7 +1050,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	||anotType.equalsIgnoreCase("acc_encender")
             	||anotType.equalsIgnoreCase("acc_apagar")
             	||anotType.equalsIgnoreCase("sintonizatv")
-            	||anotType.equalsIgnoreCase("apagartv")){
+            	||anotType.equalsIgnoreCase("apagartv")
                 ||anotType.equalsIgnoreCase("ListarLibro")
                 ||anotType.equalsIgnoreCase("addlibro")
                 ||anotType.equalsIgnoreCase("grabartv")){
