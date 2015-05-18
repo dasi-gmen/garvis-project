@@ -400,14 +400,18 @@ end
 
 rule "Mencionaste listar libro"
    when
-    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionListarLibro)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionListarLibro , msgg:mensajeNotificacion)
+    libro:IdentificarLibro(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    obj:AddLibro(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    //Focus(foco == obj)
    then
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
-     tarea.ejecutar(identInterlc);
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   	libro.setSolved();
+   	obj.SumarLibro(msgg);
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+    tarea.ejecutar(identInterlc,VocabularioGeneralGarvis.msglibro);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+ 	update(libro);
+    retract(notif);
 end
 
 
