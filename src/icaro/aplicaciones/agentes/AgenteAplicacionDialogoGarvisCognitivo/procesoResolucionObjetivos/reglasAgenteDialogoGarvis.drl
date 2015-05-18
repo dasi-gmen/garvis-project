@@ -46,6 +46,7 @@ rule "Inicio del proceso de consecucion del  objetivo ObtenerInfoInterlocutor"
     obj.setSolving();
     update(obj);
 end
+
 rule "Saludo Inicial y peticion de info"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
@@ -69,6 +70,7 @@ rule "Saludo Respuesta al interlocutor y peticion de datos iniciales "
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
+
 rule "No hay extraccion  semantica del texto del interlocutor  "
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
