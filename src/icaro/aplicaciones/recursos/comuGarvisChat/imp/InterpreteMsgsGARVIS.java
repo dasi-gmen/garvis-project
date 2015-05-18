@@ -200,6 +200,10 @@ public class InterpreteMsgsGARVIS {
 
         anotacionesBusquedaPrueba.add("nevera");
         anotacionesBusquedaPrueba.add("microondas");
+        anotacionesBusquedaPrueba.add("encendermicro");
+        anotacionesBusquedaPrueba.add("apagarmicro");
+        anotacionesBusquedaPrueba.add("abrirmicro");
+        anotacionesBusquedaPrueba.add("cerrarmicro");
         anotacionesBusquedaPrueba.add("television");
         anotacionesBusquedaPrueba.add("biblioteca");
         anotacionesBusquedaPrueba.add("dispensador");
@@ -207,21 +211,23 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("termostato");
         anotacionesBusquedaPrueba.add("detector");
         anotacionesBusquedaPrueba.add("grabartv");
+        anotacionesBusquedaPrueba.add("encendertv");
+        anotacionesBusquedaPrueba.add("apagartv");
+        anotacionesBusquedaPrueba.add("sintonizatv");
         anotacionesBusquedaPrueba.add("ListarLibro");
         anotacionesBusquedaPrueba.add("addlibro");
-        
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
         infoConecxInterlocutor.sethost("casa");
-        infoConecxInterlocutor.setlogin("pacopa");
+        infoConecxInterlocutor.setlogin("Tony");
     if(itfUsoExtractorSem !=null){
         try {
             anotacionesRelevantes = itfUsoExtractorSem.extraerAnotaciones(anotacionesBusquedaPrueba, textoUsuario);
             String anot = anotacionesRelevantes.toString();
             System.out.println(System.currentTimeMillis() + " " + anot);
-           ArrayList infoAenviar= interpretarAnotaciones("pacopa",textoUsuario,anotacionesRelevantes);
-           enviarInfoExtraida ( infoAenviar, "pacopa");
+           ArrayList infoAenviar= interpretarAnotaciones("Tony",textoUsuario,anotacionesRelevantes);
+           enviarInfoExtraida ( infoAenviar, "Tony");
 //            if ( itfAgenteDialogo!=null){
 //            mensajeAenviar = new MensajeSimple(infoAenviar,sender,identAgenteGestorDialogo);
 //            itfAgenteDialogo.aceptaMensaje(mensajeAenviar);
@@ -1024,18 +1030,27 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionSaludo(contextoInterpretacion, annot));
 //                 i++;
              }
-             if(anotType.equalsIgnoreCase("garvis")){
+             if(anotType.equalsIgnoreCase("garvis") && anotacionesRelevantes.size()==1 ){
                  anotacionesInterpretadas.add(interpretarAnotacionGarvis(contextoInterpretacion, annot));
 //                 i++;
              }
              if(anotType.equalsIgnoreCase("nevera")
                 ||anotType.equalsIgnoreCase("microondas")
+                ||anotType.equalsIgnoreCase("encendermicro")
+                ||anotType.equalsIgnoreCase("apagarmicro")
+                ||anotType.equalsIgnoreCase("abrirmicro")
+                ||anotType.equalsIgnoreCase("cerrarmicro")
                 ||anotType.equalsIgnoreCase("television")
                 ||anotType.equalsIgnoreCase("biblioteca")
                 ||anotType.equalsIgnoreCase("dispensador")
                 ||anotType.equalsIgnoreCase("aspiradora")
                 ||anotType.equalsIgnoreCase("termostato")
                 ||anotType.equalsIgnoreCase("detector")
+                ||anotType.equalsIgnoreCase("grabartv")
+            	||anotType.equalsIgnoreCase("encendertv")
+            	||anotType.equalsIgnoreCase("acc_apagar")
+            	||anotType.equalsIgnoreCase("sintonizatv")
+            	||anotType.equalsIgnoreCase("apagartv")
                 ||anotType.equalsIgnoreCase("ListarLibro")
                 ||anotType.equalsIgnoreCase("addlibro")
                 ||anotType.equalsIgnoreCase("grabartv")){

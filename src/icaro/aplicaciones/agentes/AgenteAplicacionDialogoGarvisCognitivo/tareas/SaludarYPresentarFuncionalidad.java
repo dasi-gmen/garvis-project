@@ -10,6 +10,8 @@ package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas
  */
 
 
+import java.util.ArrayList;
+
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.ObtenerInfoInterlocutor;
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comuGarvisChat.ItfUsoComuGarvisChat;
@@ -43,9 +45,13 @@ public class SaludarYPresentarFuncionalidad extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = VocabularioGeneralGarvis.SaludoInicial2+ "  "+ identInterlocutor + "  "+
+                    String[] saludos = VocabularioGeneralGarvis.SaludoInicial2.split(":");
+                    Double i = (Math.random() * (saludos.length));
+                    String[] saludos2 = VocabularioGeneralGarvis.PeticionInformacionGeneral1.split(":");
+                    Double j = (Math.random() * (saludos2.length));
+                    String mensajeAenviar = saludos[i.intValue()]+ "  "+ identInterlocutor + "  "+
                             VocabularioGeneralGarvis.InfoGeneralFuncionalidad + "  "+
-                            VocabularioGeneralGarvis.PeticionInformacionGeneral1;
+                            saludos2[j.intValue()];
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {

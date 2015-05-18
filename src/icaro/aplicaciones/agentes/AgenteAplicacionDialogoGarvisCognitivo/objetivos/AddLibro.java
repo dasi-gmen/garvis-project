@@ -7,7 +7,7 @@ public class AddLibro extends Objetivo {
 	
 	public List<String> LibrosNuevos = new ArrayList<String>();
 	public AddLibro() {
-		super.setgoalId("addlibro");
+		super.setgoalId("AddLibro");
 	}
 	
 	public List ListaLibros() {
