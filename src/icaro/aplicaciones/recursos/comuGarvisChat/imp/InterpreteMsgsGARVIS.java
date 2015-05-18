@@ -207,19 +207,22 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("termostato");
         anotacionesBusquedaPrueba.add("detector");
         anotacionesBusquedaPrueba.add("grabartv");
-        
+        anotacionesBusquedaPrueba.add("acc_encender");
+        anotacionesBusquedaPrueba.add("apagartv");
+        anotacionesBusquedaPrueba.add("sintonizatv");
+                
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
         infoConecxInterlocutor.sethost("casa");
-        infoConecxInterlocutor.setlogin("pacopa");
+        infoConecxInterlocutor.setlogin("Tony");
     if(itfUsoExtractorSem !=null){
         try {
             anotacionesRelevantes = itfUsoExtractorSem.extraerAnotaciones(anotacionesBusquedaPrueba, textoUsuario);
             String anot = anotacionesRelevantes.toString();
             System.out.println(System.currentTimeMillis() + " " + anot);
-           ArrayList infoAenviar= interpretarAnotaciones("pacopa",textoUsuario,anotacionesRelevantes);
-           enviarInfoExtraida ( infoAenviar, "pacopa");
+           ArrayList infoAenviar= interpretarAnotaciones("Tony",textoUsuario,anotacionesRelevantes);
+           enviarInfoExtraida ( infoAenviar, "Tony");
 //            if ( itfAgenteDialogo!=null){
 //            mensajeAenviar = new MensajeSimple(infoAenviar,sender,identAgenteGestorDialogo);
 //            itfAgenteDialogo.aceptaMensaje(mensajeAenviar);
@@ -1034,7 +1037,11 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                 ||anotType.equalsIgnoreCase("aspiradora")
                 ||anotType.equalsIgnoreCase("termostato")
                 ||anotType.equalsIgnoreCase("detector")
-                ||anotType.equalsIgnoreCase("grabartv")){
+                ||anotType.equalsIgnoreCase("grabartv")
+            	||anotType.equalsIgnoreCase("acc_encender")
+            	||anotType.equalsIgnoreCase("acc_apagar")
+            	||anotType.equalsIgnoreCase("sintonizatv")
+            	||anotType.equalsIgnoreCase("apagartv")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
              }

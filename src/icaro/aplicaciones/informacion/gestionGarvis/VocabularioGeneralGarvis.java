@@ -33,13 +33,15 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionNevera="nevera";
     public static final String NombreTipoNoticacionMicroondas="microondas";
     public static final String NombreTipoNoticacionTelevision="television";
-    public static final String NombreTipoNoticacionGrabarTelevision="grabartv";
+    public static final String NombreTipoNoticacionGrabarTV="grabartv";
     public static final String NombreTipoNoticacionBiblioteca="biblioteca";
     public static final String NombreTipoNoticacionDispensador="dispensador";
     public static final String NombreTipoNoticacionAspiradora="aspiradora";
     public static final String NombreTipoNoticacionTermostato="termostato";
     public static final String NombreTipoNoticacionDetector="detector";
-    
+    public static final String NombreTipoNoticacionEncenderTV="acc_encender";
+    public static final String NombreTipoNoticacionApagarTV="apagartv";
+    public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
 
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";

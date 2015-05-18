@@ -1,7 +1,7 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
 
 
-import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.ObtenerInfoInterlocutor;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.*;
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comuGarvisChat.ItfUsoComuGarvisChat;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
@@ -12,7 +12,6 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
 public class RespuestaTelevision extends TareaSincrona{
-
   /**
    *  Constructor
    *

@@ -6,5 +6,4 @@ public class GrabarProgramaTV extends Objetivo {
 	  public GrabarProgramaTV() {
 	       super.setgoalId("GrabarProgramaTele");
 	  }
-
 }
