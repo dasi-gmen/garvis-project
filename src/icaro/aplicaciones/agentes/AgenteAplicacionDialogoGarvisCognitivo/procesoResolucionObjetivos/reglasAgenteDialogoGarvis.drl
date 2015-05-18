@@ -268,7 +268,7 @@ rule "Mencionaste la television para grabar programa"
    	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
 	obj1:EncenderTele(state==Objetivo.SOLVED)
-    obj2:GrabarProgramaTV(state==Objetivo.PENDING)
+    obj2:GrabarProgramaTV(state==Objetivo.SOLVING)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionGrabarTV)
    then
     obj2.setSolving();
@@ -303,12 +303,15 @@ rule "Mencionaste la television para encender"
     Focus(foco == obj1)
     obj2:EncenderTele(state==Objetivo.PENDING)
     obj3:SintonizaTV(state==Objetivo.PENDING)
+    obj4:GrabarProgramaTV(state==Objetivo.PENDING)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncenderTV)
    then
     obj2.setSolved();
     update(obj2);
     obj3.setSolving();//obj3 listo para sintonizar
     update(obj3);
+    obj4.setSolving();//obj4 listo para grabar
+    update(obj4);
     retract(notif);
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
     tarea.ejecutar(identInterlc,"TV en ON");
@@ -323,6 +326,7 @@ rule "Mencionaste la television para apagar"
     obj2:EncenderTele(state==Objetivo.SOLVED)
     obj3:ApagarTele(state==Objetivo.PENDING)
     obj4:SintonizaTV(state==Objetivo.SOLVING)//Sintonizar esta activo ya que la TV está encendida
+    obj5:GrabarProgramaTV(state==Objetivo.SOLVING)//Grabar esta activo ya que la TV está encendida
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionApagarTV)
    then
    	obj3.setSolved();
@@ -331,6 +335,8 @@ rule "Mencionaste la television para apagar"
     update(obj2);
     obj4.setPending();//Sintonizar se desactiva
     update(obj4);
+    obj5.setPending();//Grabar se desactiva
+    update(obj5);
     retract(notif);
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
     tarea.ejecutar(identInterlc,"TV en OFF");
