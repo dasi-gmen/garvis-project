@@ -45,7 +45,7 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionAspiradora="aspiradora";
     public static final String NombreTipoNoticacionTermostato="termostato";
     public static final String NombreTipoNoticacionDetector="detector";
-    public static final String NombreTipoNoticacionEncenderTV="acc_encender";
+    public static final String NombreTipoNoticacionEncenderTV="encendertv";
     public static final String NombreTipoNoticacionApagarTV="apagartv";
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
     public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
@@ -65,9 +65,9 @@ public class VocabularioGeneralGarvis {
     public static final String HasDichoBiblioteca2 ="La Lista de Libros es : ";
     public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
     public static final String HasDichoDispensador ="No olvides aclarar.";
-    public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Â¡QuÃ© casa tan sucia!";
-    public static final String HasDichoTermostato ="AvÃ­same si tienes frÃ­o o calor";
-    public static final String HasDichoDetector ="Yo te avisarÃ© si hay algÃºn incendio.";
+    public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Qué casa tan sucia!";
+    public static final String HasDichoTermostato ="Avísame si tienes frí o calor";
+    public static final String HasDichoDetector ="Yo te avisaré si hay algún incendio.";
     
     public static final String RepuestaApagarTV ="La TV ha sido apaga.";
     public static final String RepuestaEncenderTV ="La TV está encendida.";
