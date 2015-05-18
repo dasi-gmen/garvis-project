@@ -50,6 +50,7 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
     public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
     public static final String NombreTipoNoticacionLibro = "addlibro";
+    public static final String NombreTipoNoticacionDespedida = "despedida";//ojo se esta modificando
     
 
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
@@ -57,6 +58,7 @@ public class VocabularioGeneralGarvis {
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";
     public static final String peticionInfoIicialCita1 = "puedes avisarme si necesitas algo de tu casa.";
     public static final String HasDichoMiNombre ="EstÃ¡ claro que quieres interactuar conmigo.";
+    public static final String DespedidaGarvis1 ="fue un placer :Hasta Luego Tony :Estare a tu disposicion Tony : Adios Tony, buen dia";//ojo se esta modificando
 
     public static final String HasDichoNevera ="Intuyo que quieres algo de comer?.";
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";

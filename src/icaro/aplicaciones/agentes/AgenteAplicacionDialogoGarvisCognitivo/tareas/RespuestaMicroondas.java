@@ -35,6 +35,8 @@ public class RespuestaMicroondas extends TareaSincrona{
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
                     String mensajeAenviar = (String)params[1];//VocabularioGeneralGarvis.HasDichoMicroondas;
+                    //String[] saludos = VocabularioGeneralGarvis.SaludoInicial2.split(":");
+                    //Double i = (Math.random() * (saludos.length));
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {
