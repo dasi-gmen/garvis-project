@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.AddLibro;
 
 /**
  *
@@ -32,6 +33,7 @@ import java.util.logging.Logger;
 public class InterpreteMsgsGARVIS {
     
      private boolean _verbose = true;
+     public boolean extractor ;
     private String _userNameAgente = VocabularioGeneralGarvis.IdentConexionAgte;
     private String _login = "ConexionGARVIS";
     private String _version = "ConexionGARVIS " + VERSION + " Java IRC Bot - www.jibble.org";
@@ -47,7 +49,7 @@ public class InterpreteMsgsGARVIS {
     private HashSet anotacionesRelevantes;
     private InfoConexionUsuario infoConecxInterlocutor;
     
-
+    AddLibro op = new AddLibro();
     public InterpreteMsgsGARVIS (){}
     public InterpreteMsgsGARVIS(ConexionGARVIS conexGarvis) {
        conectorGarvis = conexGarvis;
@@ -214,8 +216,8 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("encendertv");
         anotacionesBusquedaPrueba.add("apagartv");
         anotacionesBusquedaPrueba.add("sintonizatv");
-        anotacionesBusquedaPrueba.add("ListarLibro");
-        anotacionesBusquedaPrueba.add("addlibro");
+        anotacionesBusquedaPrueba.add("obtenerlibro");
+        anotacionesBusquedaPrueba.add("librospoliciacos");
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
@@ -237,6 +239,10 @@ public class InterpreteMsgsGARVIS {
             Logger.getLogger(InterpreteMsgsGARVIS.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+    if(itfUsoExtractorSem !=null && op.extract == false){
+    	op.SumarLibro(textoUsuario);
+    }
+     
     }
 
     private void enviarInfoExtraida (ArrayList infoExtraida,String sender){
@@ -1051,8 +1057,8 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	||anotType.equalsIgnoreCase("acc_apagar")
             	||anotType.equalsIgnoreCase("sintonizatv")
             	||anotType.equalsIgnoreCase("apagartv")
-                ||anotType.equalsIgnoreCase("ListarLibro")
-                ||anotType.equalsIgnoreCase("addlibro")
+            	||anotType.equalsIgnoreCase("obtenerlibro")
+            	||anotType.equalsIgnoreCase("librospoliciacos")
                 ||anotType.equalsIgnoreCase("grabartv")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;

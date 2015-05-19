@@ -48,8 +48,9 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionEncenderTV="encendertv";
     public static final String NombreTipoNoticacionApagarTV="apagartv";
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
-    public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
-    public static final String NombreTipoNoticacionLibro = "addlibro";
+    public static final String NombreTipoNoticacionObtenerLibro = "obtenerlibro";
+    public static final String NombreTipoNoticacionGeneroLibropol = "librospoliciacos";
+    
     
 
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
@@ -61,7 +62,7 @@ public class VocabularioGeneralGarvis {
     public static final String HasDichoNevera ="Intuyo que quieres algo de comer?.";
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
-    public static final String HasDichoBiblioteca ="¡Qué bueno que leas!";
+    public static final String HasDichoBiblioteca ="¡Qué bueno que leas! Que genero deseas ?";
     public static final String HasDichoBiblioteca2 ="La Lista de Libros es : ";
     public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
     public static final String HasDichoDispensador ="No olvides aclarar.";

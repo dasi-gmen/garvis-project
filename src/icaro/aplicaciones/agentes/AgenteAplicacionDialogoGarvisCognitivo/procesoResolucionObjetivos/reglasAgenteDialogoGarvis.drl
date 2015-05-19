@@ -345,19 +345,61 @@ rule "Mencionaste la television para apagar"
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
-
+//============Reglas Biblioteca============================
+//---------------------------------------
 rule "Mencionaste la biblioteca"
    when
-    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionBiblioteca)
+    //obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    //Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionBiblioteca , msg:mensajeNotificacion)
+    obj:AddLibro(state == Objetivo.PENDING )
+    //Focus(foco == obj)
    then
+     //obj.SumarLibro("hola");
+     obj.setSolving();
+     update(obj)
+     retract(notif)
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaBiblioteca.class);
+     tarea.ejecutar(identInterlc);
+     //tarea.SetFExtractor(true);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Obtener Libros la biblioteca"
+   when
+    //obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    //Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionObtenerLibro , msg:mensajeNotificacion)
+    obj:AddLibro(state == Objetivo.SOLVING )
+    //Focus(foco == obj)
+   then
+     //obj.SumarLibro("hola");
+     //update(obj)
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
      tarea.ejecutar(identInterlc);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
+rule "Obtener Genero Policiacos"
+	when
+	notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionGeneroLibropol)
+	obj:AddLibro(state == Objetivo.SOLVING )
+	then
+	obj.setPending();
+	update(obj)
+	retract(notif)
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
+    tarea.ejecutar(identInterlc);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+	
+	
+	
+
+//---------------------------------------
 rule "Mencionaste la Dispensador"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
@@ -406,21 +448,7 @@ rule "Mencionaste la Detector"
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
-rule "Mencionaste listar libro"
-   when
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionListarLibro , msgg:mensajeNotificacion)
-    libro:IdentificarLibro(state == Objetivo.PENDING, objectReferenceId == identInterlc)
-    obj:AddLibro(state == Objetivo.PENDING, objectReferenceId == identInterlc)
-    //Focus(foco == obj)
-   then
-   	libro.setSolved();
-   	obj.SumarLibro(msgg);
-	TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-    tarea.ejecutar(identInterlc,VocabularioGeneralGarvis.msglibro);
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
- 	update(libro);
-    retract(notif);
-end
+
 //============Reglas Tv============================
 //---------------------------------------
 rule "Volviste a mencionar la television para apagar"

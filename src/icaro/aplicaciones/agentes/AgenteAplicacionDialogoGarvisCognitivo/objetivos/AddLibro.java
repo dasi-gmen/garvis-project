@@ -6,17 +6,25 @@ import java.util.ArrayList;
 public class AddLibro extends Objetivo {
 	
 	public List<String> LibrosNuevos = new ArrayList<String>();
+	public boolean extract ;
 	public AddLibro() {
 		super.setgoalId("AddLibro");
 	}
-	
 	public List ListaLibros() {
 		return LibrosNuevos;
 	}
 
 	public void SumarLibro(String libro) {
-		LibrosNuevos.add(libro); 
+
+		this.LibrosNuevos.add(libro); 
 	}
 	
+	 public void setExtractor(boolean extractor) {
+	        this.extract = extractor;
+	    }
+	 public void falseExtractor() {
+	        this.setExtractor(false);
 
+	    }
+	
 }
