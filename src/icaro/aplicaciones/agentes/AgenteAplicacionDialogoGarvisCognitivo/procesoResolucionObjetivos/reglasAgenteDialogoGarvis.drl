@@ -340,8 +340,8 @@ end
 
 rule "Mencionaste la television para apagar"
    when
-    obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj1)
+    obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     obj2:EncenderTele(state==Objetivo.SOLVED)
     obj3:ApagarTele(state==Objetivo.PENDING)
     obj4:SintonizaTV(state==Objetivo.SOLVING)//Sintonizar esta activo ya que la TV está encendida

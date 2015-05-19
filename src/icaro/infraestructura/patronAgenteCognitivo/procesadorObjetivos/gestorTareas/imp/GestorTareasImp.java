@@ -17,9 +17,6 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTra
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import java.util.HashMap;
 import java.util.Map;
-import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.AddLibro;
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.*;
-
 import org.apache.log4j.Logger;
 
 /**
