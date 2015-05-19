@@ -340,8 +340,8 @@ end
 
 rule "Mencionaste la television para apagar"
    when
-    Focus(foco == obj1)
     obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj1)
     obj2:EncenderTele(state==Objetivo.SOLVED)
     obj3:ApagarTele(state==Objetivo.PENDING)
     obj4:SintonizaTV(state==Objetivo.SOLVING)//Sintonizar esta activo ya que la TV está encendida
@@ -364,36 +364,7 @@ rule "Mencionaste la television para apagar"
 end
 //============Reglas Biblioteca============================
 //---------------------------------------
-rule "Añadir Libro a la Biblioteca"
-   when
-    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionNuevoLibro)
-    obj1:AddLibro(state==Objetivo.PENDING)
-   then
-    obj1.setSolving();
-    update(obj1)
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
-     tarea.ejecutar(identInterlc);
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
 
-rule "Pedir Libro"
-   when
-    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionNuevoLibro1)
-    obj1:AddLibro(state==Objetivo.SOLVING)
-   then
-   
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaBiblioteca.class);
-     tarea.ejecutar(identInterlc);
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
-	
-	
 	
 
 //---------------------------------------
