@@ -49,7 +49,7 @@ public class InterpreteMsgsGARVIS {
     private HashSet anotacionesRelevantes;
     private InfoConexionUsuario infoConecxInterlocutor;
     
-    AddLibro op = new AddLibro();
+
     public InterpreteMsgsGARVIS (){}
     public InterpreteMsgsGARVIS(ConexionGARVIS conexGarvis) {
        conectorGarvis = conexGarvis;
@@ -219,9 +219,10 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("librospoliciacos");
         anotacionesBusquedaPrueba.add("sintonizatv");
         anotacionesBusquedaPrueba.add("ListarLibro");
-        anotacionesBusquedaPrueba.add("addlibro");
+        anotacionesBusquedaPrueba.add("nuevolibro");
         anotacionesBusquedaPrueba.add("nuevoslibros");
         anotacionesBusquedaPrueba.add("casoquebert");
+        anotacionesBusquedaPrueba.add("listalibros");
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
@@ -243,9 +244,7 @@ public class InterpreteMsgsGARVIS {
             Logger.getLogger(InterpreteMsgsGARVIS.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
-    		if(itfUsoExtractorSem !=null && op.extract == false){
-    			op.SumarLibro(textoUsuario);
-    }
+
     }
 
     private void enviarInfoExtraida (ArrayList infoExtraida,String sender){
@@ -1043,6 +1042,10 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionGarvis(contextoInterpretacion, annot));
 //                 i++;
              }
+             if(anotType.equalsIgnoreCase("listalibros")  ){
+                 anotacionesInterpretadas.add(interpretarAnotacionLibro(contextoInterpretacion, annot));
+//                 i++;
+             }
              if(anotType.equalsIgnoreCase("nevera")
                 ||anotType.equalsIgnoreCase("microondas")
                 ||anotType.equalsIgnoreCase("encendermicro")
@@ -1060,11 +1063,8 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	||anotType.equalsIgnoreCase("acc_apagar")
             	||anotType.equalsIgnoreCase("sintonizatv")
             	||anotType.equalsIgnoreCase("apagartv")
-            	||anotType.equalsIgnoreCase("obtenerlibro")
-            	||anotType.equalsIgnoreCase("librospoliciacos")
                 ||anotType.equalsIgnoreCase("grabartv")
-                ||anotType.equalsIgnoreCase("nuevoslibros")
-                ||anotType.equalsIgnoreCase("casoquebert")
+                ||anotType.equalsIgnoreCase("nuevolibro")
                 ||anotType.equalsIgnoreCase("despedida")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
@@ -1089,6 +1089,20 @@ private Notificacion interpretarAnotacionSaludo(String conttextoInterpretacion,A
         notif.setMensajeNotificacion(msgNotif);
         return notif;
 }
+
+private Notificacion interpretarAnotacionLibro(String conttextoInterpretacion,Annotation anotacionSaludo){
+//  if(anotacionSaludo.getType()!="saludo"){
+//      return null;
+//  }
+  Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+  // obtenemos el texto del saludo a partir de la anotacion
+          
+      String msgNotif = conttextoInterpretacion;
+      notif.setTipoNotificacion(anotacionSaludo.getType());
+      notif.setMensajeNotificacion(msgNotif);
+      return notif;
+}
+
 private Notificacion interpretarAnotacionGarvis(String conttextoInterpretacion,Annotation anotacionGarvis){
 //    if(anotacionSaludo.getType()!="saludo"){
 //        return null;

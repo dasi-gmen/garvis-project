@@ -8,7 +8,7 @@ public class AddLibro extends Objetivo {
 	public List<String> LibrosNuevos = new ArrayList<String>();
 	public boolean extract ;
 	public AddLibro() {
-		super.setgoalId("AddLibro");
+		super.setgoalId("AñadirLibro");
 	}
 	public List ListaLibros() {
 		return LibrosNuevos;

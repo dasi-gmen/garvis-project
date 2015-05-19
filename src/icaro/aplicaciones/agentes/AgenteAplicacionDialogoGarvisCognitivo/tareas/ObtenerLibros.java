@@ -34,24 +34,22 @@ public class ObtenerLibros extends TareaSincrona{
    String identDeEstaTarea=this.getIdentTarea();
             String identAgenteOrdenante = this.getIdentAgente();
           String identInterlocutor = (String)params[0];
+          String nombrelibro = (String)params[1];
                     try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
 		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    //List<String>suppliesNames = op1.ListaLibros();
-                    //GetLibro lista = new GetLibro();
-                    //List<String>suppliesNames = lista.Libros();
-                    //AddLibro lista = new AddLibro();
-                    //List<String>suppliesNames = lista.ListaLibros();
+                    AddLibro op1 = new AddLibro();
+                    op1.SumarLibro(nombrelibro);
+                    List<String>suppliesNames = op1.ListaLibros();
                     String space = " , " ;
-                    //List<String> listadelibros= suppliesNames;
                     String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
-                    //Iterator<String> iterator = suppliesNames.iterator();
-                   /* while (iterator.hasNext()) {
+                    Iterator<String> iterator = suppliesNames.iterator();
+                   while (iterator.hasNext()) {
                           mensajeprev +=iterator.next()+ space;
-                        }*/ 
+                   }
                     recComunicacionChat.enviarMensagePrivado(mensajeprev);
                 }
                 else {

@@ -364,9 +364,34 @@ rule "Mencionaste la television para apagar"
 end
 //============Reglas Biblioteca============================
 //---------------------------------------
+rule "Añadir Libro"
+when
+	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+	notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionLibro)
+	obj1:AddLibro(state==Objetivo.SOLVING)
+then
+	retract(notif);
+	String libro = notif.getMensajeNotificacion();
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
+     tarea.ejecutar(identInterlc,libro);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 
-	
-
+rule "Solicitud Añadir Libro"
+when 
+	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+	notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNotificacionPedirLibro)
+	obj1:AddLibro(state==Objetivo.PENDING)
+then
+	obj1.setSolving();
+	update(obj1);
+	retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaBiblioteca.class);
+     tarea.ejecutar(identInterlc);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 //---------------------------------------
 rule "Mencionaste la Dispensador"
    when
