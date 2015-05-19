@@ -35,8 +35,7 @@ public class RespuestaBiblioteca extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    
-                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca;
+                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca3;
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {

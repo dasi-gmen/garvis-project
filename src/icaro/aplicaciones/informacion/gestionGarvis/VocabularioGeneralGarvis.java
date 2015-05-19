@@ -51,8 +51,8 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
     public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
     public static final String NombreTipoNoticacionLibro = "addlibro";
-
-    
+    public static final String NombreTipoNoticacionNuevoLibro = "nuevoslibros";
+    public static final String NombreTipoNoticacionNuevoLibro1 = "casoquebert";
 
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
@@ -63,8 +63,8 @@ public class VocabularioGeneralGarvis {
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
     public static final String HasDichoBiblioteca ="¡Qué bueno que leas!";
-    public static final String HasDichoBiblioteca2 ="La Lista de Libros es : ";
-    public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
+    public static final String HasDichoBiblioteca2 ="Que libro deseas añadir ? ";
+    public static final String HasDichoBiblioteca3 ="Libro añadido. Que bueno que te guste leer ";
     public static final String HasDichoDispensador ="No olvides aclarar.";
     public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Qué casa tan sucia!";
     public static final String HasDichoTermostato ="Avísame si tienes frí o calor";
