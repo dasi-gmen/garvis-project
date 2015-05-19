@@ -51,9 +51,10 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
     public static final String NombreTipoNoticacionObtenerLibro = "obtenerlibro";
     public static final String NombreTipoNoticacionGeneroLibropol = "librospoliciacos";
-
-    
-
+    public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
+    public static final String NombreTipoNoticacionLibro = "addlibro";
+    public static final String NombreTipoNoticacionNuevoLibro = "nuevoslibros";
+    public static final String NombreTipoNoticacionNuevoLibro1 = "casoquebert";
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";

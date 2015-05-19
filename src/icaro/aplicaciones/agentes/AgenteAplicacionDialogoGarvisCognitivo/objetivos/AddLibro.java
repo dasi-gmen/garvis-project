@@ -19,12 +19,4 @@ public class AddLibro extends Objetivo {
 		this.LibrosNuevos.add(libro); 
 	}
 	
-	 public void setExtractor(boolean extractor) {
-	        this.extract = extractor;
-	    }
-	 public void falseExtractor() {
-	        this.setExtractor(false);
-
-	    }
-	
 }

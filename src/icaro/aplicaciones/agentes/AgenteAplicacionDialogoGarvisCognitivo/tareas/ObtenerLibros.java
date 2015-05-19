@@ -40,10 +40,7 @@ public class ObtenerLibros extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    AddLibro op1 = new AddLibro();
-                   op1.SumarLibro("Harry Quebet");
-                   op1.SumarLibro("En la Oscuridad");
-                    List<String>suppliesNames = op1.ListaLibros();
+                    //List<String>suppliesNames = op1.ListaLibros();
                     //GetLibro lista = new GetLibro();
                     //List<String>suppliesNames = lista.Libros();
                     //AddLibro lista = new AddLibro();
@@ -51,10 +48,10 @@ public class ObtenerLibros extends TareaSincrona{
                     String space = " , " ;
                     //List<String> listadelibros= suppliesNames;
                     String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
-                    Iterator<String> iterator = suppliesNames.iterator();
-                    while (iterator.hasNext()) {
+                    //Iterator<String> iterator = suppliesNames.iterator();
+                   /* while (iterator.hasNext()) {
                           mensajeprev +=iterator.next()+ space;
-                        } 
+                        }*/ 
                     recComunicacionChat.enviarMensagePrivado(mensajeprev);
                 }
                 else {
