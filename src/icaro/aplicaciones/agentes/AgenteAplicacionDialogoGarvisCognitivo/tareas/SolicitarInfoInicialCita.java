@@ -35,7 +35,10 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = VocabularioGeneralGarvis.SaludoInicial2+ "  "+ identInterlocutor + "  "+
+                    String[] saludos = VocabularioGeneralGarvis.SaludoInicial2.split(":");
+                    Double i = (Math.random() * (saludos.length));
+                    
+                    String mensajeAenviar = saludos[i.intValue()]+"  "+ identInterlocutor + "  "+
                             preambulo + "  "+
                             textoPeticion;
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
