@@ -38,7 +38,7 @@ import javax.swing.text.Element;
 public class GarvisUserChat extends JFrame {
 	
 	Queue inputQueue = new Queue();
-	String userName = "pacopa";
+	String userName = "Tony";
 	Integer numLineas = 0;
 	JTextArea areaLenguajeP =new JTextArea("");	
 	JLabel lineaColumnaAreaCodigo = new JLabel("Posición del puntero :  (0,0)");
