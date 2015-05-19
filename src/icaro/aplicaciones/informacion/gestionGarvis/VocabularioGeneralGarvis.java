@@ -47,17 +47,11 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionDetector="detector";
     public static final String NombreTipoNoticacionEncenderTV="encendertv";
     public static final String NombreTipoNoticacionApagarTV="apagartv";
-<<<<<<< HEAD
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
     public static final String NombreTipoNoticacionObtenerLibro = "obtenerlibro";
     public static final String NombreTipoNoticacionGeneroLibropol = "librospoliciacos";
-    
-=======
-    public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
-    public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
-    public static final String NombreTipoNoticacionLibro = "addlibro";
     public static final String NombreTipoNoticacionDespedida = "despedida";//ojo se esta modificando
->>>>>>> origin/master
+
     
 
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
