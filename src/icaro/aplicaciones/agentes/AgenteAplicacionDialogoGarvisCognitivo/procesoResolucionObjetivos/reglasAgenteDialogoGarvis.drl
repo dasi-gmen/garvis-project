@@ -37,6 +37,8 @@ rule "Regla de focalizacion en objetivo AutorizarAccesoUsuarios"
     update(f);
 end
 //=======================================================================
+
+
 ///Reglas de Consecucion del Objetivo ObtenerInfoInterlocutor
 rule "Inicio del proceso de consecucion del  objetivo ObtenerInfoInterlocutor"
   when
@@ -70,6 +72,21 @@ rule "Saludo Respuesta al interlocutor y peticion de datos iniciales "
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
+
+/********************************REGLA DESPEDIDA*******************************************************/
+
+
+rule "Despedida Garvis"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionDespedida)
+   then
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(DespedidaGarvis.class);
+    tarea.ejecutar(identInterlc);
+end
+
+/*****************************************************************************************************/
 
 rule "No hay extraccion  semantica del texto del interlocutor  "
    when

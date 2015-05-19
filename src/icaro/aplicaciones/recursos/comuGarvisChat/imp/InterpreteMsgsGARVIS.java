@@ -1053,7 +1053,8 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	||anotType.equalsIgnoreCase("apagartv")
                 ||anotType.equalsIgnoreCase("ListarLibro")
                 ||anotType.equalsIgnoreCase("addlibro")
-                ||anotType.equalsIgnoreCase("grabartv")){
+                ||anotType.equalsIgnoreCase("grabartv")
+                ||anotType.equalsIgnoreCase("despedida")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
              }
