@@ -28,13 +28,14 @@ public class RespuestaBiblioteca extends TareaSincrona{
    String identDeEstaTarea=this.getIdentTarea();
             String identAgenteOrdenante = this.getIdentAgente();
           String identInterlocutor = (String)params[0];
+         
                     try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
 		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca;
+                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoBiblioteca3;
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {

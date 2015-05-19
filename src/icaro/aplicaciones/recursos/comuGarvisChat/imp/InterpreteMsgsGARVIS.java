@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.AddLibro;
 
 /**
  *
@@ -31,7 +32,8 @@ import java.util.logging.Logger;
  */
 public class InterpreteMsgsGARVIS {
     
-     private boolean _verbose = true;
+    private boolean _verbose = true;
+    public boolean extractor ;
     private String _userNameAgente = VocabularioGeneralGarvis.IdentConexionAgte;
     private String _login = "ConexionGARVIS";
     private String _version = "ConexionGARVIS " + VERSION + " Java IRC Bot - www.jibble.org";
@@ -213,9 +215,14 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("grabartv");
         anotacionesBusquedaPrueba.add("encendertv");
         anotacionesBusquedaPrueba.add("apagartv");
+        anotacionesBusquedaPrueba.add("obtenerlibro");
+        anotacionesBusquedaPrueba.add("librospoliciacos");
         anotacionesBusquedaPrueba.add("sintonizatv");
         anotacionesBusquedaPrueba.add("ListarLibro");
-        anotacionesBusquedaPrueba.add("addlibro");
+        anotacionesBusquedaPrueba.add("nuevolibro");
+        anotacionesBusquedaPrueba.add("nuevoslibros");
+        anotacionesBusquedaPrueba.add("casoquebert");
+        anotacionesBusquedaPrueba.add("listalibros");
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
@@ -237,6 +244,7 @@ public class InterpreteMsgsGARVIS {
             Logger.getLogger(InterpreteMsgsGARVIS.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+
     }
 
     private void enviarInfoExtraida (ArrayList infoExtraida,String sender){
@@ -1034,6 +1042,10 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionGarvis(contextoInterpretacion, annot));
 //                 i++;
              }
+             if(anotType.equalsIgnoreCase("listalibros")  ){
+                 anotacionesInterpretadas.add(interpretarAnotacionLibro(contextoInterpretacion, annot));
+//                 i++;
+             }
              if(anotType.equalsIgnoreCase("nevera")
                 ||anotType.equalsIgnoreCase("microondas")
                 ||anotType.equalsIgnoreCase("encendermicro")
@@ -1051,9 +1063,9 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	||anotType.equalsIgnoreCase("acc_apagar")
             	||anotType.equalsIgnoreCase("sintonizatv")
             	||anotType.equalsIgnoreCase("apagartv")
-                ||anotType.equalsIgnoreCase("ListarLibro")
-                ||anotType.equalsIgnoreCase("addlibro")
-                ||anotType.equalsIgnoreCase("grabartv")){
+                ||anotType.equalsIgnoreCase("grabartv")
+                ||anotType.equalsIgnoreCase("nuevolibro")
+                ||anotType.equalsIgnoreCase("despedida")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
              }
@@ -1077,6 +1089,20 @@ private Notificacion interpretarAnotacionSaludo(String conttextoInterpretacion,A
         notif.setMensajeNotificacion(msgNotif);
         return notif;
 }
+
+private Notificacion interpretarAnotacionLibro(String conttextoInterpretacion,Annotation anotacionSaludo){
+//  if(anotacionSaludo.getType()!="saludo"){
+//      return null;
+//  }
+  Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+  // obtenemos el texto del saludo a partir de la anotacion
+          
+      String msgNotif = conttextoInterpretacion;
+      notif.setTipoNotificacion(anotacionSaludo.getType());
+      notif.setMensajeNotificacion(msgNotif);
+      return notif;
+}
+
 private Notificacion interpretarAnotacionGarvis(String conttextoInterpretacion,Annotation anotacionGarvis){
 //    if(anotacionSaludo.getType()!="saludo"){
 //        return null;

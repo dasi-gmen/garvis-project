@@ -37,8 +37,8 @@ public class SaludarYPresentarFuncionalidad extends TareaSincrona{
    * Produce un saludo inicial y una presentacion de funcionalidad inicial al entrar en el sistema
    */
    String identDeEstaTarea=this.getIdentTarea();
-            String identAgenteOrdenante = this.getIdentAgente();
-          String identInterlocutor = (String)params[0];
+   String identAgenteOrdenante = this.getIdentAgente();
+   String identInterlocutor = (String)params[0];
                     try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
 		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(

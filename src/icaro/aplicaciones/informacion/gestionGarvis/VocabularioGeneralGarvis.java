@@ -26,8 +26,9 @@ public class VocabularioGeneralGarvis {
     public static final String RespuestaNoEniendo1="Lo siento pero no entiendo nada de lo que dices";
     public static final String RespuestaNoEniendo2="Lo siento pero sigo sin entender nada";
     public static final String RespuestaNoEniendo3="definitivamente no me entero de lo que dice , creo que vamos a terminar la conversacion";
-    public static final String Despedida1="Bueno tenemos que dejarlo ha sido un placer";
+    public static final String Despedida1="Adios :Hasta luego :Ha sido un placer :Hasta la proxima :Nos vemos";//ojo se ha modificado
     public static final String NombreTipoNoticacionSaludo="saludo";
+    public static final String NombreTipoNoticacionDespedida="despedida";//ojo se ha modificado
     public static final String NombreTipoNoticacionGarvis="garvis";
 
     public static final String msglibro="Añadido .Gracias";
@@ -48,23 +49,18 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionEncenderTV="encendertv";
     public static final String NombreTipoNoticacionApagarTV="apagartv";
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
-    public static final String NombreTipoNoticacionListarLibro = "ListarLibro";
-    public static final String NombreTipoNoticacionLibro = "addlibro";
-    public static final String NombreTipoNoticacionDespedida = "despedida";//ojo se esta modificando
-    
-
+    public static final String NombreTipoNotificacionPedirLibro = "nuevolibro";
+    public static final String NombreTipoNoticacionLibro = "listalibros";
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";
     public static final String peticionInfoIicialCita1 = "puedes avisarme si necesitas algo de tu casa.";
     public static final String HasDichoMiNombre ="EstÃ¡ claro que quieres interactuar conmigo.";
-    public static final String DespedidaGarvis1 ="fue un placer :Hasta Luego Tony :Estare a tu disposicion Tony : Adios Tony, buen dia";//ojo se esta modificando
-
     public static final String HasDichoNevera ="Intuyo que quieres algo de comer?.";
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
-    public static final String HasDichoBiblioteca ="¡Qué bueno que leas!";
-    public static final String HasDichoBiblioteca2 ="La Lista de Libros es : ";
+    public static final String HasDichoBiblioteca ="Que bueno que leas! Que genero deseas ?";
+    public static final String HasDichoBiblioteca2 ="La Lista de Libros actual es : ";
     public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
     public static final String HasDichoDispensador ="No olvides aclarar.";
     public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Qué casa tan sucia!";
