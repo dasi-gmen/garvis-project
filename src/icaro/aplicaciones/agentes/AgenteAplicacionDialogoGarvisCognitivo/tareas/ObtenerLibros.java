@@ -26,6 +26,7 @@ public class ObtenerLibros extends TareaSincrona{
    *@param    Description of the Parameter
    */
     private Objetivo contextoEjecucionTarea = null;
+    public AddLibro op1 = new AddLibro();
   @Override
 	public void ejecutar(Object... params) {
   /**
@@ -41,15 +42,16 @@ public class ObtenerLibros extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    AddLibro op1 = new AddLibro();
                     op1.SumarLibro(nombrelibro);
                     List<String>suppliesNames = op1.ListaLibros();
                     String space = " , " ;
                     String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
+                    String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
                     Iterator<String> iterator = suppliesNames.iterator();
                    while (iterator.hasNext()) {
                           mensajeprev +=iterator.next()+ space;
                    }
+                   mensajeprev += mensaje2;
                     recComunicacionChat.enviarMensagePrivado(mensajeprev);
                 }
                 else {
