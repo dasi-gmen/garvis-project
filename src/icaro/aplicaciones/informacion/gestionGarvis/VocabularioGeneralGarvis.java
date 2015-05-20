@@ -20,7 +20,7 @@ public class VocabularioGeneralGarvis {
     public static final String IdentRecursoPersistenciaChat= "PersistenciaChat1";
     public static final String InfoUsuarioYaExiste= "infoUsuarioYaExistente";
     public static final String InfoUsuarioAltaGuardada="InfoAltaUsuarioGuardada";
-    public static final String SaludoInicial1="Hola soy GARVIS y estoy aquÃ­ para ayudarte a controlar tu casa y tus electrodomesticos";
+    public static final String SaludoInicial1="Hola soy GARVIS y estoy aquí­ para ayudarte a controlar tu casa y tus electrodomesticos .";
     public static final String SaludoInicial2="Hola :Queonda :Que hay de nuevo";
     public static final String PeticionInformacionGeneral1="Dime que deseas :Dime te escucho :Estoy para atenderte :Estoy a tus ordenes";
     public static final String RespuestaNoEniendo1="Lo siento pero no entiendo nada de lo que dices";
@@ -60,9 +60,9 @@ public class VocabularioGeneralGarvis {
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
     public static final String HasDichoBiblioteca ="Que bueno que leas! Que genero deseas ?";
-    public static final String HasDichoBiblioteca2 ="Libro añadido corectamente : ";
+    public static final String HasDichoBiblioteca2 ="Libro añadido corectamente . La lista de libros actual es :  ";
     public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
-    public static final String NoIdentificaLibro ="Recuerda que los titulos literarios va en mayúsculas la primera letra del titulo .";
+    public static final String NoIdentificaLibro ="Libro no encontrado . Recuerda que en  los titulos literarios va en mayúscula la primera letra del titulo .";
     public static final String PedirNuevoLibro =" Deseas añadir otro libro ? ";
     public static final String HasDichoDispensador ="No olvides aclarar.";
     public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Qué casa tan sucia!";
