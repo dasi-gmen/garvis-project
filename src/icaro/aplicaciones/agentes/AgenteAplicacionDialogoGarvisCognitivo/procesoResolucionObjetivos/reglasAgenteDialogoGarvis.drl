@@ -294,7 +294,7 @@ rule "Mencionaste la television para grabar programa"
     update(obj2);
     retract(notif);
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
-    tarea.ejecutar(identInterlc,"Estoy grando...");
+    tarea.ejecutar(identInterlc,"Estoy grabando...");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -402,6 +402,8 @@ rule "No identifica libro"
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull)
    	obj1:AddLibro(state==Objetivo.SOLVING)
    then
+   	obj1.setPending();
+   	update(obj1);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(NoIdentificaLibro.class);
      tarea.ejecutar(identInterlc);
      retract(notif);
