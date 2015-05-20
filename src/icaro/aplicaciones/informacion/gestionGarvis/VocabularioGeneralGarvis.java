@@ -31,8 +31,8 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionDespedida="despedida";//ojo se ha modificado
     public static final String NombreTipoNoticacionGarvis="garvis";
 
-    public static final String msglibro="Añadido .Gracias";
-    public static final String msglibro1="Algo mas ? ";
+    public static final String NombreTipoNoticacionAfirmacion="afirmaciones";
+    public static final String NombreTipoNoticacionNegacion="negacion";
     public static final String NombreTipoNoticacionNevera="nevera";
     public static final String NombreTipoNoticacionMicroondas="microondas";
     public static final String NombreTipoNoticacionEncendermicro="encendermicro";
@@ -60,18 +60,20 @@ public class VocabularioGeneralGarvis {
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
     public static final String HasDichoBiblioteca ="Que bueno que leas! Que genero deseas ?";
-    public static final String HasDichoBiblioteca2 ="La Lista de Libros actual es : ";
+    public static final String HasDichoBiblioteca2 ="Libro añadido corectamente : ";
     public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
+    public static final String NoIdentificaLibro ="Recuerda que los titulos literarios va en mayúsculas la primera letra del titulo .";
+    public static final String PedirNuevoLibro =" Deseas añadir otro libro ? ";
     public static final String HasDichoDispensador ="No olvides aclarar.";
     public static final String HasDichoAspiradora ="¡Ya tocaba limpiar!Qué casa tan sucia!";
     public static final String HasDichoTermostato ="Avísame si tienes frí o calor";
     public static final String HasDichoDetector ="Yo te avisaré si hay algún incendio.";
     
     public static final String RepuestaApagarTV ="La TV ha sido apaga.";
+   
     public static final String RepuestaEncenderTV ="La TV está encendida.";
     public static final String RepuestaBuscarCanal ="Estoy buscando el canal que me has pedido.";
     public static final String RepuestaSintonizarCanal ="He sintonizado el canal que me has pedido.";
     public static final String RepuestaGrabarContenido ="Estoy iniciando la grabación.";
-    public static final String RepuestaSintonizarFutbol ="He sintonizado el fútbol.";
-    public static final String obtenerLibros = "Dime los libros que deseas añadir : ";  
+    public static final String RepuestaSintonizarFutbol ="He sintonizado el fútbol."; 
 }

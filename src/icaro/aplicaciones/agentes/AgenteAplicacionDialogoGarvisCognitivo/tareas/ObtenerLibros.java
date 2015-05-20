@@ -46,10 +46,12 @@ public class ObtenerLibros extends TareaSincrona{
                     List<String>suppliesNames = op1.ListaLibros();
                     String space = " , " ;
                     String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
+                    String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
                     Iterator<String> iterator = suppliesNames.iterator();
                    while (iterator.hasNext()) {
                           mensajeprev +=iterator.next()+ space;
                    }
+                   mensajeprev += mensaje2;
                     recComunicacionChat.enviarMensagePrivado(mensajeprev);
                 }
                 else {
