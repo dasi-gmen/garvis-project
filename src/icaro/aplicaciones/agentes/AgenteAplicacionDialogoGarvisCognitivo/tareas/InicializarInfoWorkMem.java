@@ -34,6 +34,7 @@ public class InicializarInfoWorkMem extends TareaSincrona{
 			this.getEnvioHechos().insertarHecho(new GrabarProgramaTV());
 			this.getEnvioHechos().insertarHecho(new SintonizaTV());
 			this.getEnvioHechos().insertarHecho(new AddLibro());
+			this.getEnvioHechos().insertarHecho(new LeerLibro());
              
        } catch (Exception e) {
 			 e.printStackTrace();

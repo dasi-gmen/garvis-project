@@ -41,7 +41,7 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionCerrarmicro="cerrarmicro";
     public static final String NombreTipoNoticacionTelevision="television";
     public static final String NombreTipoNoticacionGrabarTV="grabartv";
-    public static final String NombreTipoNoticacionBiblioteca="biblioteca";
+    public static final String NombreTipoNoticacionLectura="lectura";
     public static final String NombreTipoNoticacionDispensador="dispensador";
     public static final String NombreTipoNoticacionAspiradora="aspiradora";
     public static final String NombreTipoNoticacionTermostato="termostato";

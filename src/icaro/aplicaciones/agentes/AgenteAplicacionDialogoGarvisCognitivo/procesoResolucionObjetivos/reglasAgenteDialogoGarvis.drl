@@ -390,7 +390,7 @@ then
 	retract(notif);
 	String libro = notif.getMensajeNotificacion();
 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
-     tarea.ejecutar(identInterlc,libro);
+     tarea.ejecutar(identInterlc,libro,"1");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -440,6 +440,43 @@ rule "Si desea añadir nuevo libro"
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
+
+rule "Leer un libro"
+when
+	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionLectura)
+   	obj1:AddLibro(state==Objetivo.PENDING)
+   	obj2:LeerLibro(state==Objetivo.PENDING)
+then
+	obj2.setSolving();
+	update(obj2);
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ConsultaLibro.class);
+    tarea.ejecutar(identInterlc);
+    retract(notif);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Indicar Libro a Consultar"
+when
+	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionLibro)
+   	obj1:LeerLibro(state==Objetivo.SOLVING)
+then
+	obj1.setPending();
+	update(obj1);
+	String libron = notif.getMensajeNotificacion();
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
+    tarea.ejecutar(identInterlc,libron,"2");
+    retract(notif);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+
+
 
 
 
