@@ -7,12 +7,12 @@ public class EncenderTele extends Objetivo {
     /** Crea una nueva instancia de DarAcceso */
 	private boolean flagSintonizar;
 	private boolean flagGrabar;
-	private int contadorInfofalsa; 
-    public EncenderTele() {
+	private int contarPeticion;
+	public EncenderTele() {
         super.setgoalId("EncenderLaTele");
-        this.setContadorInfofalsa(0);
         this.flagSintonizar=false;
         this.flagGrabar=false;
+        this.contarPeticion=0;
     }
     public void Cambiarflag(){
     	this.flagSintonizar=!(this.flagSintonizar);
@@ -26,10 +26,13 @@ public class EncenderTele extends Objetivo {
     public boolean isFlag1() {
         return flagGrabar;
     }
-	public int getContadorInfofalsa() {
-		return contadorInfofalsa;
+	public int getContarPeticion() {
+		return contarPeticion;
 	}
-	public void setContadorInfofalsa(int contadorInfofalsa) {
-		this.contadorInfofalsa =+ contadorInfofalsa;
+	public void setContarPeticion(int contarPeticion) {
+		this.contarPeticion = contarPeticion;
+	}
+	public void sumContarPeticion() {
+		this.contarPeticion ++;
 	}
 }
