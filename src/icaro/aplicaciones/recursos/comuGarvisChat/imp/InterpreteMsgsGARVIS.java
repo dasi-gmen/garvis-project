@@ -207,7 +207,7 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("abrirmicro");
         anotacionesBusquedaPrueba.add("cerrarmicro");
         anotacionesBusquedaPrueba.add("television");
-        anotacionesBusquedaPrueba.add("biblioteca");
+        anotacionesBusquedaPrueba.add("lectura");
         anotacionesBusquedaPrueba.add("dispensador");
         anotacionesBusquedaPrueba.add("aspiradora");
         anotacionesBusquedaPrueba.add("termostato");
@@ -224,6 +224,7 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("listalibros");
         anotacionesBusquedaPrueba.add("afirmaciones");
         anotacionesBusquedaPrueba.add("negacion");
+        anotacionesBusquedaPrueba.add("canaltv");
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
@@ -1054,7 +1055,6 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                 ||anotType.equalsIgnoreCase("abrirmicro")
                 ||anotType.equalsIgnoreCase("cerrarmicro")
                 ||anotType.equalsIgnoreCase("television")
-                ||anotType.equalsIgnoreCase("biblioteca")
                 ||anotType.equalsIgnoreCase("dispensador")
                 ||anotType.equalsIgnoreCase("aspiradora")
                 ||anotType.equalsIgnoreCase("termostato")
@@ -1067,8 +1067,10 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                 ||anotType.equalsIgnoreCase("grabartv")
                 ||anotType.equalsIgnoreCase("nuevolibro")
                 ||anotType.equalsIgnoreCase("afirmaciones")
+                ||anotType.equalsIgnoreCase("lectura")
                 ||anotType.equalsIgnoreCase("negacion")
-                ||anotType.equalsIgnoreCase("despedida")){
+                ||anotType.equalsIgnoreCase("despedida")
+                ||anotType.equalsIgnoreCase("canaltv")){
                  anotacionesInterpretadas.add(interpretarAnotacionGenerica(contextoInterpretacion, annot));
 //                 i++;
              }
@@ -1105,6 +1107,7 @@ private Notificacion interpretarAnotacionLibro(String conttextoInterpretacion,An
       notif.setMensajeNotificacion(msgNotif);
       return notif;
 }
+
 
 private Notificacion interpretarAnotacionGarvis(String conttextoInterpretacion,Annotation anotacionGarvis){
 //    if(anotacionSaludo.getType()!="saludo"){

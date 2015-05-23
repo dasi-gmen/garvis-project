@@ -92,6 +92,7 @@ rule "No hay extraccion  semantica del texto del interlocutor  "
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
+    SintonizaTV(state==Objetivo.PENDING)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull)
    then
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarInfoInicialCita.class);
@@ -282,86 +283,6 @@ end*/
 
 /* *********************************************************************************************** */
 
-rule "Mencionaste la television para grabar programa"
-   when
-   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-	obj1:EncenderTele(state==Objetivo.SOLVED)
-    obj2:GrabarProgramaTV(state==Objetivo.SOLVING)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionGrabarTV)
-   then
-    obj2.setSolving();
-    update(obj2);
-    retract(notif);
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
-    tarea.ejecutar(identInterlc,"Estoy grabando...");
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
-//---------------------------------------
-rule "Mencionaste la television para sintonizar"
-   when
-   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-	obj1:EncenderTele(state==Objetivo.SOLVED)
-    obj2:SintonizaTV(state==Objetivo.SOLVING)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionSintonizaTV)
-   then
-    //obj2.setSolving();
-    //update(obj2);
-    retract(notif);
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
-    tarea.ejecutar(identInterlc,"Listo ya tienes tu programa, disfrútalo...");
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
-//---------------------------------------
-rule "Mencionaste la television para encender"
-   when
-	obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj1)
-    obj2:EncenderTele(state==Objetivo.PENDING)
-    obj3:SintonizaTV(state==Objetivo.PENDING)
-    obj4:GrabarProgramaTV(state==Objetivo.PENDING)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncenderTV)
-   then
-    obj2.setSolved();
-    update(obj2);
-    obj3.setSolving();//obj3 listo para sintonizar
-    update(obj3);
-    obj4.setSolving();//obj4 listo para grabar
-    update(obj4);
-    retract(notif);
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
-    tarea.ejecutar(identInterlc,"TV en ON");
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
-
-rule "Mencionaste la television para apagar"
-   when
-    obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj1)
-    obj2:EncenderTele(state==Objetivo.SOLVED)
-    obj3:ApagarTele(state==Objetivo.PENDING)
-    obj4:SintonizaTV(state==Objetivo.SOLVING)//Sintonizar esta activo ya que la TV está encendida
-    obj5:GrabarProgramaTV(state==Objetivo.SOLVING)//Grabar esta activo ya que la TV está encendida
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionApagarTV)
-   then
-   	obj3.setSolved();
-   	update(obj3);
-    obj2.setPending();
-    update(obj2);
-    obj4.setPending();//Sintonizar se desactiva
-    update(obj4);
-    obj5.setPending();//Grabar se desactiva
-    update(obj5);
-    retract(notif);
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
-    tarea.ejecutar(identInterlc,"TV en OFF");
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
 //============Reglas Biblioteca============================
 //---------------------------------------
 rule "Solicitud Añadir Libro"
@@ -390,7 +311,7 @@ then
 	retract(notif);
 	String libro = notif.getMensajeNotificacion();
 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
-     tarea.ejecutar(identInterlc,libro);
+     tarea.ejecutar(identInterlc,libro,"1");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -440,6 +361,43 @@ rule "Si desea añadir nuevo libro"
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
+
+rule "Leer un libro"
+when
+	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionLectura)
+   	obj1:AddLibro(state==Objetivo.PENDING)
+   	obj2:LeerLibro(state==Objetivo.PENDING)
+then
+	obj2.setSolving();
+	update(obj2);
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ConsultaLibro.class);
+    tarea.ejecutar(identInterlc);
+    retract(notif);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Indicar Libro a Consultar"
+when
+	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionLibro)
+   	obj1:LeerLibro(state==Objetivo.SOLVING)
+then
+	obj1.setPending();
+	update(obj1);
+	String libron = notif.getMensajeNotificacion();
+	TareaSincrona tarea = gestorTareas.crearTareaSincrona(ObtenerLibros.class);
+    tarea.ejecutar(identInterlc,libron,"2");
+    retract(notif);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+
+
 
 
 
@@ -498,6 +456,91 @@ end
 
 //============Reglas Tv============================
 //---------------------------------------
+rule "Mencionaste la television para grabar programa"
+   when
+   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+	obj1:EncenderTele(state==Objetivo.SOLVED)
+    obj2:GrabarProgramaTV(state==Objetivo.SOLVING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionGrabarTV)
+   then
+    obj2.setSolving();
+    update(obj2);
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Estoy grabando...");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+//---------------------------------------
+rule "Mencionaste la television para sintonizar"
+   when
+   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+	obj1:EncenderTele(state==Objetivo.SOLVED)
+    obj2:SintonizaTV(state==Objetivo.REFINED || state==Objetivo.SOLVING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionSintonizaTV)
+   then
+    obj2.setSolving();
+    update(obj2);
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Listo ya tienes tu programa, disfrútalo...");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+//---------------------------------------
+rule "Mencionaste la television para encender"
+activation-group "encender-tv"
+salience 200
+   when
+	obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj1)
+    obj2:EncenderTele(state==Objetivo.PENDING)
+    obj3:SintonizaTV(state==Objetivo.PENDING)
+    obj4:GrabarProgramaTV(state==Objetivo.PENDING)
+    obj5:ApagarTele(state==Objetivo.PENDING || state==Objetivo.SOLVED)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncenderTV)
+   then
+    obj2.setSolved();
+    update(obj2);
+    obj3.setSolving();//obj3 listo para sintonizar
+    update(obj3);
+    obj4.setSolving();//obj4 listo para grabar
+    update(obj4);
+    obj5.setPending();//Apagar activo
+    update(obj5);
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"TV en ON");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Mencionaste la television para apagar"
+   when
+    obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj1)
+    obj2:EncenderTele(state==Objetivo.SOLVED)
+    obj3:ApagarTele(state==Objetivo.PENDING)
+    obj4:SintonizaTV(state==Objetivo.SOLVING || state==Objetivo.REFINED)//Sintonizar esta activo ya que la TV está encendida
+    obj5:GrabarProgramaTV(state==Objetivo.SOLVING)//Grabar esta activo ya que la TV está encendida
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionApagarTV)
+   then
+   	obj3.setSolved();
+   	update(obj3);
+    obj2.setPending();
+    update(obj2);
+    obj4.setPending();//Sintonizar se desactiva
+    update(obj4);
+    obj5.setPending();//Grabar se desactiva
+    update(obj5);
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"TV en OFF");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 rule "Volviste a mencionar la television para apagar"
    when
 	obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
@@ -578,12 +621,12 @@ rule "Encender TV porque dijo sintonizar"
    	update(flg);
     obj2.setSolved();
     update(obj2);
-    obj3.setSolving();//obj3 listo para sintonizar
+    obj3.setRefined();//obj3 listo para sintonizar
     update(obj3);
     obj4.setSolving();//obj4 listo para grabar
     update(obj4);
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
-    tarea.ejecutar("Tony","He encendido la TV por ti ¿Qué canal quieres sintonizar?");
+    tarea.ejecutar("Tony","He encendido la TV por ti...Qué canal deseas?");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -607,6 +650,102 @@ rule "Encender TV porque dijo grabar"
     update(obj4);
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
     tarea.ejecutar("Tony","He encendido la TV por ti ¿Qué programa deseas grabar?");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+rule "El usuario no ingresa el canal a sintonizar"
+   when
+   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj2:SintonizaTV(state==Objetivo.REFINED)
+    ct:EncenderTele(getContarPeticion()<3);
+    notif:Notificacion(identInterlc:identNotificador, (tipoNotificacion!=VocabularioGeneralGarvis.NombreTipoNoticacionSintonizaTV && tipoNotificacion!=VocabularioGeneralGarvis.NombreTipoNoticacionApagarTV && tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull) )
+   then
+    ct.sumContarPeticion();//Actualiza los intentos fallidos
+    update(ct);
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Aun no me has dicho que canal sintonizar. Cual deseas?");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Ha pedido 3 veces el canal y no ha habido repsuesta apago la TV"
+   when
+    obj1:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj1)
+    obj2:EncenderTele(state==Objetivo.SOLVED)
+    obj3:ApagarTele(state==Objetivo.PENDING)
+    obj4:SintonizaTV(state==Objetivo.SOLVING || state==Objetivo.REFINED)//Sintonizar esta activo ya que la TV está encendida
+    obj5:GrabarProgramaTV(state==Objetivo.SOLVING)//Grabar esta activo ya que la TV está encendida
+    ct:EncenderTele(getContarPeticion()==3)
+   then
+    ct.setContarPeticion(0);
+    update(ct);
+   	obj3.setSolved();
+   	update(obj3);
+    obj2.setPending();
+    update(obj2);
+    obj4.setPending();//Sintonizar se desactiva
+    update(obj4);
+    obj5.setPending();//Grabar se desactiva
+    update(obj5);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar("","No he podido entender tu orden para sintonizar. Apagaré la TV");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Mencionaste un canal"
+   when
+   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderTele(state==Objetivo.SOLVED)
+    obj2:SintonizaTV(state==Objetivo.REFINED || state==Objetivo.SOLVING)
+    ct:EncenderTele(getContarPeticion()<3);
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionCanal )
+   then
+    String canal = notif.getMensajeNotificacion(); 
+    obj2.setSolving();
+    update(obj2);
+    ct.setContarPeticion(0);
+    update(ct);
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"He sintonizado "+canal);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Mencionaste un canal cuando TV apagada"
+   when
+   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderTele(state==Objetivo.PENDING)
+    obj2:SintonizaTV(state==Objetivo.PENDING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionCanal )
+   then
+    String canal = notif.getMensajeNotificacion(); 
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Entiendo que quieres sintonizar "+canal+". Te sugiero encenderla");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+rule "Mencionaste solo la TV"
+activation-group "encender-tv"
+salience -10
+   when
+   	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderTele(state==Objetivo.PENDING)
+    obj2:ApagarTele(state==Objetivo.PENDING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionTelevision )
+   then
+    String tv = notif.getMensajeNotificacion(); 
+    retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaTelevision.class);
+    tarea.ejecutar(identInterlc,"Entiendo que quieres interactuar con la "+tv+". Te sugiero que la enciendas");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj2.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end

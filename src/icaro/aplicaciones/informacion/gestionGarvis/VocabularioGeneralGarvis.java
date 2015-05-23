@@ -41,7 +41,7 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionCerrarmicro="cerrarmicro";
     public static final String NombreTipoNoticacionTelevision="television";
     public static final String NombreTipoNoticacionGrabarTV="grabartv";
-    public static final String NombreTipoNoticacionBiblioteca="biblioteca";
+    public static final String NombreTipoNoticacionLectura="lectura";
     public static final String NombreTipoNoticacionDispensador="dispensador";
     public static final String NombreTipoNoticacionAspiradora="aspiradora";
     public static final String NombreTipoNoticacionTermostato="termostato";
@@ -51,6 +51,7 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionSintonizaTV="sintonizatv";
     public static final String NombreTipoNotificacionPedirLibro = "nuevolibro";
     public static final String NombreTipoNoticacionLibro = "listalibros";
+    public static final String NombreTipoNoticacionCanal = "canaltv";
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";

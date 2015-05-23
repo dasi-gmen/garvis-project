@@ -5,23 +5,34 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 public class EncenderTele extends Objetivo {
     
     /** Crea una nueva instancia de DarAcceso */
-	private boolean flag;
-	private boolean flag1;
-    public EncenderTele() {
+	private boolean flagSintonizar;
+	private boolean flagGrabar;
+	private int contarPeticion;
+	public EncenderTele() {
         super.setgoalId("EncenderLaTele");
-        this.flag=false;
-        this.flag1=false;
+        this.flagSintonizar=false;
+        this.flagGrabar=false;
+        this.contarPeticion=0;
     }
     public void Cambiarflag(){
-    	this.flag=!(this.flag);
+    	this.flagSintonizar=!(this.flagSintonizar);
     }
     public boolean isFlag() {
-        return flag;
+        return flagSintonizar;
     }
     public void Cambiarflag1(){
-    	this.flag1=!(this.flag1);
+    	this.flagGrabar=!(this.flagGrabar);
     }
     public boolean isFlag1() {
-        return flag1;
+        return flagGrabar;
     }
+	public int getContarPeticion() {
+		return contarPeticion;
+	}
+	public void setContarPeticion(int contarPeticion) {
+		this.contarPeticion = contarPeticion;
+	}
+	public void sumContarPeticion() {
+		this.contarPeticion ++;
+	}
 }
