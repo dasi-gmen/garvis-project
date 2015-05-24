@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comuGarvisChat.imp.util;
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.InterpreteMsgsGARVIS;
+package icaro.aplicaciones.recursos.comuGarvisPane.imp.util;
+import icaro.aplicaciones.recursos.comuGarvisPane.imp.InterpreteMsgsGARVIS;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;

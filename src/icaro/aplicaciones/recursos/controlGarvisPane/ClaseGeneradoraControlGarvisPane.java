@@ -1,10 +1,8 @@
-package icaro.aplicaciones.recursos.comuGarvisChat;
+package icaro.aplicaciones.recursos.comuGarvisPane;
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
-import icaro.aplicaciones.recursos.comuGarvisChat.*;
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.InterpreteMsgsGARVIS;
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.util.ConexionGARVIS;
-import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
+import icaro.aplicaciones.recursos.comuGarvisPane.*;
+import icaro.aplicaciones.recursos.comuGarvisPane.imp.util.ConexionCONTROL;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
@@ -18,12 +16,7 @@ public class ClaseGeneradoraComuGarvisChat extends ImplRecursoSimple implements
 		ItfUsoComuGarvisChat {
 
 	private static final long serialVersionUID = 1L;
-	private ConexionGARVIS conexChat ;
-	private InterpreteMsgsGARVIS interpreteMsgGarvis;
-	private String identExtractorSem;
-	private String identInterlocutorPruebas = "pacopa";
-	private Boolean conectado = false;
-        
+	private ConexionCONTROL conexControl ;
 
 	public ClaseGeneradoraComuGarvisChat(String idInstanciaRecurso) throws Exception {
 		
@@ -31,9 +24,9 @@ public class ClaseGeneradoraComuGarvisChat extends ImplRecursoSimple implements
 // obtenemos las propiedades del recurso que deben estar definidas en las propiedades del recurso
         identExtractorSem = VocabularioGeneralGarvis.IdentRecursoExtractorSemantico;
 		try {
-		    conexChat = new ConexionGARVIS();
-		    interpreteMsgGarvis = new InterpreteMsgsGARVIS(conexChat);
-		    conexChat.setInterpreteMsgs(interpreteMsgGarvis);
+		    conexControl = new ConexionCONTROL();
+		    interpreteMsgGarvis = new InterpreteMsgsGARVIS(conexControl);
+		    conexControl.setInterpreteMsgs(interpreteMsgGarvis);
 		    trazas.aceptaNuevaTraza(new InfoTraza(this.getId(),
 		      "Creando el recurso "+idInstanciaRecurso,
 		        InfoTraza.NivelTraza.debug));
@@ -81,11 +74,11 @@ private void generarErrorCreacionComponente(String textoMensaje){
 
   //@Override
   public void enviarMensagePrivado( String mensaje)throws Exception{
-      conexChat.sendMessage(mensaje);
+      conexControl.sendMessage(mensaje);
   }
   //@Override
   public void desconectar( )throws Exception{
-      conexChat.disconnect();
+      conexControl.disconnect();
   }
 
       //@Override
@@ -105,7 +98,7 @@ private void generarErrorCreacionComponente(String textoMensaje){
          else{
              interpreteMsgGarvis.setIdentAgenteGestorDialogo(VocabularioGeneralGarvis.IdentAgenteAplicacionDialogoGarvis);
              interpreteMsgGarvis.setIdentConexion(VocabularioGeneralGarvis.IdentConexionAgte);
-             //conexChat.setVerbose(true);
+             //conexControl.setVerbose(true);
              //conectar( url, chanel, nickname);
          }
          } catch (Exception ex) {
@@ -113,8 +106,8 @@ private void generarErrorCreacionComponente(String textoMensaje){
           }
          
          
-            conexChat.connect();
-            conectado=true;//conexChat.isConnected();
+            conexControl.connect();
+            conectado=true;//conexControl.isConnected();
 
     }
   } 

@@ -39,8 +39,10 @@
 		<icaro:DescRecursosAplicacion>
 			<icaro:DescRecursoAplicacion nombre="ComunicacionChat"
 			localizacionClaseGeneradora="icaro.aplicaciones.recursos.comuGarvisChat.ClaseGeneradoraComuGarvisChat"/>
+			<icaro:DescRecursoAplicacion nombre="ControlPane"
+			localizacionClaseGeneradora="icaro.aplicaciones.recursos.controlGarvisPane.ClaseGeneradoraControlGarvisPane"/>
 			<icaro:DescRecursoAplicacion nombre="ExtractorSemantico"
-                        localizacionClaseGeneradora="icaro.aplicaciones.recursos.extractorSemantico.ClaseGeneradoraExtractorSemantico"/>
+        localizacionClaseGeneradora="icaro.aplicaciones.recursos.extractorSemantico.ClaseGeneradoraExtractorSemantico"/>
 		</icaro:DescRecursosAplicacion>
 	</icaro:DescripcionComponentes>
 	<icaro:DescInstancias>
@@ -56,13 +58,14 @@
 			</icaro:InstanciaGestor>
 			<icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
 				<icaro:componentesGestionados>		
-                                <icaro:componenteGestionado refId="agente_Garvis" tipoComponente="AgenteAplicacion"/>		
-                                </icaro:componentesGestionados>
+        <icaro:componenteGestionado refId="agente_Garvis" tipoComponente="AgenteAplicacion"/>		
+        </icaro:componentesGestionados>
 			</icaro:InstanciaGestor>	
 			<icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos" >
 				<icaro:componentesGestionados>
 					<icaro:componenteGestionado refId="ExtractorSemantico1" tipoComponente="RecursoAplicacion"/>
-                                        <icaro:componenteGestionado refId="ComunicacionChat1" tipoComponente="RecursoAplicacion"/>  
+          <icaro:componenteGestionado refId="ComunicacionChat1" tipoComponente="RecursoAplicacion"/>  
+          <icaro:componenteGestionado refId="ControlPane1" tipoComponente="RecursoAplicacion"/>  
 				</icaro:componentesGestionados>
 			</icaro:InstanciaGestor>
 		</icaro:Gestores>
@@ -83,13 +86,14 @@
 			<icaro:Instancia id="Persistencia1" refDescripcion="PersistenciaAccesoSimple" xsi:type="icaro:Instancia">
 				<icaro:listaPropiedades>
 					<icaro:propiedad atributo="MYSQL_NAME_BD" valor="bbddejemplo" />
-                                        <icaro:propiedad atributo="MYSQL_USER" valor="root" />
+          <icaro:propiedad atributo="MYSQL_USER" valor="root" />
 					<icaro:propiedad atributo="MYSQL_PASSWORD" valor="root" />
 					<icaro:propiedad atributo="MYSQL_SCRIPT_ITEMS" valor="config/bbdd.SQL" />
 					<icaro:propiedad atributo="MYSQL_URL" valor="jdbc:mysql://localhost:3306/" />
 				</icaro:listaPropiedades>
 			</icaro:Instancia>
 				<icaro:Instancia id="ComunicacionChat1" refDescripcion="ComunicacionChat" xsi:type="icaro:Instancia"/>
+				<icaro:Instancia id="ControlPane1" refDescripcion="ControlPane" xsi:type="icaro:Instancia"/>
 				<icaro:Instancia id="ExtractorSemantico1" refDescripcion="ExtractorSemantico" xsi:type="icaro:Instancia"/>
 		</icaro:RecursosAplicacion>
 	<!--******************************************************************************************************

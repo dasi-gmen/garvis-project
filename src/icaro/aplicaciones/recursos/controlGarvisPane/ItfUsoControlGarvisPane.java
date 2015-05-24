@@ -1,4 +1,4 @@
-package icaro.aplicaciones.recursos.comuGarvisChat;
+package icaro.aplicaciones.recursos.comuGarvisPane;
 
 import icaro.aplicaciones.recursos.extractorSemantico.*;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;

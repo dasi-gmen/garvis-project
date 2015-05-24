@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comuGarvisChat.imp.util;
+package icaro.aplicaciones.recursos.comuGarvisPane.imp.util;
 
-import icaro.aplicaciones.recursos.comuGarvisChat.imp.*;
+import icaro.aplicaciones.recursos.comuGarvisPane.imp.*;
 
 /**
  *

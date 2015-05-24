@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comuGarvisChat;
+package icaro.aplicaciones.recursos.comuGarvisPane;
 
 /**
  *
