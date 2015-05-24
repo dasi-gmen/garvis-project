@@ -1049,13 +1049,17 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
                  anotacionesInterpretadas.add(interpretarAnotacionLibro(contextoInterpretacion, annot));
 //                 i++;
              }
+             if(anotType.equalsIgnoreCase("television") && anotacionesRelevantes.size()==1){
+                 anotacionesInterpretadas.add(interpretarAnotacionLibro(contextoInterpretacion, annot));
+//                 i++;
+             }
+             
              if(anotType.equalsIgnoreCase("nevera")
                 ||anotType.equalsIgnoreCase("microondas")
                 ||anotType.equalsIgnoreCase("encendermicro")
                 ||anotType.equalsIgnoreCase("apagarmicro")
                 ||anotType.equalsIgnoreCase("abrirmicro")
                 ||anotType.equalsIgnoreCase("cerrarmicro")
-                ||anotType.equalsIgnoreCase("television")
                 ||anotType.equalsIgnoreCase("dispensador")
                 ||anotType.equalsIgnoreCase("aspiradora")
                 ||anotType.equalsIgnoreCase("termostato")
