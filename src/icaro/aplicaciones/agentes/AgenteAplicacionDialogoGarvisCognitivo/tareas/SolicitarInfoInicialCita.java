@@ -29,17 +29,17 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
           String identInterlocutor = (String)params[0];
           String preambulo =(String)params[1];
           String textoPeticion =(String)params[2];
-                    try {
+          try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
-		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
+        	  ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
                     String[] saludos = VocabularioGeneralGarvis.SaludoInicial2.split(":");
                     Double i = (Math.random() * (saludos.length));
                     
-                    String mensajeAenviar = saludos[i.intValue()]+"  "+ identInterlocutor + "  "+
-                            preambulo + "  "+
+                    String mensajeAenviar = saludos[i.intValue()]+" "+ identInterlocutor + " "+
+                            preambulo + " "+
                             textoPeticion;
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }

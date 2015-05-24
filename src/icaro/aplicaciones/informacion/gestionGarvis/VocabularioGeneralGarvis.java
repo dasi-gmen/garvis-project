@@ -20,7 +20,7 @@ public class VocabularioGeneralGarvis {
     public static final String IdentRecursoPersistenciaChat= "PersistenciaChat1";
     public static final String InfoUsuarioYaExiste= "infoUsuarioYaExistente";
     public static final String InfoUsuarioAltaGuardada="InfoAltaUsuarioGuardada";
-    public static final String SaludoInicial1="Hola soy GARVIS y estoy aquí­ para ayudarte a controlar tu casa y tus electrodomesticos .";
+    public static final String SaludoInicial1="Hola soy GARVIS y estoy aquí para ayudarte a controlar tu casa y tus electrodomesticos.";
     public static final String SaludoInicial2="Hola :Queonda :Que hay de nuevo";
     public static final String PeticionInformacionGeneral1="Dime que deseas :Dime te escucho :Estoy para atenderte :Estoy a tus ordenes";
     public static final String RespuestaNoEniendo1="Lo siento pero no entiendo nada de lo que dices";
@@ -57,12 +57,12 @@ public class VocabularioGeneralGarvis {
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";
     public static final String peticionInfoIicialCita1 = "puedes avisarme si necesitas algo de tu casa.";
-    public static final String HasDichoMiNombre ="EstÃ¡ claro que quieres interactuar conmigo.";
+    public static final String HasDichoMiNombre ="Esta claro que quieres interactuar conmigo.";
     public static final String HasDichoNevera ="Intuyo que quieres algo de comer?.";
     public static final String HasDichoMicroondas ="¿Está fría tu comida?";
     public static final String HasDichoTelevision ="La tele te quitará¡ el aburrimiento.";
     public static final String HasDichoBiblioteca ="Que bueno que leas! Que genero deseas ?";
-    public static final String HasDichoBiblioteca2 ="Libro añadido corectamente . La lista de libros actual es :  ";
+    public static final String HasDichoBiblioteca2 ="Libro añadido correctamente. La lista de libros actual es:  ";
     public static final String HasDichoBiblioteca3 ="Que Libros deseas añadir ? ";
     public static final String NoIdentificaLibro ="Libro no encontrado . Recuerda que en  los titulos literarios va en mayúscula la primera letra del titulo .";
     public static final String PedirNuevoLibro =" Deseas añadir otro libro ? ";
