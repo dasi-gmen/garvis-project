@@ -45,7 +45,7 @@ public class GarvisUserControl extends JFrame {
 
 	public void inicializarInterfaz() {
 		this.setContentPane(getPanelPrincipal());
-		this.setTitle("PROYECTO DE DASI, Grupo G");
+		this.setTitle("GARVIS CONTROL");
 	}
 	
 	private JPanel getPanelPrincipal() {

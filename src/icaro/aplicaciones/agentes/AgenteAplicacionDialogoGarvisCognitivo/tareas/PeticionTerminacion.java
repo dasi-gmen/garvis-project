@@ -1,5 +1,7 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
+import icaro.aplicaciones.recursos.controlGarvisPane.ItfUsoControlGarvisPane;
 
+import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Tarea;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.comunicacion.AdaptadorRegRMI;
@@ -42,6 +44,19 @@ public class PeticionTerminacion extends Tarea {
                             mensaje.setContenido("peticionTerminacion");
                             this.getAgente().aceptaMensaje(mensaje);
                             }
+                        
+                  ItfUsoControlGarvisPane recControlPane = (ItfUsoControlGarvisPane) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
+                    VocabularioGeneralGarvis.IdentRecursoControlGarvisPane);  
+
+                    if (recControlPane!=null ){
+                      recControlPane.comenzar(identAgenteOrdenante);
+                        //TODO
+                  }else {
+                    identAgenteOrdenante = this.getAgente().getIdentAgente();
+                    this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
+                           VocabularioGeneralGarvis.IdentRecursoControlGarvisPane, CausaTerminacionTarea.ERROR);
+                  }
+
                         
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

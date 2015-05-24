@@ -61,7 +61,7 @@ public class GarvisUserChat extends JFrame {
 	public void inicializarInterfaz() {
 		//this.setJMenuBar(getMenuPrincipal());
 		this.setContentPane(getPanelPrincipal());
-		this.setTitle("PROYECTO DE DASI, Grupo G");
+		this.setTitle("GARVIS CHAT");
 	}
 	
 	private JPanel getPanelPrincipal() {

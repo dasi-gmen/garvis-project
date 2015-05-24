@@ -1,4 +1,5 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
+import icaro.aplicaciones.recursos.controlGarvisPane.ItfUsoControlGarvisPane;
 
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
@@ -39,13 +40,28 @@ public class DespedidaGarvis extends TareaSincrona{
                     recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
                 }
                 else {
-                    identAgenteOrdenante = this.getAgente().getIdentAgente();
-                     this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
-                             VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
-                        }
-                    } catch(Exception e) {
-                        this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-Acceso:Interfaz:"+
-                                VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
+                  identAgenteOrdenante = this.getAgente().getIdentAgente();
+                  this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
+                       VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
+                  }
+
+          ItfUsoControlGarvisPane recControlPane = (ItfUsoControlGarvisPane) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
+          VocabularioGeneralGarvis.IdentRecursoControlGarvisPane);  
+
+          if (recControlPane!=null ){
+              recControlPane.comenzar(identAgenteOrdenante);
+              //TODO
+          }else {
+            identAgenteOrdenante = this.getAgente().getIdentAgente();
+            this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
+                   VocabularioGeneralGarvis.IdentRecursoControlGarvisPane, CausaTerminacionTarea.ERROR);
+          }
+
+
+                  
+    } catch(Exception e) {
+        this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-Acceso:Interfaz:"+
+                VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
 			e.printStackTrace();
 		}
 	}

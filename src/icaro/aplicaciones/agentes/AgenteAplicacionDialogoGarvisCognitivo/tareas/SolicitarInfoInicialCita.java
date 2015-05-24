@@ -6,6 +6,7 @@
  * Telefonica I+D Copyright 2006-2007
  */
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
+import icaro.aplicaciones.recursos.controlGarvisPane.ItfUsoControlGarvisPane;
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comuGarvisChat.ItfUsoComuGarvisChat;

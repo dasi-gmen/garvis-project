@@ -1,4 +1,5 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.tareas;
+import icaro.aplicaciones.recursos.controlGarvisPane.ItfUsoControlGarvisPane;
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.comuGarvisChat.ItfUsoComuGarvisChat;
@@ -38,6 +39,21 @@ public class NoIdentificaLibro extends TareaSincrona {
 	                     this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
 	                             VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);
 	                        }
+
+				  ItfUsoControlGarvisPane recControlPane = (ItfUsoControlGarvisPane) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
+					VocabularioGeneralGarvis.IdentRecursoControlGarvisPane);  
+
+					if (recControlPane!=null ){
+				      recControlPane.comenzar(identAgenteOrdenante);
+				   		//TODO
+				  }else {
+				    identAgenteOrdenante = this.getAgente().getIdentAgente();
+				   	this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
+				           VocabularioGeneralGarvis.IdentRecursoControlGarvisPane, CausaTerminacionTarea.ERROR);
+				  }
+
+
+	                        
 	                    } catch(Exception e) {
 	                        this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-Acceso:Interfaz:"+
 	                                VocabularioGeneralGarvis.IdentRecursoComunicacionChat, CausaTerminacionTarea.ERROR);

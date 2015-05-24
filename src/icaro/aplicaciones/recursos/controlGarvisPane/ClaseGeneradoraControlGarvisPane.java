@@ -18,6 +18,7 @@ public class ClaseGeneradoraControlGarvisPane extends ImplRecursoSimple implemen
 
 	private static final long serialVersionUID = 1L;
 	private ConexionCONTROL conexControl ;
+	private Boolean conectado = false;
 
 	public ClaseGeneradoraControlGarvisPane(String idInstanciaRecurso) throws Exception {
 		
@@ -83,7 +84,7 @@ private void generarErrorCreacionComponente(String textoMensaje){
 
       //@Override
   public void comenzar ( String identAgteControlador)throws Exception{
- //   if (!conectado){
+	  if (!conectado){
       InterfazUsoAgente itfAgteControlador;
           try {
               itfAgteControlador = (InterfazUsoAgente) this.repoIntfaces.obtenerInterfazUso(identAgteControlador);
@@ -107,9 +108,9 @@ private void generarErrorCreacionComponente(String textoMensaje){
          
          
             conexControl.connect();
-     //       conectado=true;//conexControl.isConnected();
+            conectado=true;//conexControl.isConnected();
 
-    //}
+    }
   }
 @Override
 public void neveraAddProduct(String producto) throws Exception {
