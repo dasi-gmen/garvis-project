@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-public class GUITele extends JPanel {
+public class ControlTele extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	GUITele(){		
+	ControlTele(){		
 		
 		this.setBorder(new TitledBorder(":::TELEVISOR:::"));
 		

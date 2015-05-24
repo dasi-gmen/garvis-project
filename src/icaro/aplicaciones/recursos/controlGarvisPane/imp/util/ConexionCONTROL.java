@@ -34,8 +34,8 @@ import java.util.StringTokenizer;
      */
     public static final String VERSION = "0.9.11";
 
-    private InputThread _inputThread = null;
-    private OutputThread _outputThread = null;
+//    private InputThread _inputThread = null;
+//    private OutputThread _outputThread = null;
     private boolean _isConnected = false;
  
     private Queue _outQueue = new Queue();

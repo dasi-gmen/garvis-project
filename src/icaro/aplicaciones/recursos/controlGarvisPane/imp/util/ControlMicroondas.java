@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class GUIMicroondas extends JPanel {
+public class ControlMicroondas extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	GUIMicroondas(){		
+	ControlMicroondas(){		
 		
 		this.setBorder(new TitledBorder(":::MICROONDAS:::"));
 		

@@ -11,11 +11,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class GUIBiblio extends JPanel {
+public class ControlBiblio extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	GUIBiblio(){		
+	ControlBiblio(){		
 		
 		this.setBorder(new TitledBorder(":::BIBLIOTECA:::"));		
 		this.setLayout(null);

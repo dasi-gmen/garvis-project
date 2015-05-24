@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
 
-public class GUIAspiradora extends JPanel {
+public class ControlAspiradora extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	GUIAspiradora(){		
+	ControlAspiradora(){		
 		
 		this.setBorder(new TitledBorder(":::CHAMPÚ:::"));
 		

@@ -6,6 +6,7 @@ import icaro.aplicaciones.recursos.controlGarvisPane.imp.util.ConexionCONTROL;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 
 
 public class ClaseGeneradoraControlGarvisPane extends ImplRecursoSimple implements
-		ItfUsoComuGarvisChat {
+		ItfUsoControlGarvisPane {
 
 	private static final long serialVersionUID = 1L;
 	private ConexionCONTROL conexControl ;
@@ -109,5 +110,35 @@ private void generarErrorCreacionComponente(String textoMensaje){
      //       conectado=true;//conexControl.isConnected();
 
     //}
-  } 
+  }
+@Override
+public void neveraAddProduct(String producto) throws Exception {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void neveraRemoveProduct(String producto) throws Exception {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public boolean neveraHasProduct(String producto) throws Exception {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public void bibliotecaAddBook(String book) throws Exception {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void bibliotecaReadBook(String book) throws Exception {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public boolean bibliotecaHasBook(String book) throws Exception {
+	// TODO Auto-generated method stub
+	return false;
+} 
 }

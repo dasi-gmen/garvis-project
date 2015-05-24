@@ -64,11 +64,11 @@ public class GarvisUserControl extends JFrame {
 		
 		JPanel panelRecursos = new JPanel();
 		panelRecursos.setLayout(new GridLayout(2,4)); 
-		GUINevera nevera = new GUINevera();
-		GUIMicroondas microondas = new GUIMicroondas();
-		GUITele tele = new GUITele();
-		GUIBiblio biblio = new GUIBiblio();
-		GUIChampu champu = new GUIChampu();
+		ControlNevera nevera = new ControlNevera();
+		ControlMicroondas microondas = new ControlMicroondas();
+		ControlTele tele = new ControlTele();
+		ControlBiblio biblio = new ControlBiblio();
+		ControlChampu champu = new ControlChampu();
 		
 		panelRecursos.add(nevera);
 		panelRecursos.add(microondas); 

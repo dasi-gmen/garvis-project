@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
 
-public class GUIChampu extends JPanel {
+public class ControlChampu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	GUIChampu(){		
+	ControlChampu(){		
 		
 		this.setBorder(new TitledBorder(":::CHAMPÚ:::"));
 		

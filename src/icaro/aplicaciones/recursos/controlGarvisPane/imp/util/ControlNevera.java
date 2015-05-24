@@ -9,11 +9,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class GUINevera extends JPanel {
+public class ControlNevera extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-//	GUINevera(){		
+//	ControlNevera(){		
 //		this.setBorder(new TitledBorder(":::NEVERA:::"));
 //	
 //		JTextField introDato = new JTextField(20);
@@ -31,7 +31,7 @@ public class GUINevera extends JPanel {
 //		this.add(botonSacar);		
 //	}
 	
-	GUINevera(){		
+	ControlNevera(){		
 		
 		this.setBorder(new TitledBorder(":::NEVERA:::"));		
 		this.setLayout(null);
