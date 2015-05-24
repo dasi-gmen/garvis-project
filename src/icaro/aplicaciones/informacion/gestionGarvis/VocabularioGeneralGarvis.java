@@ -15,6 +15,8 @@ public class VocabularioGeneralGarvis {
     public static final String ErrorObtencionInterfaz_RecPersistencia = "Error-AlObtener:Interfaz_Recurso_Persistencia";
     public static final String IdentRecursoExtractorSemantico= "ExtractorSemantico1";
     public static final String IdentRecursoComunicacionChat= "ComunicacionChat1";
+    public static final String IdentRecursoControlGarvisPane= "ControlPane1";
+
     public static final String IdentAgenteAplicacionDialogoGarvis= "agente_Garvis";
     public static final String IdentConexionAgte= "AgteGarvis";
     public static final String IdentRecursoPersistenciaChat= "PersistenciaChat1";
