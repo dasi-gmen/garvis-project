@@ -1,4 +1,4 @@
-package Interfaz;
+package icaro.aplicaciones.recursos.controlGarvisPane.imp.util;
 
 import java.awt.BorderLayout;
 import java.awt.Event;
@@ -25,14 +25,14 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.Element;
 
-public class Interfaz extends JFrame {
+public class GarvisUserControl extends JFrame {
 	
 	JTextArea areaCodigo =new JTextArea("");	
 	JLabel lineaColumnaAreaCodigo = new JLabel("Posición del puntero :  (0,0)");
 	JTextArea areaIn = new JTextArea("Aquí se escriben las entradas",2,5);	
 	private static final long serialVersionUID = 1L;
 
-	public Interfaz() {
+	public GarvisUserControl() {
 		inicializarInterfaz();  
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -167,9 +167,9 @@ public class Interfaz extends JFrame {
 	
 	
 	
-	public static void main(String[] args) {
+	public static void start() {
 		
-		Interfaz interfaz = new Interfaz();
+		GarvisUserControl interfaz = new GarvisUserControl();
 		
 		interfaz.setVisible(true);
 		interfaz.setEnabled(true);

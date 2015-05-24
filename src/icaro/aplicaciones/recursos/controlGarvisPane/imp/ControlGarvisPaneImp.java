@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comuGarvisPane.imp;
+package icaro.aplicaciones.recursos.controlGarvisPane.imp;
 
-import icaro.aplicaciones.recursos.comuGarvisPane.imp.util.ConexionGARVIS;
+import icaro.aplicaciones.recursos.controlGarvisPane.imp.util.ConexionCONTROL;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.excepciones.ExcepcionEnComponente;
@@ -14,26 +14,22 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author FGarijo
- */
-public class ComuGarvisChatImp extends ConexionGARVIS{
+public class ControlGarvisPaneImp extends ConexionCONTROL{
     private String identRecurso;
    // private String url = null;
    // private String nickname = null;
   //  private String chanel="#kiwiirc-garvis";
   //  private Boolean conectado=false;
-    public InterfazUsoAgente itfUsoAgenteGestDialogo;
+    //public InterfazUsoAgente itfUsoAgenteGestDialogo;
     private  String identificadorAgenteGestorDialogo;
     private ComunicacionAgentes comunicator;
     private MensajeSimple mensajeAenviar;
-    public ComuGarvisChatImp(String identRecurso,String url, String nickname) {
+    public ControlGarvisPaneImp(String identRecurso,String url, String nickname) {
         comunicator = new ComunicacionAgentes(this.identRecurso);
     }
-    public void setItfUsoAgenteGestorDialogo(InterfazUsoAgente itfUsoAgenteDialogo){
-        this.itfUsoAgenteGestDialogo=itfUsoAgenteDialogo;
-    }
+//    public void setItfUsoAgenteGestorDialogo(InterfazUsoAgente itfUsoAgenteDialogo){
+//        this.itfUsoAgenteGestDialogo=itfUsoAgenteDialogo;
+//    }
     public synchronized final void setIdentAgenteGestorDialogo(String identAgenteDialogo){
         this.identificadorAgenteGestorDialogo=identAgenteDialogo;
     }
@@ -51,7 +47,7 @@ public class ComuGarvisChatImp extends ConexionGARVIS{
         else try {
             throw new ExcepcionEnComponente ("El identificador del Gestor de dialogo no esta definido",this.getClass().getSimpleName(),null);
         } catch (ExcepcionEnComponente ex) {
-            Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlGarvisPaneImp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @Override
@@ -62,7 +58,7 @@ public class ComuGarvisChatImp extends ConexionGARVIS{
         else try {
             throw new ExcepcionEnComponente ("El identificador del Gestor de dialogo no esta definido",this.getClass().getSimpleName(),null);
         } catch (ExcepcionEnComponente ex) {
-            Logger.getLogger(ComuGarvisChatImp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlGarvisPaneImp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

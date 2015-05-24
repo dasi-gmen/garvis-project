@@ -1,8 +1,8 @@
-package icaro.aplicaciones.recursos.comuGarvisPane;
+package icaro.aplicaciones.recursos.controlGarvisPane;
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
-import icaro.aplicaciones.recursos.comuGarvisPane.*;
-import icaro.aplicaciones.recursos.comuGarvisPane.imp.util.ConexionCONTROL;
+import icaro.aplicaciones.recursos.controlGarvisPane.*;
+import icaro.aplicaciones.recursos.controlGarvisPane.imp.util.ConexionCONTROL;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
@@ -12,21 +12,20 @@ import java.util.logging.Logger;
 
 
 
-public class ClaseGeneradoraComuGarvisChat extends ImplRecursoSimple implements
+public class ClaseGeneradoraControlGarvisPane extends ImplRecursoSimple implements
 		ItfUsoComuGarvisChat {
 
 	private static final long serialVersionUID = 1L;
 	private ConexionCONTROL conexControl ;
 
-	public ClaseGeneradoraComuGarvisChat(String idInstanciaRecurso) throws Exception {
+	public ClaseGeneradoraControlGarvisPane(String idInstanciaRecurso) throws Exception {
 		
 		super(idInstanciaRecurso);
 // obtenemos las propiedades del recurso que deben estar definidas en las propiedades del recurso
-        identExtractorSem = VocabularioGeneralGarvis.IdentRecursoExtractorSemantico;
 		try {
 		    conexControl = new ConexionCONTROL();
-		    interpreteMsgGarvis = new InterpreteMsgsGARVIS(conexControl);
-		    conexControl.setInterpreteMsgs(interpreteMsgGarvis);
+		    //interpreteMsgGarvis = new InterpreteMsgsGARVIS(conexControl);
+		    //conexControl.setInterpreteMsgs(interpreteMsgGarvis);
 		    trazas.aceptaNuevaTraza(new InfoTraza(this.getId(),
 		      "Creando el recurso "+idInstanciaRecurso,
 		        InfoTraza.NivelTraza.debug));
@@ -58,10 +57,10 @@ private void generarErrorCreacionComponente(String textoMensaje){
       try {
           itfAgteControlador = (InterfazUsoAgente) this.repoIntfaces.obtenerInterfazUso(identAgenteAReportar);
       } catch (Exception ex) {
-          Logger.getLogger(ClaseGeneradoraComuGarvisChat.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(ClaseGeneradoraControlGarvisPane.class.getName()).log(Level.SEVERE, null, ex);
       }
      if (itfAgteControlador == null) this.generarErrorCreacionComponente("itfAgteAreportar es null");
-     else interpreteMsgGarvis.setItfusoAgenteGestorDialogo(itfAgteControlador);
+    // else interpreteMsgGarvis.setItfusoAgenteGestorDialogo(itfAgteControlador);
   }
   //@Override
   public void termina() {  
@@ -83,32 +82,32 @@ private void generarErrorCreacionComponente(String textoMensaje){
 
       //@Override
   public void comenzar ( String identAgteControlador)throws Exception{
-    if (!conectado){
+ //   if (!conectado){
       InterfazUsoAgente itfAgteControlador;
           try {
               itfAgteControlador = (InterfazUsoAgente) this.repoIntfaces.obtenerInterfazUso(identAgteControlador);
          if (itfAgteControlador == null){
              this.generarErrorCreacionComponente("itfAgteControlador es null");
-         }else interpreteMsgGarvis.setItfusoAgenteGestorDialogo(itfAgteControlador);
-         ItfUsoExtractorSemantico itfExtractorSem=(ItfUsoExtractorSemantico) this.repoIntfaces.obtenerInterfazUso(identExtractorSem);
-         if (itfExtractorSem == null){
-             this.generarErrorCreacionComponente("itfExtractorSemantico es null");
-         }else interpreteMsgGarvis.setItfusoRecExtractorSemantico(itfExtractorSem);
-         if (itfExtractorSem == null ||itfAgteControlador == null )throw new Exception();
-         else{
-             interpreteMsgGarvis.setIdentAgenteGestorDialogo(VocabularioGeneralGarvis.IdentAgenteAplicacionDialogoGarvis);
-             interpreteMsgGarvis.setIdentConexion(VocabularioGeneralGarvis.IdentConexionAgte);
+         }//else interpreteMsgGarvis.setItfusoAgenteGestorDialogo(itfAgteControlador);
+         //ItfUsoExtractorSemantico itfExtractorSem=(ItfUsoExtractorSemantico) this.repoIntfaces.obtenerInterfazUso(identExtractorSem);
+//         if (itfExtractorSem == null){
+//             this.generarErrorCreacionComponente("itfExtractorSemantico es null");
+//         }else interpreteMsgGarvis.setItfusoRecExtractorSemantico(itfExtractorSem);
+//         if (itfExtractorSem == null ||itfAgteControlador == null )throw new Exception();
+//         else{
+//             interpreteMsgGarvis.setIdentAgenteGestorDialogo(VocabularioGeneralGarvis.IdentAgenteAplicacionDialogoGarvis);
+//             interpreteMsgGarvis.setIdentConexion(VocabularioGeneralGarvis.IdentConexionAgte);
              //conexControl.setVerbose(true);
              //conectar( url, chanel, nickname);
-         }
+     //    }
          } catch (Exception ex) {
-              Logger.getLogger(ClaseGeneradoraComuGarvisChat.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(ClaseGeneradoraControlGarvisPane.class.getName()).log(Level.SEVERE, null, ex);
           }
          
          
             conexControl.connect();
-            conectado=true;//conexControl.isConnected();
+     //       conectado=true;//conexControl.isConnected();
 
-    }
+    //}
   } 
 }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package icaro.aplicaciones.recursos.comuGarvisPane;
+package icaro.aplicaciones.recursos.controlGarvisPane;
 
 /**
  *
  * @author FGarijo
  */
-public class ConfigInfoComuGarvisChat {
-     public static final String urlFeeNode= "irc.freenode.net";
+public class ConfigInfoControlGarvisPane {
+     //public static final String urlFeeNode= "irc.freenode.net";
      public static final String nicknameConexionAgte= "AgteGarvis";
-     public static final String chanelConexionAgte= "#kiwiirc-garvis";
-     public static final String identInterlocutorPruebas = "pacopa";
+     //public static final String chanelConexionAgte= "#kiwiirc-garvis";
+    // public static final String identInterlocutorPruebas = "pacopa";
 }

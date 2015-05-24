@@ -1,4 +1,4 @@
-package Interfaz;
+package icaro.aplicaciones.recursos.controlGarvisPane.imp.util;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
