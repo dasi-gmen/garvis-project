@@ -177,6 +177,21 @@ rule "Ingresó el tiempo de encendido del microondas"
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
+rule "No ingresa el tiempo de encendido del microondas"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderMicro(state==Objetivo.SOLVING)
+   	obj2:ApagarMicro(state==Objetivo.SOLVING)
+   	notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull)
+   then
+   	 retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar("","Por favor ingresa el tiempo para el microondas");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
 rule " Volviste ha Mencionar Encender Microondas"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
