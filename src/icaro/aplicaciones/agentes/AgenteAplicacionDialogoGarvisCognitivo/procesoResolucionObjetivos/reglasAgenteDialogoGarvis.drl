@@ -135,7 +135,7 @@ rule "Mencionaste Encender Microondas"
    	obj2:ApagarMicro(state==Objetivo.PENDING)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncendermicro)
    then
-   	obj1.setSolved();
+   	obj1.setSolving();
    	update(obj1);
    	obj2.setSolving();
     update(obj2);
@@ -146,8 +146,38 @@ rule "Mencionaste Encender Microondas"
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
+rule "Pide el tiempo de encendido del microondas"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderMicro(state==Objetivo.SOLVING)
+   	obj2:ApagarMicro(state==Objetivo.SOLVING)
+   then
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar("","Cuanto tiempo deseas activar el microondas?");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 
-rule " Volvistes ah Mencionar Encender Microondas"
+rule "Ingresó el tiempo de encendido del microondas"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderMicro(state==Objetivo.SOLVING)
+   	obj2:ApagarMicro(state==Objetivo.SOLVING)
+   	notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionTiempoMicro)
+   then
+   	 String tiempo = notif.getMensajeNotificacion();
+     obj1.setSolved();
+     update(obj1);
+   	 retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar("","He puesto el microondas "+tiempo);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule " Volviste ha Mencionar Encender Microondas"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
