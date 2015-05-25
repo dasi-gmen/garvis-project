@@ -93,8 +93,9 @@ rule "No hay extraccion  semantica del texto del interlocutor "
     Focus(foco == obj)
     SintonizaTV(state==Objetivo.PENDING)
     EncenderMicro(state==Objetivo.PENDING)
+    AddLibro(state==Objetivo.PENDING)
     obj1:EncenderTele();
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull)
+    notif:Notificacion(identInterlc:identNotificador, (tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionAfirmacion || tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionNegacion || tipoNotificacion==VocabularioGeneralGarvis.ExtraccionSemanticaNull))
    then
    	 obj1.sumContarPeticion();
    	 update(obj1);
