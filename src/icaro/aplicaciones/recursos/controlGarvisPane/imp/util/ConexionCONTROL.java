@@ -49,7 +49,7 @@ import java.util.StringTokenizer;
     private String _version = "ConexionCONTROL " + VERSION; // + " Java IRC Bot - www.jibble.org";
     private String _finger = "You ought to be arrested for fingering a bot!";
     
-    private GarvisUserControl controlGUI;
+    public GarvisUserControl controlGUI;
 
     
     /**
@@ -62,7 +62,8 @@ import java.util.StringTokenizer;
     
 
     public final synchronized void connect() throws IOException {
-        controlGUI.start();
+    	//controlGUI = new GarvisUserControl();
+        controlGUI = GarvisUserControl.start();
         this.log("*** Connected to GARVIS.");
         this.log("*** Logged onto GARVIS.");
         

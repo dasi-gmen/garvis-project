@@ -22,68 +22,59 @@ import icaro.aplicaciones.recursos.comuGarvisChat.*;
 
 public class ObtenerLibros extends TareaSincrona{
 
-  /**
-   *  Constructor
-   *
-   *@param           Description of the Parameter
-   *@param    Description of the Parameter
-   */
     private Objetivo contextoEjecucionTarea = null;
-    public AddLibro op1 = new AddLibro();
+   // public AddLibro op1 = new AddLibro();
     public List<String>suppliesNames;
     public List<String>suppliesNames2;
-  @Override
-	public void ejecutar(Object... params) {
-  /**
-   * Produce un saludo inicial y una presentacion de funcionalidad inicial al entrar en el sistema
-   */
+@Override
+public void ejecutar(Object... params) {
+
    String identDeEstaTarea=this.getIdentTarea();
             String identAgenteOrdenante = this.getIdentAgente();
           String identInterlocutor = (String)params[0];
           String nombrelibro = (String)params[1];
           String param = (String)params[2];
-                    try {
+      try {
 //         // Se busca la interfaz del recurso en el repositorio de interfaces 
 		ItfUsoComuGarvisChat recComunicacionChat = (ItfUsoComuGarvisChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                 	//if(param == "1"){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    if(param == "1"){
-                    op1.SumarLibro(nombrelibro);
-                   suppliesNames = op1.ListaLibros();
-                    String space = " , " ;
-                    String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
-                    String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
-                    Iterator<String> iterator = suppliesNames.iterator();
-                   while (iterator.hasNext()) {
-                          mensajeprev +=iterator.next()+ space;
-                   }
-                   mensajeprev += mensaje2;
-                    recComunicacionChat.enviarMensagePrivado(mensajeprev);
-                   }
-                    else{
-                    	String mensajeprev = "Libro Encontrado . Buen Provecho"; //VocabularioGeneralGarvis.HasDichoBiblioteca2;
-	                    String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
-	                    suppliesNames2=op1.ListaLibros();
-	                    Iterator<String> iterator = suppliesNames2.iterator();
-	                   while (iterator.hasNext()) {
-	                	   if(nombrelibro.equals(iterator.next()) ){
-	                		   String mensaje = "Encontrado";
-	                		   mensajeprev = mensaje ;
-	                		    
-	                	   }
-	                	   else{
-	                		   String mensaje = "Libro No encontrado";
-	                		   mensajeprev = mensaje ;
-	                	   }
-	                   }
-	                   if (suppliesNames2.size()== 0){
-	                	   mensajeprev = "No has metido nada";
-	                   }
+//                    if(param == "1"){
+//                    op1.SumarLibro(nombrelibro);
+//                   suppliesNames = op1.ListaLibros();
+//                    String space = " , " ;
+//                    String mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
+//                    String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
+//                    Iterator<String> iterator = suppliesNames.iterator();
+//                   while (iterator.hasNext()) {
+//                          mensajeprev +=iterator.next()+ space;
+//                   }
+//                   mensajeprev += mensaje2;
+//                    recComunicacionChat.enviarMensagePrivado(mensajeprev);
+//                   }else{
+//                    	String mensajeprev = "Libro Encontrado . Buen Provecho"; //VocabularioGeneralGarvis.HasDichoBiblioteca2;
+//	                    String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
+//	                    suppliesNames2=op1.ListaLibros();
+//	                    Iterator<String> iterator = suppliesNames2.iterator();
+//	                   while (iterator.hasNext()) {
+//	                	   if(nombrelibro.equals(iterator.next()) ){
+//	                		   String mensaje = "Encontrado";
+//	                		   mensajeprev = mensaje ;
+//	                		    
+//	                	   }
+//	                	   else{
+//	                		   String mensaje = "Libro No encontrado";
+//	                		   mensajeprev = mensaje ;
+//	                	   }
+//	                   }
+//	                   if (suppliesNames2.size()== 0){
+//	                	   mensajeprev = "No has metido nada";
+//	                   }
 	                   //mensajeprev += mensaje2;
-	                   recComunicacionChat.enviarMensagePrivado(mensajeprev); 
-                    }
+	                   
+                    //}
                     
                 }
                 else {
@@ -98,7 +89,11 @@ public class ObtenerLibros extends TareaSincrona{
 
           if (recControlPane!=null ){
               recControlPane.comenzar(identAgenteOrdenante);
-              //TODO
+              
+              String respuesta = recControlPane.obtenerLibros(param, nombrelibro);
+              
+              recComunicacionChat.enviarMensagePrivado(respuesta); 
+              
           }else {
             identAgenteOrdenante = this.getAgente().getIdentAgente();
             this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+

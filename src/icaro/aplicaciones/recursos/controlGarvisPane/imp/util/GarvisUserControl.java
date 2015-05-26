@@ -31,14 +31,14 @@ public class GarvisUserControl extends JFrame {
 	JLabel lineaColumnaAreaCodigo = new JLabel("Posición del puntero :  (0,0)");
 	JTextArea areaIn = new JTextArea("Aquí se escriben las entradas",2,5);	
 	
-	ControlNevera nevera;
-	ControlMicroondas microondas;
-	ControlTele tele;
-	ControlBiblio biblio;
-	ControlChampu champu;
-	ControlAspiradora aspiradora;
-	ControlTermostato termostato;
-	ControlDetector detector;
+	public ControlNevera nevera;
+	public ControlMicroondas microondas;
+	public ControlTele tele;
+	public ControlBiblio biblio;
+	public ControlChampu champu;
+	public ControlAspiradora aspiradora;
+	public ControlTermostato termostato;
+	public ControlDetector detector;
 	
 	
 	
@@ -180,7 +180,7 @@ public class GarvisUserControl extends JFrame {
 	
 	
 	
-	public static void start() {
+	public static GarvisUserControl start() {
 		
 		GarvisUserControl interfaz = new GarvisUserControl();
 		
@@ -189,7 +189,8 @@ public class GarvisUserControl extends JFrame {
 		interfaz.setSize(1000, 600);
 		interfaz.setResizable(false);
 		//interfaz.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	
+		
+		return interfaz;
 		
 	}
 

@@ -11,9 +11,7 @@ public interface ItfUsoControlGarvisPane extends ItfUsoRecursoSimple {
     public void neveraRemoveProduct(String producto)throws Exception;
     public boolean neveraHasProduct(String producto)throws Exception;
     
-    public void bibliotecaAddBook(String book)throws Exception;
-    public void bibliotecaReadBook(String book)throws Exception;
-    public boolean bibliotecaHasBook(String book)throws Exception;
+    public String obtenerLibros(String param, String nombreLibro)throws Exception;
     
     //public void recibirMensajePrivado(String mensaje) throws Exception;
     public void desconectar( )throws Exception;

@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 public class AddLibro extends Objetivo {
 	
-	public List<String> LibrosNuevos = new ArrayList<String>();
+//	public List<String> LibrosNuevos = new ArrayList<String>();
 	public boolean extract ;
 	public AddLibro() {
 		super.setgoalId("AñadirLibro");
 	}
-	public List ListaLibros() {
-		return LibrosNuevos;
-	}
-
-	public void SumarLibro(String libro) {
-
-		this.LibrosNuevos.add(libro); 
-	}
+//	public List ListaLibros() {
+//		return LibrosNuevos;
+//	}
+//
+//	public void SumarLibro(String libro) {
+//
+//		this.LibrosNuevos.add(libro); 
+//	}
 	
 }

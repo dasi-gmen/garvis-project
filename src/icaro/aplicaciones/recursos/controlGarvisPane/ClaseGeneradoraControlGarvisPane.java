@@ -2,7 +2,7 @@ package icaro.aplicaciones.recursos.controlGarvisPane;
 
 import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
 import icaro.aplicaciones.recursos.controlGarvisPane.*;
-import icaro.aplicaciones.recursos.controlGarvisPane.imp.util.ConexionCONTROL;
+import icaro.aplicaciones.recursos.controlGarvisPane.imp.util.*;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
@@ -52,7 +52,7 @@ private void generarErrorCreacionComponente(String textoMensaje){
 }
 
 
-  //@Override
+  @Override
   public void setIdentAgenteAReportar(String identAgte ){
       identAgenteAReportar = identAgte;
       InterfazUsoAgente itfAgteControlador = null;
@@ -64,7 +64,7 @@ private void generarErrorCreacionComponente(String textoMensaje){
      if (itfAgteControlador == null) this.generarErrorCreacionComponente("itfAgteAreportar es null");
     // else interpreteMsgGarvis.setItfusoAgenteGestorDialogo(itfAgteControlador);
   }
-  //@Override
+  @Override
   public void termina() {  
     try {
       super.termina();
@@ -73,16 +73,12 @@ private void generarErrorCreacionComponente(String textoMensaje){
     }
   }
 
-  //@Override
-  public void enviarMensagePrivado( String mensaje)throws Exception{
-      conexControl.sendMessage(mensaje);
-  }
-  //@Override
+  @Override
   public void desconectar( )throws Exception{
       conexControl.disconnect();
   }
 
-      //@Override
+      @Override
   public void comenzar ( String identAgteControlador)throws Exception{
 	  if (!conectado){
       InterfazUsoAgente itfAgteControlador;
@@ -112,34 +108,25 @@ private void generarErrorCreacionComponente(String textoMensaje){
 
     }
   }
-@Override
-public void neveraAddProduct(String producto) throws Exception {
+  @Override
+public void neveraAddProduct(String producto) {
 	// TODO Auto-generated method stub
 	
 }
 @Override
-public void neveraRemoveProduct(String producto) throws Exception {
+public void neveraRemoveProduct(String producto) {
 	// TODO Auto-generated method stub
 	
 }
 @Override
-public boolean neveraHasProduct(String producto) throws Exception {
+public boolean neveraHasProduct(String producto) {
 	// TODO Auto-generated method stub
 	return false;
 }
 @Override
-public void bibliotecaAddBook(String book) throws Exception {
-	// TODO Auto-generated method stub
-	
+public String obtenerLibros(String param, String nombreLibro) {
+	String respuesta = conexControl.controlGUI.biblio.obtenerLibros(param , nombreLibro);
+	return respuesta;
 }
-@Override
-public void bibliotecaReadBook(String book) throws Exception {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public boolean bibliotecaHasBook(String book) throws Exception {
-	// TODO Auto-generated method stub
-	return false;
-} 
+
 }

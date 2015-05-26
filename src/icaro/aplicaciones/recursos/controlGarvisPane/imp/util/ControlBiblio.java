@@ -1,6 +1,11 @@
 package icaro.aplicaciones.recursos.controlGarvisPane.imp.util;
 
+import icaro.aplicaciones.informacion.gestionGarvis.VocabularioGeneralGarvis;
+
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,6 +20,9 @@ public class ControlBiblio extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	public List<String> LibrosNuevos = new ArrayList<String>();
+	
+	
 	ControlBiblio(){		
 		
 		this.setBorder(new TitledBorder(":::BIBLIOTECA:::"));		
@@ -39,5 +47,45 @@ public class ControlBiblio extends JPanel {
 		this.add(btOnOff);
 		
 		
+	}
+
+	public String obtenerLibros(String param,String nombrelibro) {
+		
+		String mensajeprev;
+	
+		if(param == "1"){
+            LibrosNuevos.add(nombrelibro);
+//           suppliesNames = op1.ListaLibros();
+            String space = " , " ;
+            mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
+            String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
+            Iterator<String> iterator = LibrosNuevos.iterator();
+           while (iterator.hasNext()) {
+                  mensajeprev +=iterator.next()+ space;
+           }
+           mensajeprev += mensaje2;
+            
+           }else{
+            	mensajeprev = "Libro Encontrado . Buen Provecho"; //VocabularioGeneralGarvis.HasDichoBiblioteca2;
+                String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
+//                suppliesNames2=op1.ListaLibros();
+                Iterator<String> iterator = LibrosNuevos.iterator();
+               while (iterator.hasNext()) {
+            	   if(nombrelibro.equals(iterator.next()) ){
+            		   String mensaje = "Encontrado";
+            		   mensajeprev = mensaje ;
+            		    
+            	   }
+            	   else{
+            		   String mensaje = "Libro No encontrado";
+            		   mensajeprev = mensaje ;
+            	   }
+               }
+               if (LibrosNuevos.size()== 0){
+            	   mensajeprev = "No has metido nada";
+               } 
+           	}
+		
+		return (mensajeprev);
 	}
 }
