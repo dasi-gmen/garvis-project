@@ -226,6 +226,9 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("negacion");
         anotacionesBusquedaPrueba.add("canaltv");
         anotacionesBusquedaPrueba.add("tiempocinco");
+        anotacionesBusquedaPrueba.add("alimentos");
+        anotacionesBusquedaPrueba.add("metermicro");
+        
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
         infoConecxInterlocutor.setuserName("Tony");
@@ -1033,10 +1036,14 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
     // recorremos las anotaciones obtenidas y las traducimos a objetos del modelo de información
     ArrayList anotacionesInterpretadas =new ArrayList();
 //    int i=0;
+    Annotation	annotAlimento = null;
     Iterator annotTypesSal = anotacionesRelevantes.iterator();
             while(annotTypesSal.hasNext()) {
              Annotation    annot = (Annotation) annotTypesSal.next();
              String anotType=annot.getType();
+             boolean meterEnMicro = false;
+             
+             
              if(anotType.equalsIgnoreCase("saludo")){
                  anotacionesInterpretadas.add(interpretarAnotacionSaludo(contextoInterpretacion, annot));
 //                 i++;
@@ -1052,6 +1059,22 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
              if(anotType.equalsIgnoreCase("television") && anotacionesRelevantes.size()==1){
                  anotacionesInterpretadas.add(interpretarAnotacionLibro(contextoInterpretacion, annot));
 //                 i++;
+             }
+             
+             if(anotType.equalsIgnoreCase("metermicro") && anotacionesRelevantes.size()!=1){
+            	 if(annotAlimento==null && !meterEnMicro)
+            		 meterEnMicro = true;
+            	 else{
+            		 if(annotAlimento!=null)
+            		 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaMicro(contextoInterpretacion, annotAlimento));
+            	 }
+             }
+             if(anotType.equalsIgnoreCase("alimentos")){
+            	 if(meterEnMicro)
+            		 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaMicro(contextoInterpretacion, annot));
+            	 else{
+            		 annotAlimento = annot;
+            	 }
              }
              
              if(anotType.equalsIgnoreCase("nevera")
@@ -1142,5 +1165,14 @@ private Notificacion interpretarAnotacionGenerica(String conttextoInterpretacion
         notif.setTipoNotificacion(anotacionGenerica.getType());
         notif.setMensajeNotificacion(msgNotif);
         return notif;
+}
+private Notificacion interpretarAnotacionMeterComidaMicro(String conttextoInterpretacion,Annotation anotacion){
+	Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+	int posicionComienzoTexto =anotacion.getStartNode().getOffset().intValue();
+    int posicionFinTexto =anotacion.getEndNode().getOffset().intValue();
+    String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
+    notif.setTipoNotificacion("meterAlimentoMicro");
+    notif.setMensajeNotificacion(msgNotif);
+	return notif;
 }
 }

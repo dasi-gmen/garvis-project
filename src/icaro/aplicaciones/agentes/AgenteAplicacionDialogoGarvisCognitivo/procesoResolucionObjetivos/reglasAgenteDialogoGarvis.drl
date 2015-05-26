@@ -184,6 +184,23 @@ end
 
 /* *********************************REGLAS PARA MICROONDAS************************************ */
 
+/*rule "Mencionaste Meter comida en Microondas"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:MeterComidaMicro(state==Objetivo.PENDING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionAlimentos)
+   then
+   	obj1.setSolved();
+   	update(obj1);
+   	String alimento = notif.getMensajeNotificacion();
+   	retract(notif);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+    tarea.ejecutar(identInterlc,"Has metido alimento",alimento);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end*/
+
 rule "Mencionaste Encender Microondas"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
