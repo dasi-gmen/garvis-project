@@ -14,18 +14,10 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 
 public class RespuestaBiblioteca extends TareaSincrona{
 
-  /**
-   *  Constructor
-   *
-   *@param           Description of the Parameter
-   *@param    Description of the Parameter
-   */
     private Objetivo contextoEjecucionTarea = null;
-  @Override
+ 
 	public void ejecutar(Object... params) {
-  /**
-   * Produce un saludo inicial y una presentacion de funcionalidad inicial al entrar en el sistema
-   */
+
    String identDeEstaTarea=this.getIdentTarea();
             String identAgenteOrdenante = this.getIdentAgente();
           String identInterlocutor = (String)params[0];

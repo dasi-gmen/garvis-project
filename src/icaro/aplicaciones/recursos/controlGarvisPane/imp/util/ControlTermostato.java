@@ -7,13 +7,13 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
 
-public class ControlAspiradora extends JPanel {
+public class ControlTermostato extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	ControlAspiradora(){		
+	ControlTermostato(){		
 		
-		this.setBorder(new TitledBorder(":::ASPIRADORA:::"));
+		this.setBorder(new TitledBorder(":::TERMOSTATO:::"));
 		
 		this.setLayout(null);
         

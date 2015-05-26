@@ -30,6 +30,19 @@ public class GarvisUserControl extends JFrame {
 	JTextArea areaCodigo =new JTextArea("");	
 	JLabel lineaColumnaAreaCodigo = new JLabel("Posición del puntero :  (0,0)");
 	JTextArea areaIn = new JTextArea("Aquí se escriben las entradas",2,5);	
+	
+	ControlNevera nevera;
+	ControlMicroondas microondas;
+	ControlTele tele;
+	ControlBiblio biblio;
+	ControlChampu champu;
+	ControlAspiradora aspiradora;
+	ControlTermostato termostato;
+	ControlDetector detector;
+	
+	
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	public GarvisUserControl() {
@@ -64,23 +77,23 @@ public class GarvisUserControl extends JFrame {
 		
 		JPanel panelRecursos = new JPanel();
 		panelRecursos.setLayout(new GridLayout(2,4)); 
-		ControlNevera nevera = new ControlNevera();
-		ControlMicroondas microondas = new ControlMicroondas();
-		ControlTele tele = new ControlTele();
-		ControlBiblio biblio = new ControlBiblio();
-		ControlChampu champu = new ControlChampu();
+		nevera= new ControlNevera();
+		microondas= new ControlMicroondas();
+		tele= new ControlTele();
+		biblio= new ControlBiblio();
+		champu= new ControlChampu();
+		aspiradora= new ControlAspiradora();
+		termostato= new ControlTermostato();
+		detector= new ControlDetector();
 		
 		panelRecursos.add(nevera);
 		panelRecursos.add(microondas); 
 		panelRecursos.add(tele);
 		panelRecursos.add(biblio);
 		panelRecursos.add(champu);
-		
-		
-		
-		for (int i = 0; i < 3; i++){
-			panelRecursos.add(new JButton("Button " + i));
-		}
+		panelRecursos.add(aspiradora);
+		panelRecursos.add(termostato);
+		panelRecursos.add(detector);
 		
 		return panelRecursos;
 		
