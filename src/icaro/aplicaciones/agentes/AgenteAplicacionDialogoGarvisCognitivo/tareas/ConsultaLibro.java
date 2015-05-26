@@ -42,7 +42,7 @@ public class ConsultaLibro extends TareaSincrona {
 				  ItfUsoControlGarvisPane recControlPane = (ItfUsoControlGarvisPane) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ.obtenerInterfazUso(
 					VocabularioGeneralGarvis.IdentRecursoControlGarvisPane);  
 
-					if (recControlPane!=null ){
+				if (recControlPane!=null ){
 				      recControlPane.comenzar(identAgenteOrdenante);
 				   		//TODO
 				  }else {
