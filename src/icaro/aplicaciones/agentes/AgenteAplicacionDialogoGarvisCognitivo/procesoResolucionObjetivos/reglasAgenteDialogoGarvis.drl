@@ -865,7 +865,7 @@ salience -10
    	obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
     obj1:EncenderTele(state==Objetivo.PENDING)
-    //obj2:ApagarTele(state==Objetivo.PENDING)
+    obj2:ApagarTele(state==Objetivo.PENDING)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionTelevision)
    then
     String tv = notif.getMensajeNotificacion(); 
