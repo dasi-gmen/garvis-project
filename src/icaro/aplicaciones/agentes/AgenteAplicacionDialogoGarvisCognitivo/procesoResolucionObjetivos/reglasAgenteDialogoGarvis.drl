@@ -367,8 +367,8 @@ rule " Volviste ha Mencionar Encender Microondas"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
-    obj1:ApagarMicro(state==Objetivo.SOLVING)
-    obj2:EncenderMicro(state==Objetivo.SOLVED)
+    obj1:ApagarMicro(state==Objetivo.SOLVING || state==Objetivo.PENDING)
+    obj2:EncenderMicro(state==Objetivo.SOLVED || state==Objetivo.SOLVING)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncendermicro)
    then
    	retract(notif);
