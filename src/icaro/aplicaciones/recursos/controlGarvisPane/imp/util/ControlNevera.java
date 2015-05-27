@@ -49,6 +49,12 @@ public class ControlNevera extends JPanel {
 		this.add(scrollProductos, BorderLayout.CENTER );
 		this.add(botonSacar);	
 		
+		comidas.add("pollo");
+		comidas.add("tomate");
+		comidas.add("cerdo");
+		comidas.add("pescado");
+		comidas.add("salchicha");
+		actualizaNevera();
 		
 	}
 

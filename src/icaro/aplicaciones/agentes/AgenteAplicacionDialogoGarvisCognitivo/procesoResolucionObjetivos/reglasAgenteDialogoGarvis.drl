@@ -373,7 +373,7 @@ rule " Volviste ha Mencionar Encender Microondas"
    then
    	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-     tarea.ejecutar(identInterlc,"Ya se encuenctra encendido el Microondas...");
+     tarea.ejecutar(identInterlc,"Ya se encuenctra encendido el Microondas.");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -408,7 +408,7 @@ rule "Volviste ah Mencionar Apagar Microondas"
    then
    	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-     tarea.ejecutar(identInterlc,"Ya se encuentra apagado el Microondas...");
+     tarea.ejecutar(identInterlc,"Ya se encuentra apagado el Microondas.");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -428,7 +428,7 @@ rule "Mencionaste Abrir Microondas"
     update(obj2);
    	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-     tarea.ejecutar(identInterlc,"He abierto la Microondas...");
+     tarea.ejecutar(identInterlc,"He abierto la Microondas.");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -444,7 +444,7 @@ rule " Volvistes ah Mencionar Abrir Microondas"
    then
    	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-     tarea.ejecutar(identInterlc,"Ya se encuenctra abierto la puerta del Microondas...");
+     tarea.ejecutar(identInterlc,"Ya se encuenctra abierto la puerta del Microondas.");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -464,7 +464,7 @@ rule "Mencionaste Cerrar Microondas"
    	update(obj2);
    	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-     tarea.ejecutar(identInterlc,"He Cerrado la Microondas...");
+     tarea.ejecutar(identInterlc,"He Cerrado la Microondas.");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -555,7 +555,7 @@ rule "No desea añadir nuevo libro"
    then
    	obj1.setPending();
 	update(obj1);
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(DespedidaGarvis.class);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(DespedidaBiblioteca.class);
      tarea.ejecutar(identInterlc);
      retract(notif);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
