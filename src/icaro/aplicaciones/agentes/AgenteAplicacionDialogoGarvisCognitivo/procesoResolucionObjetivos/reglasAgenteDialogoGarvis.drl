@@ -332,7 +332,7 @@ rule "Ingresó el tiempo de encendido del microondas"
 end
 
 rule "Indicar que terminó el tiempo del microondas y apagarlo"
-    timer (cron:* 0/5 * * * ?)
+    timer (cron:* 0/2 * * * ?)
 when
     //$a : Alarm( on == true )
     obj1:EncenderMicro(state==Objetivo.SOLVED)
