@@ -555,7 +555,7 @@ rule "No desea añadir nuevo libro"
    then
    	obj1.setPending();
 	update(obj1);
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(DespedidaGarvis.class);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(DespedidaBiblioteca.class);
      tarea.ejecutar(identInterlc);
      retract(notif);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
