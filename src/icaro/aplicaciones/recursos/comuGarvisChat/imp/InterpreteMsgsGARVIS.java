@@ -1101,7 +1101,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             		 meterEnNevera = true;
             	 else{
             		 if(annotAlimento!=null)
-            			 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaNevera(contextoInterpretacion, annot));
+            			 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaNevera(contextoInterpretacion, annotAlimento));
             	 }
              }
              
@@ -1110,7 +1110,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             		 sacarDeNevera = true;
             	 else{
             		 if(annotAlimento!=null)
-            			 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaNevera(contextoInterpretacion, annot));
+            			 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaNevera(contextoInterpretacion, annotAlimento));
             	 }
              }
              
