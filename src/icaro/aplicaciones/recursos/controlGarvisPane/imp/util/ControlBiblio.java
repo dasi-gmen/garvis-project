@@ -22,23 +22,28 @@ public class ControlBiblio extends JPanel {
 
 	public List<String> LibrosNuevos = new ArrayList<String>();
 	
+	public JTextField introDato ;
+	public JButton btAgregar ;
+	public JTextArea taLibros ;
+	public JScrollPane scrollTALibro ;
+	public JButton btOnOff ;
 	
 	ControlBiblio(){		
 		
 		this.setBorder(new TitledBorder(":::BIBLIOTECA:::"));		
 		this.setLayout(null);
 		
-		JTextField introDato = new JTextField(20);
+		introDato = new JTextField(20);
 		introDato.setBounds(20,25,200,20);
-        
-		JButton btAgregar = new JButton("Agregar");		
+		    
+		btAgregar = new JButton("Agregar");   
 		btAgregar.setBounds(60,50,120,25);
-		
-		JTextArea taLibros = new JTextArea(5,10);
-		JScrollPane scrollTALibro = new JScrollPane(taLibros);
+
+		taLibros = new JTextArea(5,10);
+		scrollTALibro = new JScrollPane(taLibros);
 		scrollTALibro.setBounds(20,100,200,80);
-				
-		JButton btOnOff = new JButton("On/Off");
+		    
+		btOnOff = new JButton("On/Off");
 		btOnOff.setBounds(70,200,100,25);
 				
 		this.add(introDato);
@@ -55,6 +60,7 @@ public class ControlBiblio extends JPanel {
 	
 		if(param == "1"){
             LibrosNuevos.add(nombrelibro);
+            taLibros.append(nombrelibro+"\n");
 //           suppliesNames = op1.ListaLibros();
             String space = " , " ;
             mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
