@@ -35,8 +35,7 @@ public class RespuestaNevera extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = VocabularioGeneralGarvis.HasDichoNevera;
-                    recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+                    
                 }
                 else {
                     identAgenteOrdenante = this.getAgente().getIdentAgente();
@@ -50,12 +49,32 @@ public class RespuestaNevera extends TareaSincrona{
 
           if (recControlPane!=null ){
               recControlPane.comenzar(identAgenteOrdenante);
-              //TODO
+              
           }else {
             identAgenteOrdenante = this.getAgente().getIdentAgente();
             this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
                    VocabularioGeneralGarvis.IdentRecursoControlGarvisPane, CausaTerminacionTarea.ERROR);
           }
+          
+          String accion = (String)params[1];
+          String comida = (String)params[2];
+          boolean sacado = false;
+          
+          String mensajeAenviar= VocabularioGeneralGarvis.HasDichoNevera;
+          
+          if (accion.equalsIgnoreCase("meter")){
+        	  recControlPane.meterComidaNevera(comida);
+        	  mensajeAenviar = "Ahora tienes "+comida+" en la nevera.";
+          }
+          if (accion.equalsIgnoreCase("sacar")){
+        	  sacado = recControlPane.sacarComidaNevera(comida);
+        	  if(sacado)
+        		  mensajeAenviar = "Ya no contare con que haya "+comida+" en la nevera. Que aproveche!";
+        	  else
+        		  mensajeAenviar = "No he encontrado "+comida+" en la nevera.";
+          }
+          
+          recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
 
 
                         

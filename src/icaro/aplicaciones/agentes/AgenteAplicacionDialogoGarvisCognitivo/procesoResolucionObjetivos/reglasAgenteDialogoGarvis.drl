@@ -170,14 +170,30 @@ rule "Estas hablando de mi "
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
-rule "Mencionaste la nevera"
+rule "Meter comida en la nevera"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionNevera)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionMeterAlimentoNevera)
    then
+   String alimento = notif.getMensajeNotificacion();
+   	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaNevera.class);
-     tarea.ejecutar(identInterlc);
+     tarea.ejecutar(identInterlc,"meter",alimento);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Sacar comida de la nevera"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionSacarAlimentoNevera)
+   then
+   String alimento = notif.getMensajeNotificacion();
+   	retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaNevera.class);
+     tarea.ejecutar(identInterlc,"sacar",alimento);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end

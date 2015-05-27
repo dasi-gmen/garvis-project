@@ -20,7 +20,7 @@ public class ControlBiblio extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public List<String> LibrosNuevos = new ArrayList<String>();
+	public ArrayList<String> LibrosNuevos = new ArrayList<String>();
 	
 	public JTextField introDato ;
 	public JButton btAgregar ;

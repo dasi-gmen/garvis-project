@@ -1044,10 +1044,14 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
 //    int i=0;
     Annotation	annotAlimento = null;
     Iterator annotTypesSal = anotacionesRelevantes.iterator();
+    
+    boolean meterEnMicro = false;
+    boolean meterEnNevera = false;
+    boolean sacarDeNevera = false;
             while(annotTypesSal.hasNext()) {
              Annotation    annot = (Annotation) annotTypesSal.next();
              String anotType=annot.getType();
-             boolean meterEnMicro = false;
+             
              
              
              if(anotType.equalsIgnoreCase("saludo")){
@@ -1078,8 +1082,13 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
              if(anotType.equalsIgnoreCase("alimentos")){
             	 if(meterEnMicro)
             		 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaMicro(contextoInterpretacion, annot));
-            	 else{
-            		 annotAlimento = annot;
+            	 if(meterEnNevera){
+            		 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaNevera(contextoInterpretacion, annot));
+            	 }
+            	 if(sacarDeNevera){
+            		 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaNevera(contextoInterpretacion, annot));
+            	 }else{
+            	 	 annotAlimento = annot;
             	 }
              }
              
@@ -1088,11 +1097,21 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
              }
              
              if(anotType.equalsIgnoreCase("meternevera")){
-            	 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaNevera(contextoInterpretacion, annot));
+            	 if(annotAlimento==null && !meterEnNevera)
+            		 meterEnNevera = true;
+            	 else{
+            		 if(annotAlimento!=null)
+            			 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaNevera(contextoInterpretacion, annot));
+            	 }
              }
              
              if(anotType.equalsIgnoreCase("sacarnevera")){
-            	 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaNevera(contextoInterpretacion, annot));
+            	 if(annotAlimento==null && !sacarDeNevera)
+            		 sacarDeNevera = true;
+            	 else{
+            		 if(annotAlimento!=null)
+            			 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaNevera(contextoInterpretacion, annot));
+            	 }
              }
              
              if(anotType.equalsIgnoreCase("nevera")
@@ -1210,18 +1229,18 @@ private Object interpretarAnotacionSacarComidaNevera(String contextoInterpretaci
 	int posicionComienzoTexto =annot.getStartNode().getOffset().intValue();
     int posicionFinTexto =annot.getEndNode().getOffset().intValue();
     String msgNotif =contextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
-    notif.setTipoNotificacion("meterAlimentoNevera");
+    notif.setTipoNotificacion("sacarAlimentoNevera");
     notif.setMensajeNotificacion(msgNotif);
-	return null;
+	return notif;
 }
 private Object interpretarAnotacionMeterComidaNevera(String contextoInterpretacion, Annotation annot) {
 	Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
 	int posicionComienzoTexto =annot.getStartNode().getOffset().intValue();
     int posicionFinTexto =annot.getEndNode().getOffset().intValue();
     String msgNotif =contextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
-    notif.setTipoNotificacion("sacarAlimentoNevera");
+    notif.setTipoNotificacion("meterAlimentoNevera");
     notif.setMensajeNotificacion(msgNotif);
-	return null;
+	return notif;
 }
 
 }
