@@ -128,5 +128,13 @@ public String obtenerLibros(String param, String nombreLibro) {
 	String respuesta = conexControl.controlGUI.biblio.obtenerLibros(param , nombreLibro);
 	return respuesta;
 }
+@Override
+public void meterComidaMicro(String string) throws Exception {
+	conexControl.controlGUI.microondas.meterComida(string);	
+}
+@Override
+public void sacarComidaMicro() throws Exception {
+	conexControl.controlGUI.microondas.sacarComida();
+}
 
 }

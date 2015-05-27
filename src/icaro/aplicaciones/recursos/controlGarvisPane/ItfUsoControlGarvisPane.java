@@ -15,5 +15,9 @@ public interface ItfUsoControlGarvisPane extends ItfUsoRecursoSimple {
     
     //public void recibirMensajePrivado(String mensaje) throws Exception;
     public void desconectar( )throws Exception;
+
+	public void meterComidaMicro(String string)throws Exception;
+
+	public void sacarComidaMicro()throws Exception;
         
 }

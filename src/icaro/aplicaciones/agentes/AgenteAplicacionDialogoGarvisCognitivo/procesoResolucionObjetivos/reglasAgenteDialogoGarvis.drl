@@ -184,22 +184,69 @@ end
 
 /* *********************************REGLAS PARA MICROONDAS************************************ */
 
-/*rule "Mencionaste Meter comida en Microondas"
+
+rule "Meter comida en Microondas"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
     obj1:MeterComidaMicro(state==Objetivo.PENDING)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionAlimentos)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionMeterAlimentoMicro)
    then
    	obj1.setSolved();
    	update(obj1);
    	String alimento = notif.getMensajeNotificacion();
    	retract(notif);
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
-    tarea.ejecutar(identInterlc,"Has metido alimento",alimento);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar(identInterlc,"Ahora hay "+alimento+" en la microondas","meter",alimento);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end*/
+end
+
+rule "Meter comida en Microondas pero ya hay comida dentro"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:MeterComidaMicro(state==Objetivo.SOLVED)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionMeterAlimentoMicro)
+   then
+   	retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar(identInterlc,"ya hay comida dentro del micro");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Mencionaste vaciar Microondas pero no hay comida dentro"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderMicro(state==Objetivo.PENDING)
+   	obj2:ApagarMicro(state==Objetivo.PENDING)
+   	obj3:MeterComidaMicro(state==Objetivo.PENDING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionSacarAlimentoMicro)
+   then
+   	retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar(identInterlc,"No hay comida en el microondas");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Sacar comida en Microondas y SI hay comida dentro"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:MeterComidaMicro(state==Objetivo.SOLVED)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionSacarAlimentoMicro)
+   then
+   obj1.setPending();
+   	update(obj1);
+   	retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar(identInterlc,"ya no hay comida dentro del micro","sacar");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 
 rule "Mencionaste Encender Microondas"
    when
@@ -207,6 +254,7 @@ rule "Mencionaste Encender Microondas"
     Focus(foco == obj)
     obj1:EncenderMicro(state==Objetivo.PENDING)
    	obj2:ApagarMicro(state==Objetivo.PENDING)
+   	obj3:MeterComidaMicro(state==Objetivo.SOLVED)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncendermicro)
    then
    	obj1.setSolving();
@@ -216,6 +264,22 @@ rule "Mencionaste Encender Microondas"
    	retract(notif);
      TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
      tarea.ejecutar(identInterlc,"He encendido el Microondas...");
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Mencionaste Encender Microondas pero no hay comida dentro"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    obj1:EncenderMicro(state==Objetivo.PENDING)
+   	obj2:ApagarMicro(state==Objetivo.PENDING)
+   	obj3:MeterComidaMicro(state==Objetivo.PENDING)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGeneralGarvis.NombreTipoNoticacionEncendermicro)
+   then
+   	retract(notif);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(RespuestaMicroondas.class);
+     tarea.ejecutar(identInterlc,"No hay comida en el microondas");
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj1.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end

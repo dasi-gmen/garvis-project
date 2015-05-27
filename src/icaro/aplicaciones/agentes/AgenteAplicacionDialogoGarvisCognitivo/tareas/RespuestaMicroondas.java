@@ -35,10 +35,7 @@ public class RespuestaMicroondas extends TareaSincrona{
 						VocabularioGeneralGarvis.IdentRecursoComunicacionChat);          
                 if (recComunicacionChat!=null){
                     recComunicacionChat.comenzar(identAgenteOrdenante);
-                    String mensajeAenviar = (String)params[1];//VocabularioGeneralGarvis.HasDichoMicroondas;
-                    //String[] saludos = VocabularioGeneralGarvis.SaludoInicial2.split(":");
-                    //Double i = (Math.random() * (saludos.length));
-                    recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+                    
                 }
                 else {
                     identAgenteOrdenante = this.getAgente().getIdentAgente();
@@ -58,6 +55,24 @@ public class RespuestaMicroondas extends TareaSincrona{
             this.generarInformeConCausaTerminacion(identDeEstaTarea, contextoEjecucionTarea, identAgenteOrdenante, "Error-AlObtener:Interfaz:"+
                    VocabularioGeneralGarvis.IdentRecursoControlGarvisPane, CausaTerminacionTarea.ERROR);
           }
+          
+          String mensajeAenviar = (String)params[1];//VocabularioGeneralGarvis.HasDichoMicroondas;
+          //String[] saludos = VocabularioGeneralGarvis.SaludoInicial2.split(":");
+          //Double i = (Math.random() * (saludos.length));
+          recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+          if(params.length==4){
+        	  String accion = (String)params[2];
+        	  if (((String)params[2]).equalsIgnoreCase("meter")){
+      
+        		  recControlPane.meterComidaMicro((String)params[3]);
+        	  }
+          }
+          if(params.length==3){
+        	  if (((String)params[2]).equalsIgnoreCase("sacar")){
+        		  recControlPane.sacarComidaMicro();
+        	  }
+          }
+          
 
                         
                     } catch(Exception e) {

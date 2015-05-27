@@ -16,6 +16,7 @@ import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.excepciones.ExcepcionEnComponente;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoGarvisCognitivo.objetivos.AddLibro;
 
 /**
@@ -228,6 +230,7 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("tiempocinco");
         anotacionesBusquedaPrueba.add("alimentos");
         anotacionesBusquedaPrueba.add("metermicro");
+        anotacionesBusquedaPrueba.add("sacarmicro");
         
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
@@ -1032,6 +1035,7 @@ public class InterpreteMsgsGARVIS {
 //    if (conectorGarvis.isConnected())
     	conectorGarvis.disconnect(); 
     }
+@SuppressWarnings("unchecked")
 private ArrayList interpretarAnotaciones(String interlocutor,String contextoInterpretacion,HashSet anotacionesRelevantes){
     // recorremos las anotaciones obtenidas y las traducimos a objetos del modelo de información
     ArrayList anotacionesInterpretadas =new ArrayList();
@@ -1075,6 +1079,10 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	 else{
             		 annotAlimento = annot;
             	 }
+             }
+             
+             if(anotType.equalsIgnoreCase("sacarmicro")){
+            	 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaMicro(contextoInterpretacion, annot));
              }
              
              if(anotType.equalsIgnoreCase("nevera")
@@ -1172,6 +1180,16 @@ private Notificacion interpretarAnotacionMeterComidaMicro(String conttextoInterp
     int posicionFinTexto =anotacion.getEndNode().getOffset().intValue();
     String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
     notif.setTipoNotificacion("meterAlimentoMicro");
+    notif.setMensajeNotificacion(msgNotif);
+	return notif;
+}
+
+private Notificacion interpretarAnotacionSacarComidaMicro(String conttextoInterpretacion,Annotation anotacion){
+	Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+	int posicionComienzoTexto =anotacion.getStartNode().getOffset().intValue();
+    int posicionFinTexto =anotacion.getEndNode().getOffset().intValue();
+    String msgNotif =conttextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
+    notif.setTipoNotificacion("sacarAlimentoMicro");
     notif.setMensajeNotificacion(msgNotif);
 	return notif;
 }
