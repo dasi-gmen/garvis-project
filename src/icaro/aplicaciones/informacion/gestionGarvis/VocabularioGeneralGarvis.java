@@ -58,6 +58,8 @@ public class VocabularioGeneralGarvis {
     public static final String NombreTipoNoticacionAlimentos = "alimentos";
     public static final String NombreTipoNoticacionMeterAlimentoMicro = "meterAlimentoMicro";
     public static final String NombreTipoNoticacionSacarAlimentoMicro = "sacarAlimentoMicro";
+    public static final String NombreTipoNoticacionMeterAlimentoNevera = "meterAlimentoNevera";
+    public static final String NombreTipoNoticacionSacarAlimentoNevera = "sacarAlimentoNevera";
     public static final String InfoGeneralFuncionalidad= "Puedo gestionar el funcionamiento de algunos de tus electrodomésticos.";
     public static final String ExtraccionSemanticaNull= "SinSemantica";
     public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero";

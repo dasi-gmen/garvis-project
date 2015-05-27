@@ -231,6 +231,8 @@ public class InterpreteMsgsGARVIS {
         anotacionesBusquedaPrueba.add("alimentos");
         anotacionesBusquedaPrueba.add("metermicro");
         anotacionesBusquedaPrueba.add("sacarmicro");
+        anotacionesBusquedaPrueba.add("meternevera");
+        anotacionesBusquedaPrueba.add("sacarnevera");
         
     // esto habria que pasarlo como parametro
         if(infoConecxInterlocutor==null)infoConecxInterlocutor= new InfoConexionUsuario();
@@ -1085,6 +1087,14 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             	 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaMicro(contextoInterpretacion, annot));
              }
              
+             if(anotType.equalsIgnoreCase("meternevera")){
+            	 anotacionesInterpretadas.add(interpretarAnotacionMeterComidaNevera(contextoInterpretacion, annot));
+             }
+             
+             if(anotType.equalsIgnoreCase("sacarnevera")){
+            	 anotacionesInterpretadas.add(interpretarAnotacionSacarComidaNevera(contextoInterpretacion, annot));
+             }
+             
              if(anotType.equalsIgnoreCase("nevera")
                 ||anotType.equalsIgnoreCase("microondas")
                 ||anotType.equalsIgnoreCase("encendermicro")
@@ -1117,6 +1127,7 @@ private ArrayList interpretarAnotaciones(String interlocutor,String contextoInte
             }
      return anotacionesInterpretadas;
 }
+
 private Notificacion interpretarAnotacionSaludo(String conttextoInterpretacion,Annotation anotacionSaludo){
 //    if(anotacionSaludo.getType()!="saludo"){
 //        return null;
@@ -1193,4 +1204,24 @@ private Notificacion interpretarAnotacionSacarComidaMicro(String conttextoInterp
     notif.setMensajeNotificacion(msgNotif);
 	return notif;
 }
+
+private Object interpretarAnotacionSacarComidaNevera(String contextoInterpretacion, Annotation annot) {
+	Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+	int posicionComienzoTexto =annot.getStartNode().getOffset().intValue();
+    int posicionFinTexto =annot.getEndNode().getOffset().intValue();
+    String msgNotif =contextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
+    notif.setTipoNotificacion("meterAlimentoNevera");
+    notif.setMensajeNotificacion(msgNotif);
+	return null;
+}
+private Object interpretarAnotacionMeterComidaNevera(String contextoInterpretacion, Annotation annot) {
+	Notificacion notif= new Notificacion(this.infoConecxInterlocutor.getuserName());
+	int posicionComienzoTexto =annot.getStartNode().getOffset().intValue();
+    int posicionFinTexto =annot.getEndNode().getOffset().intValue();
+    String msgNotif =contextoInterpretacion.substring(posicionComienzoTexto, posicionFinTexto);
+    notif.setTipoNotificacion("sacarAlimentoNevera");
+    notif.setMensajeNotificacion(msgNotif);
+	return null;
+}
+
 }

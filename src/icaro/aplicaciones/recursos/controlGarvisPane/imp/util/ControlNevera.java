@@ -12,41 +12,29 @@ import javax.swing.border.TitledBorder;
 public class ControlNevera extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
-//	ControlNevera(){		
-//		this.setBorder(new TitledBorder(":::NEVERA:::"));
-//	
-//		JTextField introDato = new JTextField(20);
-//		introDato.setBounds(20,25,200,20);
-//		JButton botonIntro = new JButton("Introducir");
-//		
-//		JTextArea listaProd = new JTextArea(5,10);
-//		//listaProd.setSize(500, 300);
-//		JScrollPane scroll = new JScrollPane( listaProd );
-//		scroll.setBounds(20,100,200,80);
-//		JButton botonSacar = new JButton("Sacar");		
-//		this.add(introDato);		
-//		this.add(botonIntro);
-//		this.add(scroll, BorderLayout.CENTER );
-//		this.add(botonSacar);		
-//	}
 	
+	public JTextField introDato;
+	public JButton botonIntro;
+	public JTextArea productos;
+	public JScrollPane scrollProductos;
+	public JButton botonSacar;
+
 	ControlNevera(){		
 		
 		this.setBorder(new TitledBorder(":::NEVERA:::"));		
 		this.setLayout(null);
 		
-		JTextField introDato = new JTextField(20);
+		introDato = new JTextField(20);
 		introDato.setBounds(20,25,200,20);
-        
-		JButton botonIntro = new JButton("Introducir");		
+
+		botonIntro = new JButton("Introducir");   
 		botonIntro.setBounds(60,50,120,25);
-		
-		JTextArea productos = new JTextArea(5,10);
-		JScrollPane scrollProductos = new JScrollPane(productos);
+
+		productos = new JTextArea(5,10);
+		scrollProductos = new JScrollPane(productos);
 		scrollProductos.setBounds(20,100,200,80);
-				
-		JButton botonSacar = new JButton("Sacar");		
+
+		botonSacar = new JButton("Sacar");    
 		botonSacar.setBounds(70,200,100,25);
 				
 		this.add(introDato);		
@@ -55,6 +43,16 @@ public class ControlNevera extends JPanel {
 		this.add(botonSacar);	
 		
 		
+	}
+
+	public void meterComidaNevera(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean sacarComidaNevera(String string) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

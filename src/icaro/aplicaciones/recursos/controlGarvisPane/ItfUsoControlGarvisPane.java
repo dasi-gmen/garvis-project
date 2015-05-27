@@ -19,5 +19,9 @@ public interface ItfUsoControlGarvisPane extends ItfUsoRecursoSimple {
 	public void meterComidaMicro(String string)throws Exception;
 
 	public void sacarComidaMicro()throws Exception;
+	
+	public void meterComidaNevera(String string)throws Exception;
+
+	public boolean sacarComidaNevera(String string)throws Exception;
         
 }

@@ -60,16 +60,23 @@ public class ControlBiblio extends JPanel {
 	
 		if(param == "1"){
             LibrosNuevos.add(nombrelibro);
-            taLibros.append(nombrelibro+"\n");
+            
+            
+            String listaLibrosString = "";
+            //taLibros.append(nombrelibro+"\n");
 //           suppliesNames = op1.ListaLibros();
             String space = " , " ;
             mensajeprev = VocabularioGeneralGarvis.HasDichoBiblioteca2;
             String mensaje2 = VocabularioGeneralGarvis.PedirNuevoLibro;
             Iterator<String> iterator = LibrosNuevos.iterator();
            while (iterator.hasNext()) {
-                  mensajeprev +=iterator.next()+ space;
+        	   		String libro = iterator.next();
+                  mensajeprev +=libro+ space;
+                  listaLibrosString+=libro+"\n";
            }
            mensajeprev += mensaje2;
+           
+           taLibros.setText(listaLibrosString);
             
            }else{
             	mensajeprev = "Libro Encontrado . Buen Provecho"; //VocabularioGeneralGarvis.HasDichoBiblioteca2;

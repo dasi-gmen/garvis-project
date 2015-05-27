@@ -136,5 +136,14 @@ public void meterComidaMicro(String string) throws Exception {
 public void sacarComidaMicro() throws Exception {
 	conexControl.controlGUI.microondas.sacarComida();
 }
+@Override
+public void meterComidaNevera(String string) throws Exception {
+	conexControl.controlGUI.nevera.meterComidaNevera(string);
+	
+}
+@Override
+public boolean sacarComidaNevera(String string) throws Exception {
+	return conexControl.controlGUI.nevera.sacarComidaNevera(string);
+}
 
 }
