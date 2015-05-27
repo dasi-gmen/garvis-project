@@ -108,21 +108,7 @@ private void generarErrorCreacionComponente(String textoMensaje){
 
     }
   }
-  @Override
-public void neveraAddProduct(String producto) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void neveraRemoveProduct(String producto) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public boolean neveraHasProduct(String producto) {
-	// TODO Auto-generated method stub
-	return false;
-}
+  
 @Override
 public String obtenerLibros(String param, String nombreLibro) {
 	String respuesta = conexControl.controlGUI.biblio.obtenerLibros(param , nombreLibro);
